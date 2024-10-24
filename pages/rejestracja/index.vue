@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <img src="/img/background.jpg" />
+    <div class="bg-registration-background w-full h-screen">
+        
     </div>
 </template>
 
