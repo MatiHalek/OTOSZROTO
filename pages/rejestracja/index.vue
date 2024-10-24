@@ -20,6 +20,8 @@
                 <InputLabel>Powtórz hasło:</InputLabel>
                 <AppInput />
             </VerticalGroup>
+
+            <ConfirmButton>Utwórz konto</ConfirmButton>
         </VerticalGroup>
     </AppForm>
 </template>
