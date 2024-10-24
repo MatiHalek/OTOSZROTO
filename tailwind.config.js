@@ -2,7 +2,11 @@
 export default {
   content: [],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'registration-background': "url('/img/background.jpg')",
+      }
+    },
   },
   plugins: [],
 }
