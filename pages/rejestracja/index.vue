@@ -19,8 +19,14 @@
             </VerticalGroup>
 
             <VerticalGroup>
-                <InputLabel>Powtórz hasło:</InputLabel>
-                <AppInput />
+                <VerticalGroup>
+                    <InputLabel>Powtórz hasło:</InputLabel>
+                    <AppInput />
+                </VerticalGroup>
+
+                <AppCheckBox>
+                    Zapoznałem się z regulaminem portalu
+                </AppCheckBox>
             </VerticalGroup>
 
             <ConfirmButton>Utwórz konto</ConfirmButton>
