@@ -4,13 +4,13 @@
 
         <VerticalGroup class="gap-y-6 relative">
             <VerticalGroup>
-                <InputLabel>Adres e-mail:</InputLabel>
-                <AppInput type="email" />
+                <InputLabel for="loginInputEmail">Adres e-mail:</InputLabel>
+                <AppInput type="email" id="loginInputEmail" />
             </VerticalGroup>
 
             <VerticalGroup>
-                <InputLabel>Hasło:</InputLabel>
-                <AppInput type="password" />
+                <InputLabel for="loginInputPassword">Hasło:</InputLabel>
+                <AppInput type="password" id="loginInputPassword" />
             </VerticalGroup>
 
             <ConfirmButton>Zaloguj się</ConfirmButton>

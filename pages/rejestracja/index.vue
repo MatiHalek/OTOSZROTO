@@ -4,24 +4,24 @@
 
         <VerticalGroup class="gap-y-6 relative">
             <VerticalGroup>
-                <InputLabel>Adres e-mail:</InputLabel>
-                <AppInput type="email" />
+                <InputLabel for="registrationInputEmail">Adres e-mail:</InputLabel>
+                <AppInput type="email" id="registrationInputEmail" />
             </VerticalGroup>
 
             <VerticalGroup>
-                <InputLabel>Numer telefonu:</InputLabel>
-                <AppInput type="tel" />
+                <InputLabel for="registrationInputPhone">Numer telefonu:</InputLabel>
+                <AppInput type="tel" id="registrationInputPhone" />
             </VerticalGroup>
 
             <VerticalGroup>
-                <InputLabel>Hasło:</InputLabel>
-                <AppInput type="password" />
+                <InputLabel for="registrationInputPassword">Hasło:</InputLabel>
+                <AppInput type="password" id="registrationInputPassword" />
             </VerticalGroup>
 
             <VerticalGroup>
                 <VerticalGroup>
-                    <InputLabel>Powtórz hasło:</InputLabel>
-                    <AppInput type="password" />
+                    <InputLabel for="registrationInputPassword2">Powtórz hasło:</InputLabel>
+                    <AppInput type="password" id="registrationInputPassword2" />
                 </VerticalGroup>
 
                 <AppCheckBox>

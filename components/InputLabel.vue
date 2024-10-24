@@ -1,9 +1,9 @@
 <template>
-    <span class="pb-2 text-[#332404]">
+    <label :for="for" class="pb-2 text-[#332404]">
         <slot />
-    </span>
+    </label>
 </template>
 
 <script setup>
-
+    defineProps(['for']);
 </script>
