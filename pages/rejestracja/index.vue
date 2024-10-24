@@ -1,8 +1,7 @@
 <template>
     <AppForm>
-        <PageTitle >
-            Utwórz konto
-        </PageTitle>
+        <PageTitle>Utwórz konto</PageTitle>
+
         <VerticalGroup class="gap-y-6">
             <VerticalGroup>
                 <InputLabel>Adres e-mail:</InputLabel>
