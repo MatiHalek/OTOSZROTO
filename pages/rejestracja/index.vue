@@ -24,6 +24,10 @@
             </VerticalGroup>
 
             <ConfirmButton>Utwórz konto</ConfirmButton>
+            <p>
+                <span>Masz już konto? </span>
+                <NuxtLink :to="'/logowanie'" class="text-[#463691]">zaloguj się</NuxtLink>
+            </p>
         </VerticalGroup>
     </AppForm>
 </template>
