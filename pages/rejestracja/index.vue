@@ -2,37 +2,37 @@
     <AppForm>
         <PageTitle>Utwórz konto</PageTitle>
 
-        <VerticalGroup class="gap-y-6">
+        <VerticalGroup class="gap-y-6 relative">
             <VerticalGroup>
                 <InputLabel>Adres e-mail:</InputLabel>
-                <AppInput />
+                <AppInput type="email" />
             </VerticalGroup>
 
             <VerticalGroup>
                 <InputLabel>Numer telefonu:</InputLabel>
-                <AppInput />
+                <AppInput type="tel" />
             </VerticalGroup>
 
             <VerticalGroup>
                 <InputLabel>Hasło:</InputLabel>
-                <AppInput />
+                <AppInput type="password" />
             </VerticalGroup>
 
             <VerticalGroup>
                 <VerticalGroup>
                     <InputLabel>Powtórz hasło:</InputLabel>
-                    <AppInput />
+                    <AppInput type="password" />
                 </VerticalGroup>
 
                 <AppCheckBox>
-                    Zapoznałem się z regulaminem portalu
+                    <span class="cursor-pointer select-none">Oświadczam, że znam i akceptuję postanowienia serwisu OTOSZROTO.</span>
                 </AppCheckBox>
             </VerticalGroup>
 
             <ConfirmButton>Utwórz konto</ConfirmButton>
             <p>
                 <span>Masz już konto? </span>
-                <NuxtLink :to="'/logowanie'" class="text-[#463691]">zaloguj się</NuxtLink>
+                <NuxtLink :to="'/logowanie'" class="text-[#463691]">Zaloguj się</NuxtLink>
             </p>
         </VerticalGroup>
     </AppForm>

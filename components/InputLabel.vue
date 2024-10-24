@@ -1,5 +1,5 @@
 <template>
-    <span class="pb-3 text-[#332404]">
+    <span class="pb-2 text-[#332404]">
         <slot />
     </span>
 </template>

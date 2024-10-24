@@ -5,18 +5,18 @@
         <VerticalGroup class="gap-y-6">
             <VerticalGroup>
                 <InputLabel>Adres e-mail:</InputLabel>
-                <AppInput />
+                <AppInput type="email" />
             </VerticalGroup>
 
             <VerticalGroup>
                 <InputLabel>Hasło:</InputLabel>
-                <AppInput />
+                <AppInput type="password" />
             </VerticalGroup>
 
             <ConfirmButton>Zaloguj się</ConfirmButton>
             <p>
                 <span>Nie masz konta? </span>
-                <NuxtLink :to="'/rejestracja'" class="text-[#463691]">zarejestruj się</NuxtLink>
+                <NuxtLink :to="'/rejestracja'" class="text-[#463691]">Zarejestruj się</NuxtLink>
             </p>
         </VerticalGroup>
     </AppForm>
