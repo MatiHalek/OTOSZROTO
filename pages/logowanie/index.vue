@@ -2,7 +2,7 @@
     <AppForm>
         <PageTitle>Zaloguj się</PageTitle>
 
-        <VerticalGroup class="gap-y-6">
+        <VerticalGroup class="gap-y-6 relative">
             <VerticalGroup>
                 <InputLabel>Adres e-mail:</InputLabel>
                 <AppInput type="email" />
