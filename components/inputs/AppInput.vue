@@ -1,7 +1,7 @@
 <template>
-    <input :type="type" class="outline-none rounded-lg border-solid border-2 border-[#DDD] text-base p-2 focus:border-[#E5A00A]">
+    <input :type="type" :id="id" class="outline-none rounded-lg border-solid border-2 border-[#DDD] text-base p-2 focus:border-[#E5A00A]">
 </template>
 
 <script setup>
-    defineProps(['type']);
+    defineProps(['type', 'id']);
 </script>
