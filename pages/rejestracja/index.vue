@@ -1,7 +1,7 @@
 <template>
-    <div class="bg-registration-background w-full h-screen">
+    <AppForm>
         
-    </div>
+    </AppForm>
 </template>
 
 <script setup>
