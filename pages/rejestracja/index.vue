@@ -34,7 +34,7 @@
                 <NuxtLink :to="'/logowanie'" class="text-[#463691]">Zaloguj się</NuxtLink>
             </p>          
         </VerticalGroup>
-        <p class="relative border-t-4 text-center py-2 rounded">&copy;2024 Grupa OTOSZROTO</p>
+        <p class="relative border-t-4 text-center py-2 mt-3 rounded">&copy;2024 Grupa OTOSZROTO</p>
     </AppForm>
 </template>
 
