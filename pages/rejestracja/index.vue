@@ -27,9 +27,9 @@
                     <span class="cursor-pointer select-none">Oświadczam, że znam i akceptuję postanowienia serwisu OTOSZROTO.<span class="text-red-600 text-xl">*</span></span>
                 </AppCheckBox>
             </VerticalGroup>
-            
+
             <p><span class="text-red-600 text-xl">*</span>Pole jest wymagane.</p>
-            <ConfirmButton class="shadow-xl">Zarejestruj się</ConfirmButton>
+            <ConfirmButton class="shadow-xl mt-8">Zarejestruj się</ConfirmButton>
             <p class="text-center">
                 <span>Masz już konto? </span>
                 <NuxtLink :to="'/logowanie'" class="text-[#463691]">Zaloguj się</NuxtLink>

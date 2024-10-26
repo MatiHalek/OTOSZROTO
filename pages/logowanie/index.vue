@@ -12,7 +12,7 @@
                 <AppInput class="shadow-xl" type="password" id="loginInputPassword" />
             </VerticalGroup>
             <p class="text-right">
-                <NuxtLink :to="'/przypomnij-haslo'" class="text-[#463691]">Nie pamiętam hasła</NuxtLink>
+                <NuxtLink :to="'/przypomnij-haslo'" class="text-[#463691] font-medium">Nie pamiętam hasła</NuxtLink>
             </p>
 
             <ConfirmButton class="shadow-xl">Zaloguj się</ConfirmButton>
