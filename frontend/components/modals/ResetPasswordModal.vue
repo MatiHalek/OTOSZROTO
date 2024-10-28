@@ -10,7 +10,7 @@
                         <input class="outline-none border-2 w-full mt-8 p-2" type="text" placeholder="E-mail">
                         <div class="flex flex-col mt-10 gap-3">
                             <button class="w-full bg-[#E5A00A] p-2">Wyślij link</button>
-                            <button class="w-full bg-[#DDD] p-2">Anuluj</button>
+                            <button @click="$emit('close')" class="w-full bg-[#DDD] p-2">Anuluj</button>
                         </div>
                     </div>
                 </div>
