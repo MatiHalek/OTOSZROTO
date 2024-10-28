@@ -2,13 +2,16 @@
     <Transition name="fade">
         <div class="fixed left-0 top-0 z-50 w-full h-full bg-[#00000095] flex justify-center items-center" v-show="isVisible">
             <Transition>
-                <div class="bg-[#fff] h-96 w-96 rounded-sm relative pt-0 pr-5 pb-5" v-if="isVisible">
-                    <svg class="absolute left-4 top-4 w-6 cursor-pointer fill-[#231D2B] transition-colors hover:fill-[#F44534]" @click="$emit('close')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
-                        <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
-                    </svg>
+                <div class="bg-[#fff] h-96 w-[500px] rounded-sm relative py-14 px-8" v-if="isVisible">
+                    <div>
+                        <h2 class="text-center font-bold text-3xl">Nie pamiętasz hasła?</h2>
+                        <h3 class="text-center py-3 text-base">Na podany e-mail prześlemy link do zmiany hasła!</h3>
 
-                    <div id="content">
-                        
+                        <input class="outline-none border-2 w-full mt-8 p-2" type="text" placeholder="E-mail">
+                        <div class="flex flex-col mt-10 gap-3">
+                            <button class="w-full bg-[#E5A00A] p-2">Wyślij link</button>
+                            <button class="w-full bg-[#DDD] p-2">Anuluj</button>
+                        </div>
                     </div>
                 </div>
             </Transition>
