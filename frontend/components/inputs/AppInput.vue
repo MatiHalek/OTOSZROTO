@@ -6,6 +6,8 @@
             :id="id" 
             @blur="checkIfEmpty()"
             @input="validateInput()"
+            :placeholder="props.type == 'tel' ? 'XXX-XXX-XXX' : ''"
+            :maxlength="props.type == 'tel' ? 11 : 255"
             class="w-full p-2 focus:border-[#E5A00A] outline-none rounded-md border-solid border-2 border-[#DDD] text-base"
             :class="{ 'border-[#E32727]': error }">
 
@@ -36,17 +38,43 @@
     const errorMessage = ref('');
 
     const inputValue = ref();
+    
     function checkIfEmpty() {
-        if(!inputValue.value) {
-            error.value = true;
-            errorMessage.value = "Pole nie może być puste!";
+        if(props.validate) {
+            if(!inputValue.value) {
+                error.value = true;
+                errorMessage.value = "Pole nie może być puste!";
+            }
         }
     }
 
     function validateInput() {
-        if(inputValue.value) {
-            error.value = false;
-            errorMessage.value = "";
+        if(props.validate) {
+            if(inputValue.value) {
+                error.value = false;
+                errorMessage.value = "";
+
+                if(props.type == "password") {
+                    if(inputValue.value.length < 8 || inputValue.value.length > 255) {
+                        error.value = true;
+                        errorMessage.value = "Hasło musi mieć od 8 do 255 znaków!";
+                    }
+                } else if(props.type == "email") {
+                    const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+                    if(!inputValue.value.toLowerCase().match(regex)) {
+                        error.value = true;
+                        errorMessage.value = "Niepoprawny adres e-mail!";
+                    }
+                } else if(props.type == "tel") {
+                    const regex = /^\d{3}-\d{3}-\d{3}$/;
+
+                    if(!inputValue.value.match(regex)) {
+                        error.value = true;
+                        errorMessage.value = "Niepoprawny numer telefonu!";
+                    }
+                }
+            }
         }
     }
 

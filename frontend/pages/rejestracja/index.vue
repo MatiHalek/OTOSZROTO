@@ -4,23 +4,23 @@
         <VerticalGroup class="gap-y-6 relative overflow-auto grow px-10">     
             <VerticalGroup>
                 <InputLabel for="registrationInputEmail">Adres e-mail<span class="text-red-600 text-xl">*</span></InputLabel>
-                <AppInput type="email" id="registrationInputEmail" class="shadow-xl" />
+                <AppInput :validate="true" type="email" id="registrationInputEmail" class="shadow-xl" />
             </VerticalGroup>
 
             <VerticalGroup>
                 <InputLabel for="registrationInputPhone">Numer telefonu<span class="text-red-600 text-xl">*</span></InputLabel>
-                <AppInput type="tel" id="registrationInputPhone" class="shadow-xl" />
+                <AppInput :validate="true" type="tel" id="registrationInputPhone" class="shadow-xl" />
             </VerticalGroup>
 
             <VerticalGroup>
                 <InputLabel for="registrationInputPassword">Hasło<span class="text-red-600 text-xl">*</span></InputLabel>
-                <AppInput type="password" id="registrationInputPassword" class="shadow-xl" />
+                <AppInput :validate="true" type="password" id="registrationInputPassword" class="shadow-xl" />
             </VerticalGroup>
 
             <VerticalGroup>
                 <VerticalGroup>
                     <InputLabel for="registrationInputPassword2">Powtórz hasło<span class="text-red-600 text-xl">*</span></InputLabel>
-                    <AppInput type="password" id="registrationInputPassword2" class="shadow-xl" />
+                    <AppInput :validate="true" type="password" id="registrationInputPassword2" class="shadow-xl" />
                 </VerticalGroup>
 
                 <AppCheckBox>
