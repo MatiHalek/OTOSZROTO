@@ -1,7 +1,7 @@
 <template>
     <AppForm>
         <PageTitle>Załóż konto</PageTitle>
-        <VerticalGroup class="gap-y-6 relative overflow-auto grow">     
+        <VerticalGroup class="gap-y-6 relative overflow-auto grow px-10">     
             <VerticalGroup>
                 <InputLabel for="registrationInputEmail">Adres e-mail<span class="text-red-600 text-xl">*</span></InputLabel>
                 <AppInput type="email" id="registrationInputEmail" class="shadow-xl" />

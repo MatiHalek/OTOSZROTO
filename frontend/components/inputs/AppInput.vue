@@ -1,6 +1,17 @@
 <template>
-    <div class="relative">
-        <input :type="inputType" :id="id" class="w-full p-2 focus:border-[#E5A00A] outline-none rounded-lg border-solid border-2 border-[#DDD] text-base">
+    <div class="relative shadow-none">
+        <input 
+            v-model="inputValue"
+            :type="inputType" 
+            :id="id" 
+            @blur="checkIfEmpty()"
+            @input="validateInput()"
+            class="w-full p-2 focus:border-[#E5A00A] outline-none rounded-md border-solid border-2 border-[#DDD] text-base"
+            :class="{ 'border-[#E32727]': error }">
+
+        <p class="relative left-0 -bottom-2 text-[#E32727] text-right">
+            {{ errorMessage }}
+        </p>
 
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" @click="togglePasswordVisibility" v-if="inputType == 'password'" class="w-6 absolute fill-[#635669] top-3 right-3 cursor-pointer">
             <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
@@ -15,7 +26,29 @@
 </template>
 
 <script setup>
-    const props = defineProps(['type', 'id']);
+    const props = defineProps([
+        'type', 
+        'id',
+        'validate'
+    ]);
+
+    const error = ref(false);
+    const errorMessage = ref('');
+
+    const inputValue = ref();
+    function checkIfEmpty() {
+        if(!inputValue.value) {
+            error.value = true;
+            errorMessage.value = "Pole nie może być puste!";
+        }
+    }
+
+    function validateInput() {
+        if(inputValue.value) {
+            error.value = false;
+            errorMessage.value = "";
+        }
+    }
 
     const inputType = ref(props.type);
     function togglePasswordVisibility() {
