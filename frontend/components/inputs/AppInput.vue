@@ -1,6 +1,19 @@
 <template>
-    <div class="relative">
-        <input :type="inputType" :id="id" class="w-full p-2 focus:border-[#E5A00A] outline-none rounded-lg border-solid border-2 border-[#DDD] text-base">
+    <div class="relative shadow-none">
+        <input 
+            v-model="inputValue"
+            :type="inputType" 
+            :id="id" 
+            @blur="checkIfEmpty()"
+            @input="validateInput()"
+            :placeholder="props.type == 'tel' ? 'XXX-XXX-XXX' : ''"
+            :maxlength="props.type == 'tel' ? 11 : 255"
+            class="w-full p-2 focus:border-[#E5A00A] outline-none rounded-md border-solid border-2 border-[#DDD] text-base"
+            :class="{ 'border-[#E32727]': error }">
+
+        <p class="relative left-0 -bottom-2 text-[#E32727] text-right">
+            {{ errorMessage }}
+        </p>
 
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" @click="togglePasswordVisibility" v-if="inputType == 'password'" class="w-6 absolute fill-[#635669] top-3 right-3 cursor-pointer">
             <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
@@ -15,7 +28,55 @@
 </template>
 
 <script setup>
-    const props = defineProps(['type', 'id']);
+    const props = defineProps([
+        'type', 
+        'id',
+        'validate'
+    ]);
+
+    const error = ref(false);
+    const errorMessage = ref('');
+
+    const inputValue = ref();
+    
+    function checkIfEmpty() {
+        if(props.validate) {
+            if(!inputValue.value) {
+                error.value = true;
+                errorMessage.value = "Pole nie może być puste!";
+            }
+        }
+    }
+
+    function validateInput() {
+        if(props.validate) {
+            if(inputValue.value) {
+                error.value = false;
+                errorMessage.value = "";
+
+                if(props.type == "password") {
+                    if(inputValue.value.length < 8 || inputValue.value.length > 255) {
+                        error.value = true;
+                        errorMessage.value = "Hasło musi mieć od 8 do 255 znaków!";
+                    }
+                } else if(props.type == "email") {
+                    const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+                    if(!inputValue.value.toLowerCase().match(regex)) {
+                        error.value = true;
+                        errorMessage.value = "Niepoprawny adres e-mail!";
+                    }
+                } else if(props.type == "tel") {
+                    const regex = /^\d{3}-\d{3}-\d{3}$/;
+
+                    if(!inputValue.value.match(regex)) {
+                        error.value = true;
+                        errorMessage.value = "Niepoprawny numer telefonu!";
+                    }
+                }
+            }
+        }
+    }
 
     const inputType = ref(props.type);
     function togglePasswordVisibility() {
