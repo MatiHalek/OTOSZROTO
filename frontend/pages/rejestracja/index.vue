@@ -73,8 +73,8 @@
                 }
             })
 
-            if(response) {
-                console.log(response);
+            if(response.userID) {
+                await navigateTo('/logowanie');
             }
         }
     }
