@@ -57,6 +57,27 @@ namespace api.Controllers
             });
         }
 
+        [HttpGet("user")]
+        public IActionResult GetUserByJwt()
+        {
+            try
+            {
+                var jwt = Request.Cookies["jwt"];
+
+                var token = jwtService.Verify(jwt!);
+
+                int userId = int.Parse(token.Issuer);
+
+                var user = userRepository.Get(userId);
+
+                return Ok(user);
+            }
+            catch (Exception)
+            {
+                return Ok(null);
+            }
+        }
+
         [HttpPost("logout")]
         public IActionResult Logout()
         {
