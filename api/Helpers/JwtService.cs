@@ -7,7 +7,7 @@ namespace api.Helpers
 {
     public class JwtService : IJwtService
     {
-        private string secureKey = "otoszroto zstio project";
+        private string secureKey = "otoszroto zstio car portal project";
         public string Generate(int userId)
         {
             var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secureKey));
