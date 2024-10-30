@@ -34,18 +34,25 @@
         'validate'
     ]);
 
+    const inputValue = defineModel();
+
     const error = ref(false);
     const errorMessage = ref('');
-
-    const inputValue = ref();
     
     function checkIfEmpty() {
         if(props.validate) {
             if(!inputValue.value) {
                 error.value = true;
                 errorMessage.value = "Pole nie może być puste!";
+
+                emitErrorValue();
             }
         }
+    }
+
+    const emit = defineEmits(['errorValue']);
+    function emitErrorValue() {
+        emit('errorValue', error.value);
     }
 
     function validateInput() {
@@ -75,6 +82,8 @@
                     }
                 }
             }
+
+            emitErrorValue();
         }
     }
 
