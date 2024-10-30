@@ -1,5 +1,7 @@
 
 using api.Data;
+using api.Interfaces;
+using api.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
@@ -14,6 +16,7 @@ namespace api
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
 
