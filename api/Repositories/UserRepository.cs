@@ -57,6 +57,16 @@ namespace api.Repositories
             }
         }
 
+        public User GetByEmail(string email)
+        {
+            User user = context.Users.Where(u => u.Email == email).FirstOrDefault()!;
+            if (user == null)
+            {
+                throw new Exception($"Failed to fetch user with email = {email}");
+            }
+            return user;
+        }
+
         public User Update(User user,int userID)
         {
             User user_db = context.Users.Find(userID)!;

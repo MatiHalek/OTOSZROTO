@@ -9,5 +9,6 @@ namespace api.Interfaces
         User Get(int userID); 
         List<User> GetAll(); 
         int Remove(int userID);
+        User GetByEmail(string email);
     }
 }
