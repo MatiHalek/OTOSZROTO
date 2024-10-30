@@ -1,4 +1,8 @@
 
+using api.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
+
 namespace api
 {
     public class Program
@@ -12,24 +16,38 @@ namespace api
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection") ??
+                    throw new InvalidOperationException("Connection string 'DefaultConnection' not found"));
+            });
+
+            builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowNuxtApp",
+                    builder => builder
+                        .WithOrigins("http://localhost:3000") // Nuxt app URL
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
 
             var app = builder.Build();
 
+            app.UseCors("AllowNuxtApp");
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+            {   
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
-
             app.Run();
         }
     }
