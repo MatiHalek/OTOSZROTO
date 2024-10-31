@@ -113,3 +113,21 @@ describe('App password input tests', () => {
         expect(wrapper.find('p').text()).toEqual('');
     })
 });
+
+// tests for empty input
+describe('App password input tests', () => {
+    it('should display error that input cannot be empty', async () => {
+        const wrapper = mount(AppInput, {
+            props: {
+                type: 'password',
+                validate: true
+            }
+        });
+        const input = await wrapper.find('input[type="password"]')
+    
+        await input.setValue(''); // 6 characters
+        await input.trigger('blur');
+    
+        expect(wrapper.find('p').text()).toEqual('Pole nie może być puste!');
+    })
+});
