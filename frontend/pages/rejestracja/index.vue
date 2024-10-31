@@ -4,23 +4,23 @@
         <VerticalGroup class="gap-y-6 relative overflow-auto grow px-10">     
             <VerticalGroup>
                 <InputLabel for="registrationInputEmail">Adres e-mail<span class="text-red-600 text-xl">*</span></InputLabel>
-                <AppInput :validate="true" type="email" id="registrationInputEmail" class="shadow-xl" />
+                <AppInput @error-value="(value) => { errors.input1 = value }" v-model="newUserData.Email" :validate="true" type="email" id="registrationInputEmail" />
             </VerticalGroup>
 
             <VerticalGroup>
                 <InputLabel for="registrationInputPhone">Numer telefonu<span class="text-red-600 text-xl">*</span></InputLabel>
-                <AppInput :validate="true" type="tel" id="registrationInputPhone" class="shadow-xl" />
+                <AppInput @error-value="(value) => { errors.input2 = value }" v-model="newUserData.PhoneNumber" :validate="true" type="tel" id="registrationInputPhone" />
             </VerticalGroup>
 
             <VerticalGroup>
                 <InputLabel for="registrationInputPassword">Hasło<span class="text-red-600 text-xl">*</span></InputLabel>
-                <AppInput :validate="true" type="password" id="registrationInputPassword" class="shadow-xl" />
+                <AppInput @error-value="(value) => { errors.input3 = value }" v-model="newUserData.Password" :validate="true" type="password" id="registrationInputPassword" />
             </VerticalGroup>
 
             <VerticalGroup>
                 <VerticalGroup>
                     <InputLabel for="registrationInputPassword2">Powtórz hasło<span class="text-red-600 text-xl">*</span></InputLabel>
-                    <AppInput :validate="true" type="password" id="registrationInputPassword2" class="shadow-xl" />
+                    <AppInput @error-value="(value) => { errors.input4 = value }" :validate="true" type="password" id="registrationInputPassword2" />
                 </VerticalGroup>
 
                 <AppCheckBox>
@@ -29,7 +29,7 @@
             </VerticalGroup>
 
             <p><span class="text-red-600 text-xl">*</span>Pole jest wymagane.</p>
-            <ConfirmButton class="shadow-xl mt-8">Zarejestruj się</ConfirmButton>
+            <ConfirmButton class="shadow-xl mt-8" @click.prevent="registerUser()">Zarejestruj się</ConfirmButton>
             <p class="text-center">
                 <span>Masz już konto? </span>
                 <NuxtLink :to="'/logowanie'" class="text-[#463691]">Zaloguj się</NuxtLink>
@@ -46,6 +46,38 @@
     useHead({
         title: 'Załóż konto | OTOSZROTO'
     });
+
+    const newUserData = ref({
+        Email: '',
+        PhoneNumber: '',
+        Password: ''
+    });
+
+    const errors = ref({
+        input1: true,
+        input2: true,
+        input3: true,
+        input4: true,
+    });
+
+    async function registerUser() {
+        if(!errors.value.input1 && !errors.value.input2 && !errors.value.input3 && !errors.value.input4) {
+            const response = await $fetch('http://localhost:5271/api/auth/register', {
+                method: 'POST',
+                body: {
+                    "name": '',
+                    "surname": "",
+                    "email": newUserData.value.Email,
+                    "phoneNumber": newUserData.value.PhoneNumber,
+                    "password": newUserData.value.Password
+                }
+            })
+
+            if(response.userID) {
+                await navigateTo('/logowanie');
+            }
+        }
+    }
 </script>
 
 <style scoped>
