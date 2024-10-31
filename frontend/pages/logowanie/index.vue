@@ -1,4 +1,6 @@
 <template>
+    <ResetPasswordModal :isVisible="isModalVisible" @close="isModalVisible = false" />
+
     <AppForm>
         <PageTitle>Logowanie</PageTitle>
         <VerticalGroup class="gap-y-6 relative overflow-auto grow">         
@@ -11,9 +13,7 @@
                 <InputLabel for="loginInputPassword">Hasło</InputLabel>
                 <AppInput v-model="userData.Password" :validate="false" class="shadow-xl" type="password" id="loginInputPassword" />
             </VerticalGroup>
-            <p class="text-right">
-                <NuxtLink :to="'/przypomnij-haslo'" class="text-[#463691] font-medium">Nie pamiętam hasła</NuxtLink>
-            </p>
+            <p @click="isModalVisible = true" class="text-right text-[#463691] font-medium cursor-pointer">Nie pamiętam hasła</p>
 
             <ConfirmButton class="shadow-xl" @click.prevent="loginUser()">Zaloguj się</ConfirmButton>
             <p class="text-center">
@@ -29,8 +29,12 @@
     definePageMeta({
         layout: 'clear'
     });
+
     useHead({
         title: 'Logowanie | OTOSZROTO'
+    });
+
+    const isModalVisible = ref(false);
     })
 
     const userData = ref({
