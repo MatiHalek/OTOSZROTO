@@ -35,7 +35,6 @@
     });
 
     const isModalVisible = ref(false);
-    })
 
     const userData = ref({
         Email: '',
