@@ -13,10 +13,12 @@ namespace api.Controllers
     {
         private readonly IUserRepository userRepository;
         private readonly IJwtService jwtService;
-        public AuthController(IUserRepository userRepository, IJwtService jwtService)
+        private readonly IEmailService emailService;
+        public AuthController(IUserRepository userRepository, IJwtService jwtService, IEmailService emailService)
         {
             this.userRepository = userRepository;
             this.jwtService = jwtService;
+            this.emailService = emailService;
         }
         [HttpPost("register")]
         public IActionResult Create(UserDto dto)
