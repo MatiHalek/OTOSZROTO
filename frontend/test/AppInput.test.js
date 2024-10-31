@@ -68,3 +68,48 @@ describe('App phone number input tests', () => {
         expect(wrapper.find('p').text()).toEqual('');
     })
 });
+
+// tests for password input
+describe('App password input tests', () => {
+    it('should display error if password is too short ', async () => {
+        const wrapper = mount(AppInput, {
+            props: {
+                type: 'password',
+                validate: true
+            }
+        });
+        const input = await wrapper.find('input[type="password"]')
+    
+        await input.setValue('qwerty'); // 6 characters
+    
+        expect(wrapper.find('p').text()).toEqual('Hasło musi mieć od 8 do 50 znaków!');
+    })
+
+    it('should display error if password is too long ', async () => {
+        const wrapper = mount(AppInput, {
+            props: {
+                type: 'password',
+                validate: true
+            }
+        });
+        const input = await wrapper.find('input[type="password"]')
+    
+        await input.setValue('0TpeS2ccJFOMFVpPX2UuRdqKBm3XotYnPDluv7zhPVSpaGKIDAb'); // 51 characters
+    
+        expect(wrapper.find('p').text()).toEqual('Hasło musi mieć od 8 do 50 znaków!');
+    })
+
+    it('should not display error', async () => {
+        const wrapper = mount(AppInput, {
+            props: {
+                type: 'password',
+                validate: true
+            }
+        });
+        const input = await wrapper.find('input[type="password"]')
+    
+        await input.setValue('qwertyuiop'); // 10 characters
+    
+        expect(wrapper.find('p').text()).toEqual('');
+    })
+});

@@ -62,9 +62,9 @@
                 errorMessage.value = "";
 
                 if(props.type == "password") {
-                    if(inputValue.value.length < 8 || inputValue.value.length > 255) {
+                    if(inputValue.value.length < 8 || inputValue.value.length > 50) {
                         error.value = true;
-                        errorMessage.value = "Hasło musi mieć od 8 do 255 znaków!";
+                        errorMessage.value = "Hasło musi mieć od 8 do 50 znaków!";
                     }
                 } else if(props.type == "email") {
                     const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
