@@ -90,5 +90,16 @@ namespace api.Controllers
                 message = "success"
             });
         }
+
+        [HttpPost("reset/{userID}")]
+        public IActionResult Reset(int userID)
+        {
+            User user = userRepository.Get(userID);
+            if(user == null) return NotFound();
+            string token = Utils.GenerateRandomString(25);
+            emailService.SendEmailAsync("kacperpiaskowy937@gmail.com", "Password restart"
+                , $"<a href='http://localhost:3000/restart?token={token}'>http://localhost:3000/restart?token={token}</a>");
+            return Ok("success");
+        }
     }
 }
