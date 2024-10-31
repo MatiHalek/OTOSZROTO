@@ -1,6 +1,8 @@
 <template>
     <AppForm>
         <PageTitle>Logowanie</PageTitle>
+        <p class="text-red-600 z-20 text-center -mt-5 pb-10 font-medium">{{ errorMessage }}</p>
+
         <VerticalGroup class="gap-y-6 relative overflow-auto grow">         
             <VerticalGroup>
                 <InputLabel for="loginInputEmail">Adres e-mail</InputLabel>
@@ -38,18 +40,26 @@
         Password: ''
     });
 
-    async function loginUser() {
-        const response = await $fetch('http://localhost:5271/api/auth/login', {
-            method: 'POST',
-            body: {
-                "email": userData.value.Email,
-                "password": userData.value.Password
-            },
-            credentials: 'include'
-        })
+    const errorMessage = ref('');
 
-        if(response.message == 'success') {
-            await navigateTo('/');
+    async function loginUser() {
+        try {
+            const response = await $fetch('http://localhost:5271/api/auth/login', {
+                method: 'POST',
+                body: {
+                    "email": userData.value.Email,
+                    "password": userData.value.Password
+                },
+                credentials: 'include'
+            });
+
+            if (response.message === 'success') {
+                await navigateTo('/');
+            }
+        } catch (error) {
+            if(error.data.message == "Invalid Credentials") {
+                errorMessage.value = "Nieprawidłowy e-mail lub hasło!";
+            }
         }
     }
 </script>
