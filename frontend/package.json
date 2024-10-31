@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "^6.12.2",
+    "@vue/test-utils": "^2.4.0-alpha.2",
     "nuxt": "^3.13.2",
+    "vitest": "^2.1.4",
     "vue": "latest",
     "vue-router": "latest"
   }
