@@ -7,19 +7,19 @@
                 <HorizontalGroup class="gap-3">
                     <VerticalGroup class="flex-1">
                         <InputLabel for="title">Tytuł ogłoszenia: </InputLabel>
-                        <AppDetailsInput id="title" />
+                        <AppDetailsInput v-model="newOfferData.title" id="title" />
                     </VerticalGroup>
 
                     <VerticalGroup>
                         <InputLabel for="category">Kategoria ogłoszenia: </InputLabel>
-                        <AppSelectBox :source="['Samochody osobowe', 'Motocykle']" class="w-64" />
+                        <AppSelectBox @selectionChanged="(value) => { newOfferData.category = value }" :source="['Samochody osobowe', 'Motocykle']" class="w-64" />
                     </VerticalGroup>
                 </HorizontalGroup>
 
                 <HorizontalGroup class="items-center gap-5">
                     <VerticalGroup>
                         <InputLabel for="price">Cena: (PLN)</InputLabel>
-                        <AppDetailsInput id="price" />
+                        <AppDetailsInput v-model="newOfferData.price" id="price" />
                     </VerticalGroup>
 
                     <AppCheckBox class="mt-2">
@@ -29,7 +29,7 @@
 
                 <VerticalGroup>
                     <InputLabel for="description">Opis ogłoszenia: </InputLabel>
-                    <AppTextArea id="description" />
+                    <AppTextArea id="description" v-model="newOfferData.description" />
                 </VerticalGroup>
 
                 <VerticalGroup>
@@ -45,33 +45,33 @@
 
                 <VerticalGroup class="flex-1">
                     <InputLabel for="model">Model pojazdu: </InputLabel>
-                    <AppDetailsInput id="model" />
+                    <AppDetailsInput v-model="newOfferData.model" id="model" />
                 </VerticalGroup>
 
                 <HorizontalGroup class="gap-5 flex-col md:flex-row">
                     <VerticalGroup>
                         <InputLabel for="year">Rok produkcji: </InputLabel>
-                        <AppDetailsInput id="year" />
+                        <AppDetailsInput v-model="newOfferData.yearOfProduction" id="year" />
                     </VerticalGroup>
 
                     <VerticalGroup>
                         <InputLabel for="doors">Liczba drzwi: </InputLabel>
-                        <AppDetailsInput id="doors" />
+                        <AppDetailsInput v-model="newOfferData.numberOfDoors" id="doors" />
                     </VerticalGroup>
 
                     <VerticalGroup>
                         <InputLabel for="space">Liczba miejsc: </InputLabel>
-                        <AppDetailsInput id="space" />
+                        <AppDetailsInput v-model="newOfferData.numberOfPlaces" id="space" />
                     </VerticalGroup>
 
                     <VerticalGroup>
                         <InputLabel for="color">Kolor: </InputLabel>
-                        <AppDetailsInput id="color" />
+                        <AppDetailsInput v-model="newOfferData.color" id="color" />
                     </VerticalGroup>
 
                     <VerticalGroup class="flex-none lg:flex-1">
                         <InputLabel for="vin">VIN: </InputLabel>
-                        <AppDetailsInput id="vin" />
+                        <AppDetailsInput v-model="newOfferData.VIN" id="vin" />
                     </VerticalGroup>
                 </HorizontalGroup>
 
@@ -83,27 +83,27 @@
                 <HorizontalGroup class="gap-5 flex-col lg:flex-row">
                     <VerticalGroup>
                         <InputLabel for="power">Moc: </InputLabel>
-                        <AppDetailsInput id="power" />
+                        <AppDetailsInput v-model="newOfferData.power" id="power" />
                     </VerticalGroup>
 
                     <VerticalGroup>
                         <InputLabel for="displacement">Pojemność skokowa: </InputLabel>
-                        <AppDetailsInput id="displacement" />
+                        <AppDetailsInput v-model="newOfferData.displacement" id="displacement" />
                     </VerticalGroup>
 
                     <VerticalGroup>
                         <InputLabel for="gearbox">Skrzynia biegów: </InputLabel>
-                        <AppSelectBox :source="['manualna', 'automatyczna', 'PDK']" id="gearbox" class="w-48" />
+                        <AppSelectBox @selectionChanged="(value) => { newOfferData.gearbox = value }" :source="['manualna', 'automatyczna', 'PDK']" id="gearbox" class="w-48" />
                     </VerticalGroup>
 
                     <VerticalGroup>
                         <InputLabel for="fuel">Rodzaj paliwa: </InputLabel>
-                        <AppSelectBox :source="['benzyna', 'diesel', 'instalacja gazowa']" id="fuel" class="w-48"/>
+                        <AppSelectBox @selectionChanged="(value) => { newOfferData.fuelType = value }" :source="['benzyna', 'diesel', 'instalacja gazowa']" id="fuel" class="w-48"/>
                     </VerticalGroup>
 
                     <VerticalGroup>
                         <InputLabel for="body">Typ nadwozia: </InputLabel>
-                        <AppSelectBox :source="['SUV', 'Coupe', 'Combi']" id="body"  class="w-48"/>
+                        <AppSelectBox @selectionChanged="(value) => { newOfferData.bodyType = value }" :source="['SUV', 'Coupe', 'Combi']" id="body"  class="w-48"/>
                     </VerticalGroup>
                 </HorizontalGroup>
 
@@ -115,12 +115,12 @@
                 <HorizontalGroup class="gap-5">
                     <VerticalGroup>
                         <InputLabel for="condition">Stan: </InputLabel>
-                        <AppSelectBox :source="['Nowy', 'Używany']" id="condition" class="w-48" />
+                        <AppSelectBox @selectionChanged="(value) => { newOfferData.condition = value }" :source="['Nowy', 'Używany']" id="condition" class="w-48" />
                     </VerticalGroup>
 
                     <VerticalGroup class="flex-1">
                         <InputLabel for="mileage">Przebieg: </InputLabel>
-                        <AppDetailsInput id="mileage" />
+                        <AppDetailsInput v-model="newOfferData.mileage" id="mileage" />
                     </VerticalGroup>
                 </HorizontalGroup>
             </VerticalGroup>
@@ -130,25 +130,26 @@
 
 <script setup>
     const newOfferData = ref({
-        title: String,
-        price: Number,
-        forNegotiation: Boolean,
-        description: String,
-        image: FormData,
-        model: String,
-        yearOfProduction: Number,
-        numberOfDoors: Number,
-        numberOfPlaces: Number,
-        color: String,
-        VIN: String,
-        power: Number,
-        displacement: Number,
-        gearbox: String,
-        fuelType: String,
-        bodyType: String,
-        condition: String,
-        mileage: Number,
-        email: String,
-        phoneNumber: String
+        title: '',
+        price: 0,
+        category: '',
+        forNegotiation: false,
+        description: '',
+        image: [],
+        model: '',
+        yearOfProduction: 0,
+        numberOfDoors: 0,
+        numberOfPlaces: 0,
+        color: '',
+        VIN: '',
+        power: 0,
+        displacement: 0,
+        gearbox: '',
+        fuelType: '',
+        bodyType: '',
+        condition: '',
+        mileage: 0,
+        email: '',
+        phoneNumber: ''
     });
 </script>
