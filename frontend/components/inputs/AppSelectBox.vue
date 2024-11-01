@@ -1,5 +1,5 @@
 <template>
-    <div @click="isCollapsed = !isCollapsed" class="relative min-w-72 h-10 p-1.5 border-2 border-[#DDD]">
+    <div @click="isCollapsed = !isCollapsed" class="relative min-w-72 h-10 p-1.5 border-2 border-[#DDD] cursor-pointer">
         <p v-if="selected">{{ selected }}</p>
         <p v-else>wybierz</p>
 
