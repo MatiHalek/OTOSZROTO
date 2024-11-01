@@ -12,8 +12,19 @@
 
                     <VerticalGroup>
                         <InputLabel for="category">Kategoria ogłoszenia: </InputLabel>
-                        <AppSelectBox :source="['Samochody osobowe', 'Motocykle']" />
+                        <AppSelectBox :source="['Samochody osobowe', 'Motocykle']" class="w-64" />
                     </VerticalGroup>
+                </HorizontalGroup>
+
+                <HorizontalGroup class="items-center gap-5">
+                    <VerticalGroup>
+                        <InputLabel for="price">Cena: (PLN)</InputLabel>
+                        <AppDetailsInput id="price" />
+                    </VerticalGroup>
+
+                    <AppCheckBox class="mt-2">
+                        Do negocjacji?
+                    </AppCheckBox>
                 </HorizontalGroup>
 
                 <VerticalGroup>
@@ -37,7 +48,7 @@
                     <AppDetailsInput id="model" />
                 </VerticalGroup>
 
-                <HorizontalGroup class="gap-5">
+                <HorizontalGroup class="gap-5 flex-col md:flex-row">
                     <VerticalGroup>
                         <InputLabel for="year">Rok produkcji: </InputLabel>
                         <AppDetailsInput id="year" />
@@ -58,8 +69,8 @@
                         <AppDetailsInput id="color" />
                     </VerticalGroup>
 
-                    <VerticalGroup class="flex-1">
-                        <InputLabel for="vin">VIN pojazdu: </InputLabel>
+                    <VerticalGroup class="flex-none lg:flex-1">
+                        <InputLabel for="vin">VIN: </InputLabel>
                         <AppDetailsInput id="vin" />
                     </VerticalGroup>
                 </HorizontalGroup>
@@ -69,7 +80,7 @@
                     <h2 class="text-2xl m-0 font-medium">Specyfikacja</h2>
                 </VerticalGroup>
 
-                <HorizontalGroup class="gap-5">
+                <HorizontalGroup class="gap-5 flex-col lg:flex-row">
                     <VerticalGroup>
                         <InputLabel for="power">Moc: </InputLabel>
                         <AppDetailsInput id="power" />
@@ -82,17 +93,17 @@
 
                     <VerticalGroup>
                         <InputLabel for="gearbox">Skrzynia biegów: </InputLabel>
-                        <AppSelectBox :source="['manualna', 'automatyczna', 'PDK']" id="gearbox" />
+                        <AppSelectBox :source="['manualna', 'automatyczna', 'PDK']" id="gearbox" class="w-48" />
                     </VerticalGroup>
 
                     <VerticalGroup>
                         <InputLabel for="fuel">Rodzaj paliwa: </InputLabel>
-                        <AppSelectBox :source="['benzyna', 'diesel', 'instalacja gazowa']" id="fuel" />
+                        <AppSelectBox :source="['benzyna', 'diesel', 'instalacja gazowa']" id="fuel" class="w-48"/>
                     </VerticalGroup>
 
                     <VerticalGroup>
                         <InputLabel for="body">Typ nadwozia: </InputLabel>
-                        <AppSelectBox :source="['SUV', 'Coupe', 'Combi']" id="body" />
+                        <AppSelectBox :source="['SUV', 'Coupe', 'Combi']" id="body"  class="w-48"/>
                     </VerticalGroup>
                 </HorizontalGroup>
 
@@ -104,7 +115,7 @@
                 <HorizontalGroup class="gap-5">
                     <VerticalGroup>
                         <InputLabel for="condition">Stan: </InputLabel>
-                        <AppSelectBox :source="['Nowy', 'Używany']" id="condition" />
+                        <AppSelectBox :source="['Nowy', 'Używany']" id="condition" class="w-48" />
                     </VerticalGroup>
 
                     <VerticalGroup class="flex-1">
