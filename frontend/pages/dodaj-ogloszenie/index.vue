@@ -129,5 +129,26 @@
 </template>
 
 <script setup>
-
+    const newOfferData = ref({
+        title: String,
+        price: Number,
+        forNegotiation: Boolean,
+        description: String,
+        image: FormData,
+        model: String,
+        yearOfProduction: Number,
+        numberOfDoors: Number,
+        numberOfPlaces: Number,
+        color: String,
+        VIN: String,
+        power: Number,
+        displacement: Number,
+        gearbox: String,
+        fuelType: String,
+        bodyType: String,
+        condition: String,
+        mileage: Number,
+        email: String,
+        phoneNumber: String
+    });
 </script>
