@@ -9,6 +9,7 @@ namespace api.Data
     {
         public DbSet<User> Users { get; set; } = default!;
         public DbSet<UserToken> UserTokens { get; set; } = default!;
+        public DbSet<Advertisement> Advertisements { get; set; } = default!;
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
