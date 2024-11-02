@@ -42,6 +42,8 @@
                     <input class="hidden" type="file" id="file-input" @change="handleFileUpload" ref="fileInput" accept="image/*">
 
                     <AppSelectedImages v-for="image in files" :image="image"/>
+
+                    <button @click="saveImage()">Wyślij</button>
                 </VerticalGroup>
 
                 <VerticalGroup>
@@ -175,5 +177,18 @@
                 files.value.push(file);
             }
         });
+    }
+
+    async function saveImage() {
+        let response;
+
+        const formData = new FormData();
+        files.value.forEach(file => formData.append('files', file));
+
+        response = await $fetch('http://localhost:5271/api/image/upload/gallery', { responseType: 'json', method: 'post', body: formData });
+
+        if(response) {
+            console.log(response);
+        }
     }
 </script>
