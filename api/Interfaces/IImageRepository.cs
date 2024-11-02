@@ -2,6 +2,7 @@
 {
     public interface IImageRepository
     {
-        int InsertGalleryImage(string imageToken,int filesCount);
+        int InsertGalleryImage(string imageToken, List<IFormFile> files, int advertismentID);
+        List<byte[]> GetGalleryImages(int advertismentID);
     }
 }
