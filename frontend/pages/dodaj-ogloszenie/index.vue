@@ -180,6 +180,38 @@
     }
 
     async function createOffer() {
+        const response = await $fetch('http://localhost:5271/api/advertisment', 
+            { 
+                responseType: 'json', 
+                method: 'post', 
+                body: {
+                    "Title": newOfferData.value.title,
+                    "Price": newOfferData.value.price,
+                    "Description": newOfferData.value.description,
+                    "Model": newOfferData.value.model,
+                    "YearOfProduction": newOfferData.value.yearOfProduction,
+                    "NumberOfDoors": newOfferData.value.numberOfDoors,
+                    "NumberOfPlaces": newOfferData.value.numberOfPlaces,
+                    "Color": newOfferData.value.color,
+                    "VIN": newOfferData.value.VIN,
+                    "Power": newOfferData.value.power,
+                    "Displacement": newOfferData.value.displacement,
+                    "Gearbox": newOfferData.value.gearbox,
+                    "FuelType": newOfferData.value.fuelType,
+                    "BodyType": newOfferData.value.bodyType,
+                    "Condition": newOfferData.value.condition,
+                    "Mileage": newOfferData.value.mileage,
+                    "Email": newOfferData.value.email,
+                    "PhoneNumber": newOfferData.value.phoneNumber
+                }
+            });
+
+        if(response) {
+            console.log(response);
+        }
+    }
+
+    async function _createOffer() {
         let response;
 
         const formData = new FormData();
