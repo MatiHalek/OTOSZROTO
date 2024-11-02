@@ -19,6 +19,7 @@ namespace api
             builder.Services.AddControllers();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IUserTokenRepository, UserTokenRepository>();
+            builder.Services.AddScoped<IAdvertismentRepository, AdvertismentRepository>();
             builder.Services.AddScoped<IJwtService, JwtService>();
 
             // Register IEmailService with a transient lifetime
