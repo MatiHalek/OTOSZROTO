@@ -2,7 +2,7 @@
     <div class="container mx-auto">
         <PageHeader>Dodaj ogłoszenie</PageHeader>
 
-        <form class="pt-5 pb-96">
+        <div class="pt-5 pb-96">
             <VerticalGroup class="gap-10">
                 <HorizontalGroup class="gap-3">
                     <VerticalGroup class="flex-1">
@@ -32,10 +32,16 @@
                     <AppTextArea id="description" v-model="newOfferData.description" />
                 </VerticalGroup>
 
-                <VerticalGroup>
-                    <InputLabel>Zdjęcia (max 10): </InputLabel>
+                <VerticalGroup class="gap-2">
+                    <InputLabel>Zdjęcia (max 10): {{ files.length }} / 10 </InputLabel>
 
-                    <button class="bg-[#FFF] border-2 border-[#DDD] w-60 h-24">Wybierz</button>
+                    <label for="file-input" class="bg-[#FFF] border-2 border-[#DDD] w-60 h-24 flex justify-center items-center cursor-pointer">
+                        <button>Wybierz</button>
+                    </label>
+
+                    <input class="hidden" type="file" id="file-input" @change="handleFileUpload" ref="fileInput" accept="image/*">
+
+                    <AppSelectedImages v-for="image in files" :image="image"/>
                 </VerticalGroup>
 
                 <VerticalGroup>
@@ -124,7 +130,7 @@
                     </VerticalGroup>
                 </HorizontalGroup>
             </VerticalGroup>
-        </form>
+        </div>
     </div>
 </template>
 
@@ -152,4 +158,22 @@
         email: '',
         phoneNumber: ''
     });
+
+    const files = ref([]);
+    const allowedTypes = ref(['image/jpeg', 'image/png']);
+    const fileInput = ref(null);
+    const fileError = ref();
+
+    function handleFileUpload(event) {
+        const selectedFiles = Array.from(event.target.files);
+        fileError.value = '';
+
+        selectedFiles.forEach(file => {
+            if(!allowedTypes.value.includes(file.type)) {
+                fileError.value = 'Nieprawidłowy typ zdjęcia!';
+            } else {
+                files.value.push(file);
+            }
+        });
+    }
 </script>
