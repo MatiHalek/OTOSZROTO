@@ -159,7 +159,7 @@
     });
 
     const images = ref([
-    "https://via.placeholder.com/800x450",
+    "https://wparena.com/wp-content/uploads/2009/09/img0.jpg",
     "https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg",
     "https://wallpaperaccess.com/full/1673840.jpg"
     ]);
