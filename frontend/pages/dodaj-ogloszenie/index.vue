@@ -42,8 +42,6 @@
                     <input class="hidden" type="file" id="file-input" @change="handleFileUpload" ref="fileInput" accept="image/*">
 
                     <AppSelectedImages v-for="(image, index) in files" :image="image" @deleteImage="files.splice(index, 1);"/>
-
-                    <button @click="saveImage()">Wyślij</button>
                 </VerticalGroup>
 
                 <VerticalGroup>
@@ -132,6 +130,8 @@
                     </VerticalGroup>
                 </HorizontalGroup>
             </VerticalGroup>
+
+            <ConfirmButton class="mt-24 w-48" @click="createOffer()">Wyślij</ConfirmButton>
         </div>
     </div>
 </template>
@@ -179,7 +179,7 @@
         });
     }
 
-    async function saveImage() {
+    async function createOffer() {
         let response;
 
         const formData = new FormData();
