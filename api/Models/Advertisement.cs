@@ -21,5 +21,6 @@
         public int Mileage { get; set; }
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
+        public ICollection<AdvertismentImage> AdvertismentImages { get; set; } = new List<AdvertismentImage>();
     }
 }

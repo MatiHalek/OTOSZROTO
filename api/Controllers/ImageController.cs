@@ -42,17 +42,22 @@ namespace api.Controllers
         public ImageController(IWebHostEnvironment hostEnvironment/*, IImageRepository imageRepository*/)
         {
             this.hostEnvironment = hostEnvironment;
-            //this.imageRepository = imageRepository;
+            this.imageRepository = imageRepository;
         }
         [HttpPost("uploadGalleryImages/{advertismentID}")]
         public async Task<IActionResult> UploadGalleryImages(List<IFormFile> files,int advertismentID)
         {
             string imageToken = await Utils.UploadImages(files, "gallery");
-            for (int i = 0; i < files.Count; i++)
-            {
-                
-            }
+            imageRepository.InsertGalleryImage(imageToken,files,advertismentID);
             return Ok(imageToken);
+        }
+
+        [HttpGet("uploadGalleryImages/{advertismentID}")]
+        public IActionResult GetGalleryImages(int advertismentID)
+        {
+            List<byte[]> fileBytesList = imageRepository.GetGalleryImages(advertismentID);
+            byte[] fileBytes = Utils.CombineChunks(fileBytesList);
+            return File(fileBytes, "image/png");
         }
     }
 }

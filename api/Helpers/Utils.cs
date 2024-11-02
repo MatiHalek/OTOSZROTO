@@ -46,5 +46,20 @@ namespace api.Helpers
             }
             return randomImageToken;
         }
+
+        public static byte[] CombineChunks(List<byte[]> chunks)
+        {
+            int totalLength = chunks.Sum(chunk => chunk.Length);
+            byte[] combinedBytes = new byte[totalLength];
+
+            int offset = 0;
+            foreach (var chunk in chunks)
+            {
+                System.Buffer.BlockCopy(chunk, 0, combinedBytes, offset, chunk.Length);
+                offset += chunk.Length;
+            }
+
+            return combinedBytes;
+        }
     }
 }
