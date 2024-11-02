@@ -124,10 +124,65 @@
                     </VerticalGroup>
                 </HorizontalGroup>
             </VerticalGroup>
+
+            <ConfirmButton class="mt-24 w-48" @click="createOffer()">Wyślij</ConfirmButton>
         </div>
     </div>
 </template>
 
 <script setup>
+    const newOfferData = ref({
+        title: '',
+        price: 0,
+        category: '',
+        forNegotiation: false,
+        description: '',
+        image: [],
+        model: '',
+        yearOfProduction: 0,
+        numberOfDoors: 0,
+        numberOfPlaces: 0,
+        color: '',
+        VIN: '',
+        power: 0,
+        displacement: 0,
+        gearbox: '',
+        fuelType: '',
+        bodyType: '',
+        condition: '',
+        mileage: 0,
+        email: '',
+        phoneNumber: ''
+    });
 
+    const files = ref([]);
+    const allowedTypes = ref(['image/jpeg', 'image/png']);
+    const fileInput = ref(null);
+    const fileError = ref();
+
+    function handleFileUpload(event) {
+        const selectedFiles = Array.from(event.target.files);
+        fileError.value = '';
+
+        selectedFiles.forEach(file => {
+            if(!allowedTypes.value.includes(file.type)) {
+                fileError.value = 'Nieprawidłowy typ zdjęcia!';
+            } else {
+                files.value.push(file);
+            }
+        });
+    }
+
+    async function createOffer() {
+        let response;
+
+        const formData = new FormData();
+        files.value.forEach(file => formData.append('files', file));
+
+        response = await $fetch('http://localhost:5271/api/image/upload/gallery', { responseType: 'json', method: 'post', body: formData });
+
+        if(response) {
+            console.log(response);
+        }
+    }
 </script>
