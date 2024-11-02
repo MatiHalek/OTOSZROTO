@@ -181,46 +181,36 @@
 
     async function createOffer() {
         const response = await $fetch('http://localhost:5271/api/advertisment', 
-            { 
-                responseType: 'json', 
-                method: 'post', 
-                body: {
-                    "Title": newOfferData.value.title,
-                    "Price": newOfferData.value.price,
-                    "Description": newOfferData.value.description,
-                    "Model": newOfferData.value.model,
-                    "YearOfProduction": newOfferData.value.yearOfProduction,
-                    "NumberOfDoors": newOfferData.value.numberOfDoors,
-                    "NumberOfPlaces": newOfferData.value.numberOfPlaces,
-                    "Color": newOfferData.value.color,
-                    "VIN": newOfferData.value.VIN,
-                    "Power": newOfferData.value.power,
-                    "Displacement": newOfferData.value.displacement,
-                    "Gearbox": newOfferData.value.gearbox,
-                    "FuelType": newOfferData.value.fuelType,
-                    "BodyType": newOfferData.value.bodyType,
-                    "Condition": newOfferData.value.condition,
-                    "Mileage": newOfferData.value.mileage,
-                    "Email": newOfferData.value.email,
-                    "PhoneNumber": newOfferData.value.phoneNumber
-                }
-            });
+        { 
+            responseType: 'json', 
+            method: 'post', 
+            body: {
+                "Title": newOfferData.value.title,
+                "Price": newOfferData.value.price,
+                "Description": newOfferData.value.description,
+                "Model": newOfferData.value.model,
+                "YearOfProduction": newOfferData.value.yearOfProduction,
+                "NumberOfDoors": newOfferData.value.numberOfDoors,
+                "NumberOfPlaces": newOfferData.value.numberOfPlaces,
+                "Color": newOfferData.value.color,
+                "VIN": newOfferData.value.VIN,
+                "Power": newOfferData.value.power,
+                "Displacement": newOfferData.value.displacement,
+                "Gearbox": newOfferData.value.gearbox,
+                "FuelType": newOfferData.value.fuelType,
+                "BodyType": newOfferData.value.bodyType,
+                "Condition": newOfferData.value.condition,
+                "Mileage": newOfferData.value.mileage,
+                "Email": newOfferData.value.email,
+                "PhoneNumber": newOfferData.value.phoneNumber
+            },
+        });
 
         if(response) {
-            console.log(response);
-        }
-    }
+            const formData = new FormData();
+            files.value.forEach(file => formData.append('files', file));
 
-    async function _createOffer() {
-        let response;
-
-        const formData = new FormData();
-        files.value.forEach(file => formData.append('files', file));
-
-        response = await $fetch('http://localhost:5271/api/image/upload/gallery', { responseType: 'json', method: 'post', body: formData });
-
-        if(response) {
-            console.log(response);
+            const imagesResponse = await $fetch(`http://localhost:5271/api/image/uploadGalleryImages/${response.advertisementID}`, { responseType: 'json', method: 'post', body: formData });
         }
     }
 </script>
