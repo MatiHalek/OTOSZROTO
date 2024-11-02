@@ -3,5 +3,6 @@
     public interface IImageRepository
     {
         int Create();
+        int InsertGalleryImage(string imageToken,int filesCount);
     }
 }
