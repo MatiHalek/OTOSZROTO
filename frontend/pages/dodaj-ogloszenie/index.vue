@@ -35,7 +35,13 @@
                 <VerticalGroup class="gap-2">
                     <InputLabel>Zdjęcia (max 10): {{ files.length }} / 10 </InputLabel>
 
-                    <button class="bg-[#FFF] border-2 border-[#DDD] w-60 h-24">Wybierz</button>
+                    <label :class="{ 'hidden': files.length >= 10 }" for="file-input" class="bg-[#FFF] border-2 border-[#DDD] w-60 h-24 flex justify-center items-center cursor-pointer">
+                        <button>Wybierz</button>
+                    </label>
+
+                    <input class="hidden" type="file" id="file-input" @change="handleFileUpload" ref="fileInput" accept="image/*">
+                    
+                    <AppSelectedImages v-for="(image, index) in files" :image="image" @deleteImage="files.splice(index, 1);"/>
                 </VerticalGroup>
 
                 <VerticalGroup>
