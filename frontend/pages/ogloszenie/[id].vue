@@ -28,14 +28,14 @@
         <article class="relative container mx-auto px-4 lg:px-8" id="advertisementInfo">
             <section class="grid grid-cols-1 md:grid-cols-[minmax(0,_2.5fr)_minmax(250px,_1fr)] grid-flow-dense gap-4 -mt-16">
                 <section class="flex flex-col items-center justify-center space-y-4 rounded-lg bg-[#D0D0D090] backdrop-blur-md md:backdrop-blur-none md:bg-white p-3 break-all shadow-lg md:col-start-2 md:row-start-1 row-span-5 h-fit min-h-[8rem] fixed md:sticky md:top-24 break-normal bottom-0 w-full start-0">
-                    <a href="mailto:" class="flex relative min-h-[50px] items-center justify-center overflow-hidden text-[#FFF] p-2.5 rounded-lg shadow-xl transition-all duration-300 before:absolute before:inset-0 before:border-[0px] before:border-white before:transition-all before:duration-300 before:ease-linear hover:bg-white hover:text-[#463691] hover:shadow-special hover:before:border-[25px] font-bold bg-[#1e90ff] mt-0 shadow-xl w-11/12 cursor-pointer">
+                    <a :href="'mailto:' + data.email" class="flex relative min-h-[50px] items-center justify-center overflow-hidden text-[#FFF] p-2.5 rounded-lg shadow-xl transition-all duration-300 before:absolute before:inset-0 before:border-[0px] before:border-white before:transition-all before:duration-300 before:ease-linear hover:bg-white hover:text-[#463691] hover:shadow-special hover:before:border-[25px] font-bold bg-[#1e90ff] mt-0 shadow-xl w-11/12 cursor-pointer">
                         <span class="relative z-10">
-                            <i class="fa-solid fa-envelope me-2"></i>email
+                            <i class="fa-solid fa-envelope me-2"></i>{{ data.email }}
                         </span>
                     </a>
-                    <a href="tel:" class="flex relative min-h-[50px] items-center justify-center overflow-hidden text-[#FFF] p-2.5 rounded-lg shadow-xl transition-all duration-300 before:absolute before:inset-0 before:border-[0px] before:border-white before:transition-all before:duration-300 before:ease-linear hover:bg-white hover:text-[#463691] hover:shadow-special hover:before:border-[25px] font-bold bg-[#43AD19] mt-0 shadow-xl w-11/12 cursor-pointer">
+                    <a :href="'tel:' + data.phoneNumber" class="flex relative min-h-[50px] items-center justify-center overflow-hidden text-[#FFF] p-2.5 rounded-lg shadow-xl transition-all duration-300 before:absolute before:inset-0 before:border-[0px] before:border-white before:transition-all before:duration-300 before:ease-linear hover:bg-white hover:text-[#463691] hover:shadow-special hover:before:border-[25px] font-bold bg-[#43AD19] mt-0 shadow-xl w-11/12 cursor-pointer">
                         <span class="relative z-10">
-                            <i class="fa-solid fa-phone me-2"></i>phoneNumber
+                            <i class="fa-solid fa-phone me-2"></i>{{ data.phoneNumber }}
                         </span>
                     </a>
                 </section>
@@ -154,13 +154,14 @@
     definePageMeta({
         layout: 'default'
     });
-    useHead({
-        title: '[tytuł] | OTOSZROTO'
-    });
 
     const { id } = useRoute().params;
     const { data } = await useFetch(`http://localhost:5271/api/advertisment/${id}`, {
         method: 'get'
+    });
+
+    useHead({
+        title: data.value.title + ' | OTOSZROTO'
     });
 
     console.log(data.value);
