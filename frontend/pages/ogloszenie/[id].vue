@@ -38,7 +38,12 @@
                             <i class="fa-solid fa-phone me-2"></i>{{ data.phoneNumber }}
                         </span>
                     </a>
+
+                    <hr class="w-full">
+
+                    <AppManageAdvertisment />
                 </section>
+
                 <section class="rounded-lg bg-white p-3 break-all shadow-lg">
                     <h1 class="text-2xl font-bold">{{ data.title }}
                         <span class="text-base font-normal">#{{ data.advertisementID }}</span>
