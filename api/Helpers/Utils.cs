@@ -34,7 +34,7 @@ namespace api.Helpers
 
             for (int i = 0; i < files.Count; i++)
             {
-                string fileName = $"car_{randomImageToken}_{i}{Path.GetExtension(files[i].FileName)}";
+                string fileName = $"{randomImageToken}_{i}{Path.GetExtension(files[i].FileName)}";
 
                 var filePath = Path.Combine(uploads, fileName);
 

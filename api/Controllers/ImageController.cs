@@ -55,9 +55,7 @@ namespace api.Controllers
         [HttpGet("uploadGalleryImages/{advertismentID}")]
         public IActionResult GetGalleryImages(int advertismentID)
         {
-            List<byte[]> fileBytesList = imageRepository.GetGalleryImages(advertismentID);
-            byte[] fileBytes = Utils.CombineChunks(fileBytesList);
-            return File(fileBytes, "image/png");
+            return Ok(imageRepository.GetGalleryImages(advertismentID));
         }
     }
 }

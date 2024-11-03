@@ -28,17 +28,10 @@ namespace api.Repositories
             return 1;
         }
 
-        public List<byte[]> GetGalleryImages(int advertismentID)
+        public List<AdvertismentImage> GetGalleryImages(int advertismentID)
         {
-            var advertismentImages = context.AdvertismentImages.Where(ai => ai.AdvertismentID == advertismentID).ToList();
-            List<byte[]> bytes = new List<byte[]>();
-            foreach (var image in advertismentImages)
-            {
-                byte[] imageBytes = System.IO.File.ReadAllBytes(
-                    Path.Combine(Directory.GetCurrentDirectory(), $"Uploads/gallery"));
-                bytes.Add(imageBytes);
-            }
-            return bytes;
+            List<AdvertismentImage> advertismentImages = context.AdvertismentImages.Where(ai => ai.AdvertismentID == advertismentID).ToList();
+            return advertismentImages;
         }
     }
 }

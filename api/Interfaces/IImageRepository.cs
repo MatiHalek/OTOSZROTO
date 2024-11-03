@@ -1,8 +1,10 @@
-﻿namespace api.Interfaces
+﻿using api.Models;
+
+namespace api.Interfaces
 {
     public interface IImageRepository
     {
         int InsertGalleryImage(string imageToken, List<IFormFile> files, int advertismentID);
-        List<byte[]> GetGalleryImages(int advertismentID);
+        List<AdvertismentImage> GetGalleryImages(int advertismentID);
     }
 }
