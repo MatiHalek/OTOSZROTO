@@ -93,20 +93,20 @@ namespace api.Controllers
             });
         }
 
-        [HttpPost("reset/{userID}")]
-        public IActionResult Reset(int userID)
+        [HttpPost("reset/{email}")]
+        public IActionResult Reset(string email)
         {
-            User user = userRepository.Get(userID);
+            User user = userRepository.GetByEmail(email);
             if(user == null) return NotFound();
             string token = Utils.GenerateRandomString(25);
 
-            emailService.SendEmailAsync("kacperpiaskowy937@gmail.com", "Password restart"
-                , $"<a href='http://localhost:3000/restart?token={token}'>http://localhost:3000/restart?token={token}</a>");
+            emailService.SendEmailAsync(email, "Password restart"
+                , $"<a href='http://localhost:3000/restart?token={token}'>Zrestatruj hasło klikając w ten link!</a>");
             
             UserToken userToken = new UserToken()
             {
                 Token = token,
-                UserID = userID
+                UserID = user.UserID,
             };
 
             userTokenRepository.Create(userToken);
