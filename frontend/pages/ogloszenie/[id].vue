@@ -164,7 +164,11 @@
         title: data.value.title + ' | OTOSZROTO'
     });
 
-    console.log(data.value);
+    const path = '../../../api/Uploads/gallery/';
+
+    const { data2 } = await useFetch('', {
+        method: 'get'
+    });
 
     const images = ref([
     "https://wparena.com/wp-content/uploads/2009/09/img0.jpg",
