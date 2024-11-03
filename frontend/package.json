@@ -12,9 +12,11 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
+    "@nuxtjs/proxy": "^2.1.0",
     "@nuxtjs/tailwindcss": "^6.12.2",
     "@vitejs/plugin-vue": "^5.1.4",
     "@vue/test-utils": "^2.4.0-alpha.2",
+    "axios": "^1.7.7",
     "happy-dom": "^15.7.4",
     "nuxt": "^3.13.2",
     "vue": "latest",
