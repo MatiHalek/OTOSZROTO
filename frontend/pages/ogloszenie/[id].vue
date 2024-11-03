@@ -161,15 +161,20 @@
     });
 
     const { id } = useRoute().params;
-    const { data } = await useFetch(`http://localhost:5271/api/advertisment/${id}`, {
-        method: 'get'
+
+    const { data } = await useFetch('http://localhost:5271/api/advertisment/9', { 
+        responseType: 'json', 
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json',
+        } 
     });
+
+    console.log(data.value);
 
     useHead({
         title: data.value.title + ' | OTOSZROTO'
     });
-
-    console.log(data.value);
 
     const images = ref([
     "https://wparena.com/wp-content/uploads/2009/09/img0.jpg",
