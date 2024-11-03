@@ -1,7 +1,10 @@
-﻿using api.Helpers;
+﻿using api.Dto;
+using api.Helpers;
 using api.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
+using System.Net.Mime;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace api.Controllers
@@ -56,6 +59,28 @@ namespace api.Controllers
         public IActionResult GetGalleryImages(int advertismentID)
         {
             return Ok(imageRepository.GetGalleryImages(advertismentID));
+        }
+
+        [HttpGet("uploadGallerySingleImage")]
+        public async Task<IActionResult> GetGallerySingleImage(ImageDto dto)
+        {
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), $"Uploads/gallery/{dto.ImagePath}");
+            byte[] imageBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+            var contentType = GetContentType(filePath);
+            return File(imageBytes, contentType);
+        }
+
+        [NonAction]
+        private string GetContentType(string filePath)
+        {
+            var extension = Path.GetExtension(filePath).ToLowerInvariant();
+            return extension switch
+            {
+                ".png" => MediaTypeNames.Image.Png,
+                ".jpg" or ".jpeg" => MediaTypeNames.Image.Jpeg,
+                ".gif" => MediaTypeNames.Image.Gif,
+                _ => MediaTypeNames.Application.Octet, // Fallback for unknown types
+            };
         }
     }
 }
