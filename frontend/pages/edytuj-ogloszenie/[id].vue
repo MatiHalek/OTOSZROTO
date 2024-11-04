@@ -173,21 +173,18 @@
     });
 
     onMounted(async () => {
-
-        // Konwersja arrayBuffer na Blob i dodanie do plików
-        const mimeType = "image/png"; // Ustawienie typu MIME obrazu
+        const mimeType = "image/png";
         const blob = new Blob([singleImage.value], { type: mimeType });
         const file = new File([blob], images.value[0].imageSource.split('/').pop(), { type: mimeType });
         files.value.push(file);
 
-        // Użycie FileReader do konwersji Blob na base64
-        if (typeof window !== 'undefined') { // Sprawdzenie, czy jesteśmy w przeglądarce
+        if (typeof window !== 'undefined') {
             const reader = new FileReader();
             reader.onloadend = () => {
-                imageSrc.value = reader.result; // Wynik to base64
-                console.log(singleImage.value); // Możesz tu ustawić podgląd obrazu, jeśli potrzebujesz
+                imageSrc.value = reader.result; 
+                console.log(singleImage.value); 
             };
-            reader.readAsDataURL(blob); // Konwersja na base64
+            reader.readAsDataURL(blob); 
         }
     });
 
