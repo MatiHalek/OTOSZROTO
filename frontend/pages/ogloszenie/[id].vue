@@ -160,21 +160,19 @@
         method: 'get'
     });
 
+    const { data: images } = await useFetch(`http://localhost:5271/api/image/uploadGalleryImages/${id}`, { 
+        responseType: 'json', 
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json',
+        } 
+    });
+
+    console.log(images);
+
     useHead({
         title: data.value.title + ' | OTOSZROTO'
     });
-
-    const path = '../../../api/Uploads/gallery/';
-
-    const { data2 } = await useFetch('', {
-        method: 'get'
-    });
-
-    const images = ref([
-    "https://wparena.com/wp-content/uploads/2009/09/img0.jpg",
-    "https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg",
-    "https://wallpaperaccess.com/full/1673840.jpg"
-    ]);
 
     const currentIndex = ref(0);
 
