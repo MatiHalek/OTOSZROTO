@@ -162,7 +162,7 @@
 
     const { id } = useRoute().params;
 
-    const { data } = await useFetch('http://localhost:5271/api/advertisment/9', { 
+    const { data } = await useFetch(`http://localhost:5271/api/advertisment/${id}`, { 
         responseType: 'json', 
         method: 'get',
         headers: {
