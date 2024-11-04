@@ -33,5 +33,28 @@ namespace api.Repositories
             List<AdvertismentImage> advertismentImages = context.AdvertismentImages.Where(ai => ai.AdvertismentID == advertismentID).ToList();
             return advertismentImages;
         }
+
+        public string DeleteGalleryImageForAdvertisment(int advertismentID)
+        {
+            List<AdvertismentImage> advertismentImages = context.AdvertismentImages.Where(ai => ai.AdvertismentID == advertismentID).ToList();
+            string singlePath = "";
+            if(advertismentImages.Count > 0)
+            {
+                singlePath = advertismentImages[0].ImageSource!;
+            }
+
+            foreach (var image in advertismentImages)
+            {
+                var path = Path.Combine(Directory.GetCurrentDirectory(), $"Uploads/gallery/{image.ImageSource}");
+                if (File.Exists(path))
+                {
+                    Console.WriteLine(path + "Esa");
+                    File.Delete(path);
+                }
+                context.AdvertismentImages.Remove(image);
+            }
+            context.SaveChanges(true);
+            return singlePath;
+        }
     }
 }

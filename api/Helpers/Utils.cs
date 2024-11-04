@@ -6,6 +6,10 @@ namespace api.Helpers
 {
     public static class Utils
     {
+        public static string GetFolderGalleryPath(string fullpath)
+        {
+            return fullpath.Substring(0, 19);
+        }
         public static string GenerateRandomString(int length)
         {
             Random random = new Random();
@@ -29,8 +33,12 @@ namespace api.Helpers
 
             var uploads = Path.Combine(Directory.GetCurrentDirectory(), $"Uploads/{directory}/car_{randomImageToken}");
 
+            Console.WriteLine("poza directory");
             if (!Directory.Exists(uploads))
+            {
                 Directory.CreateDirectory(uploads);
+                Console.WriteLine("w directory");
+            }
 
             for (int i = 0; i < files.Count; i++)
             {

@@ -6,5 +6,6 @@ namespace api.Interfaces
     {
         int InsertGalleryImage(string imageToken, List<IFormFile> files, int advertismentID);
         List<AdvertismentImage> GetGalleryImages(int advertismentID);
+        string DeleteGalleryImageForAdvertisment(int advertismentID);
     }
 }

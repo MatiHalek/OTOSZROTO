@@ -55,6 +55,20 @@ namespace api.Controllers
             return Ok(imageToken);
         }
 
+        [HttpPut("uploadGalleryImages/{advertismentID}")]
+        public async Task<IActionResult> EditGalleryImages(List<IFormFile> files, int advertismentID)
+        {
+            string folderPathToDelete = Utils.GetFolderGalleryPath(
+                imageRepository.DeleteGalleryImageForAdvertisment(advertismentID));
+            if (Directory.Exists(folderPathToDelete))
+            {
+                Directory.Delete(folderPathToDelete);
+            }
+            string imageToken = await Utils.UploadImages(files, "gallery");
+            imageRepository.InsertGalleryImage(imageToken, files, advertismentID);
+            return Ok(imageToken);
+        }
+
         [HttpGet("uploadGalleryImages/{advertismentID}")]
         public IActionResult GetGalleryImages(int advertismentID)
         {
