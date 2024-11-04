@@ -2,8 +2,6 @@
     <div class="container mx-auto">
         <PageHeader>Edytuj ogłoszenie {{ $route.params.id }}</PageHeader>
 
-        {{ newOfferData.forNegotiation }}
-
         <div class="pt-5 pb-96">
             <VerticalGroup class="gap-10">
                 <HorizontalGroup class="gap-3">
@@ -133,6 +131,8 @@
                 </HorizontalGroup>
             </VerticalGroup>
 
+            <img :src="imageSrc" alt="">
+
             <ConfirmButton class="mt-24 w-48" @click="editOffer()">Edytuj</ConfirmButton>
         </div>
     </div>
@@ -147,6 +147,45 @@
         headers: {
             'Content-Type': 'application/json',
         } 
+    });
+
+    const { data: images } = await useFetch(`http://localhost:5271/api/image/uploadGalleryImages/${id}`, { 
+        responseType: 'json', 
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json',
+        } 
+    });
+
+    const files = ref([]);
+    const formData = new FormData();
+    const imageSrc = ref(null); // Ustawienie na null na początku
+
+    const { data: singleImage } = await useFetch('http://localhost:5271/api/image/uploadGallerySingleImage', { 
+        responseType: 'arrayBuffer', 
+        method: 'post',
+        body: JSON.stringify({
+            ImagePath: images.value[0].imageSource
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+
+    onMounted(async () => {
+        const mimeType = "image/png";
+        const blob = new Blob([singleImage.value], { type: mimeType });
+        const file = new File([blob], images.value[0].imageSource.split('/').pop(), { type: mimeType });
+        files.value.push(file);
+
+        if (typeof window !== 'undefined') {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                imageSrc.value = reader.result; 
+                console.log(singleImage.value); 
+            };
+            reader.readAsDataURL(blob); 
+        }
     });
 
     const newOfferData = ref({
@@ -173,7 +212,6 @@
         phoneNumber: data.value.phoneNumber
     });
 
-    const files = ref([]);
     const allowedTypes = ref(['image/jpeg', 'image/png']);
     const fileInput = ref(null);
     const fileError = ref();
