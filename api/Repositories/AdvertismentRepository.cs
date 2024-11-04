@@ -72,6 +72,8 @@ namespace api.Repositories
             advertisement_db.YearOfProduction = advertisement.YearOfProduction;
             advertisement_db.NumberOfDoors = advertisement.NumberOfDoors;
             advertisement_db.NumberOfPlaces = advertisement.NumberOfPlaces;
+            advertisement_db.IsPriceNegotiable = advertisement.IsPriceNegotiable;
+            advertisement_db.Category = advertisement.Category;
             advertisement_db.Color = advertisement.Color;
             advertisement_db.VIN = advertisement.VIN;
             advertisement_db.Power = advertisement.Power;

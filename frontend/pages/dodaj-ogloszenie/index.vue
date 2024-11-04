@@ -2,6 +2,8 @@
     <div class="container mx-auto">
         <PageHeader>Dodaj ogłoszenie</PageHeader>
 
+        {{ newOfferData.forNegotiation }}
+
         <div class="pt-5 pb-96">
             <VerticalGroup class="gap-10">
                 <HorizontalGroup class="gap-3">
@@ -22,7 +24,7 @@
                         <AppDetailsInput v-model="newOfferData.price" id="price" />
                     </VerticalGroup>
 
-                    <AppCheckBox class="mt-2">
+                    <AppCheckBox class="mt-2" v-model="newOfferData.forNegotiation">
                         Do negocjacji?
                     </AppCheckBox>
                 </HorizontalGroup>
@@ -189,6 +191,8 @@
                 "Price": newOfferData.value.price,
                 "Description": newOfferData.value.description,
                 "Model": newOfferData.value.model,
+                "Category": newOfferData.value.category,
+                "IsPriceNegotiable": newOfferData.value.forNegotiation,
                 "YearOfProduction": newOfferData.value.yearOfProduction,
                 "NumberOfDoors": newOfferData.value.numberOfDoors,
                 "NumberOfPlaces": newOfferData.value.numberOfPlaces,

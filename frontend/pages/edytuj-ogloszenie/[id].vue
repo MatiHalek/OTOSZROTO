@@ -2,6 +2,8 @@
     <div class="container mx-auto">
         <PageHeader>Edytuj ogłoszenie {{ $route.params.id }}</PageHeader>
 
+        {{ newOfferData.forNegotiation }}
+
         <div class="pt-5 pb-96">
             <VerticalGroup class="gap-10">
                 <HorizontalGroup class="gap-3">
@@ -12,7 +14,7 @@
 
                     <VerticalGroup>
                         <InputLabel for="category">Kategoria ogłoszenia: </InputLabel>
-                        <AppSelectBox @selectionChanged="(value) => { newOfferData.category = value }" :source="['Samochody osobowe', 'Motocykle']" class="w-64" />
+                        <AppSelectBox @selectionChanged="(value) => { newOfferData.category = value }" :source="['Samochody osobowe', 'Motocykle']" :current="newOfferData.category" class="w-64" />
                     </VerticalGroup>
                 </HorizontalGroup>
 
@@ -99,17 +101,17 @@
 
                     <VerticalGroup>
                         <InputLabel for="gearbox">Skrzynia biegów: </InputLabel>
-                        <AppSelectBox @selectionChanged="(value) => { newOfferData.gearbox = value }" :source="['manualna', 'automatyczna', 'PDK']" id="gearbox" class="w-48" />
+                        <AppSelectBox @selectionChanged="(value) => { newOfferData.gearbox = value }" :source="['manualna', 'automatyczna', 'PDK']" :current="newOfferData.gearbox" id="gearbox" class="w-48" />
                     </VerticalGroup>
 
                     <VerticalGroup>
                         <InputLabel for="fuel">Rodzaj paliwa: </InputLabel>
-                        <AppSelectBox @selectionChanged="(value) => { newOfferData.fuelType = value }" :source="['benzyna', 'diesel', 'instalacja gazowa']" id="fuel" class="w-48"/>
+                        <AppSelectBox @selectionChanged="(value) => { newOfferData.fuelType = value }" :source="['benzyna', 'diesel', 'instalacja gazowa']" :current="newOfferData.fuelType" id="fuel" class="w-48"/>
                     </VerticalGroup>
 
                     <VerticalGroup>
                         <InputLabel for="body">Typ nadwozia: </InputLabel>
-                        <AppSelectBox @selectionChanged="(value) => { newOfferData.bodyType = value }" :source="['SUV', 'Coupe', 'Combi']" id="body"  class="w-48"/>
+                        <AppSelectBox @selectionChanged="(value) => { newOfferData.bodyType = value }" :source="['SUV', 'Coupe', 'Combi']" :current="newOfferData.bodyType" id="body"  class="w-48"/>
                     </VerticalGroup>
                 </HorizontalGroup>
 
@@ -121,7 +123,7 @@
                 <HorizontalGroup class="gap-5">
                     <VerticalGroup>
                         <InputLabel for="condition">Stan: </InputLabel>
-                        <AppSelectBox @selectionChanged="(value) => { newOfferData.condition = value }" :source="['Nowy', 'Używany']" id="condition" class="w-48" />
+                        <AppSelectBox @selectionChanged="(value) => { newOfferData.condition = value }" :source="['Nowy', 'Używany']" :current="newOfferData.condition" id="condition" class="w-48" />
                     </VerticalGroup>
 
                     <VerticalGroup class="flex-1">
@@ -131,7 +133,7 @@
                 </HorizontalGroup>
             </VerticalGroup>
 
-            <ConfirmButton class="mt-24 w-48" @click="createOffer()">Wyślij</ConfirmButton>
+            <ConfirmButton class="mt-24 w-48" @click="editOffer()">Edytuj</ConfirmButton>
         </div>
     </div>
 </template>
@@ -146,8 +148,6 @@
             'Content-Type': 'application/json',
         } 
     });
-
-    console.log(data.value);
 
     const newOfferData = ref({
         title: data.value.title,
@@ -191,38 +191,22 @@
         });
     }
 
-    async function createOffer() {
-        const response = await $fetch('http://localhost:5271/api/advertisment', 
-        { 
-            responseType: 'json', 
-            method: 'post', 
+    async function editOffer() {
+        const response = await $fetch(`/api/editOffer`, {
+            method: 'post',
             body: {
-                "Title": newOfferData.value.title,
-                "Price": newOfferData.value.price,
-                "Description": newOfferData.value.description,
-                "Model": newOfferData.value.model,
-                "YearOfProduction": newOfferData.value.yearOfProduction,
-                "NumberOfDoors": newOfferData.value.numberOfDoors,
-                "NumberOfPlaces": newOfferData.value.numberOfPlaces,
-                "Color": newOfferData.value.color,
-                "VIN": newOfferData.value.VIN,
-                "Power": newOfferData.value.power,
-                "Displacement": newOfferData.value.displacement,
-                "Gearbox": newOfferData.value.gearbox,
-                "FuelType": newOfferData.value.fuelType,
-                "BodyType": newOfferData.value.bodyType,
-                "Condition": newOfferData.value.condition,
-                "Mileage": newOfferData.value.mileage,
-                "Email": newOfferData.value.email,
-                "PhoneNumber": newOfferData.value.phoneNumber
-            },
+                id: id,
+                offerData: newOfferData.value
+            }
         });
 
-        if(response) {
-            const formData = new FormData();
-            files.value.forEach(file => formData.append('files', file));
+        console.log(response.value);
 
-            const imagesResponse = await $fetch(`http://localhost:5271/api/image/uploadGalleryImages/${response.advertisementID}`, { responseType: 'json', method: 'post', body: formData });
-        }
+       // if(response) {
+            //const formData = new FormData();
+            //files.value.forEach(file => formData.append('files', file));
+
+            //const imagesResponse = await $fetch(`http://localhost:5271/api/image/uploadGalleryImages/${response.advertisementID}`, { responseType: 'json', method: 'post', body: formData });
+        //}
     }
 </script>
