@@ -11,8 +11,8 @@
             <div class="relative w-full h-full flex items-center justify-center overflow-hidden">
             <div class="flex transition-transform duration-500 h-full"
                 :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
-                <div v-for="(image, index) in images" :key="index" class="min-w-full h-full flex justify-center">
-                <img :src="image" alt="Obrazek galerii" class="rounded-xl h-full w-full max-w-[1200px] object-cover" />
+                <div v-for="(image, index) in imageSrcArray" :key="index" class="min-w-full h-full flex justify-center">
+                    <img :src="image" alt="Obrazek galerii" class="rounded-xl h-full w-full max-w-[1200px] object-cover" />
                 </div>
             </div>
             </div>
@@ -170,26 +170,55 @@
         } 
     });
 
-    console.log(data.value);
+    const { data: images } = await useFetch(`http://localhost:5271/api/image/uploadGalleryImages/${id}`, { 
+        responseType: 'json', 
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json',
+        } 
+    });
+
+    const imageSrcArray = ref([]);
+
+    for (const image of images.value) {
+        const { data: singleImage } = await useFetch('http://localhost:5271/api/image/uploadGallerySingleImage', {
+            responseType: 'arrayBuffer',
+            method: 'post',
+            body: JSON.stringify({
+                ImagePath: image.imageSource
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        const mimeType = "image/png";
+        const blob = new Blob([singleImage.value], { type: mimeType });
+
+        if (typeof window !== 'undefined') {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const imageSrc = reader.result;
+                imageSrcArray.value.push(imageSrc); 
+                console.log(imageSrc); 
+            };
+            reader.readAsDataURL(blob);
+        }
+    }
 
     useHead({
         title: data.value.title + ' | OTOSZROTO'
     });
 
-    const images = ref([
-    "https://wparena.com/wp-content/uploads/2009/09/img0.jpg",
-    "https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg",
-    "https://wallpaperaccess.com/full/1673840.jpg"
-    ]);
 
     const currentIndex = ref(0);
 
     function nextImage() {
-    currentIndex.value = (currentIndex.value + 1) % images.value.length;
+        currentIndex.value = (currentIndex.value + 1) % imageSrcArray.value.length;
     }
 
     function prevImage() {
     currentIndex.value =
-        (currentIndex.value - 1 + images.value.length) % images.value.length;
+        (currentIndex.value - 1 + imageSrcArray.value.length) % imageSrcArray.value.length;
     }
 </script>
