@@ -38,7 +38,12 @@
                             <i class="fa-solid fa-phone me-2"></i>{{ data.phoneNumber }}
                         </span>
                     </a>
+
+                    <hr class="w-full">
+
+                    <AppManageAdvertisment />
                 </section>
+
                 <section class="rounded-lg bg-white p-3 break-all shadow-lg">
                     <h1 class="text-2xl font-bold">{{ data.title }}
                         <span class="text-base font-normal">#{{ data.advertisementID }}</span>
@@ -156,11 +161,8 @@
     });
 
     const { id } = useRoute().params;
-    const { data } = await useFetch(`http://localhost:5271/api/advertisment/${id}`, {
-        method: 'get'
-    });
 
-    const { data: images } = await useFetch(`http://localhost:5271/api/image/uploadGalleryImages/${id}`, { 
+    const { data } = await useFetch(`http://localhost:5271/api/advertisment/${id}`, { 
         responseType: 'json', 
         method: 'get',
         headers: {
@@ -168,11 +170,17 @@
         } 
     });
 
-    console.log(images);
+    console.log(data.value);
 
     useHead({
         title: data.value.title + ' | OTOSZROTO'
     });
+
+    const images = ref([
+    "https://wparena.com/wp-content/uploads/2009/09/img0.jpg",
+    "https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg",
+    "https://wallpaperaccess.com/full/1673840.jpg"
+    ]);
 
     const currentIndex = ref(0);
 

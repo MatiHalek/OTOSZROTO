@@ -14,12 +14,14 @@
 <script setup>
     //props 
 
-    defineProps(['source']);
+    const props = defineProps(['source', 'current']);
 
     // emits
     const emit = defineEmits(['selectionChanged']);
 
     const selected = ref('');
+    selected.value = props.current;
+
     const isCollapsed = ref(false);
 
     function selectItem(item) {

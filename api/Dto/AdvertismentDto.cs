@@ -18,6 +18,8 @@
         public string? BodyType { get; set; }
         public string? Condition { get; set; }
         public int Mileage { get; set; }
+        public string? Category { get; set; }
+        public bool IsPriceNegotiable { get; set; }
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
     }

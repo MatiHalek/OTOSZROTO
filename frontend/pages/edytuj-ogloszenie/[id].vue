@@ -1,8 +1,6 @@
 <template>
     <div class="container mx-auto">
-        <PageHeader>Dodaj ogłoszenie</PageHeader>
-
-        {{ newOfferData.forNegotiation }}
+        <PageHeader>Edytuj ogłoszenie {{ $route.params.id }}</PageHeader>
 
         <div class="pt-5 pb-96">
             <VerticalGroup class="gap-10">
@@ -14,7 +12,7 @@
 
                     <VerticalGroup>
                         <InputLabel for="category">Kategoria ogłoszenia: </InputLabel>
-                        <AppSelectBox @selectionChanged="(value) => { newOfferData.category = value }" :source="['Samochody osobowe', 'Motocykle']" class="w-64" />
+                        <AppSelectBox @selectionChanged="(value) => { newOfferData.category = value }" :source="['Samochody osobowe', 'Motocykle']" :current="newOfferData.category" class="w-64" />
                     </VerticalGroup>
                 </HorizontalGroup>
 
@@ -101,17 +99,17 @@
 
                     <VerticalGroup>
                         <InputLabel for="gearbox">Skrzynia biegów: </InputLabel>
-                        <AppSelectBox @selectionChanged="(value) => { newOfferData.gearbox = value }" :source="['manualna', 'automatyczna', 'PDK']" id="gearbox" class="w-48" />
+                        <AppSelectBox @selectionChanged="(value) => { newOfferData.gearbox = value }" :source="['manualna', 'automatyczna', 'PDK']" :current="newOfferData.gearbox" id="gearbox" class="w-48" />
                     </VerticalGroup>
 
                     <VerticalGroup>
                         <InputLabel for="fuel">Rodzaj paliwa: </InputLabel>
-                        <AppSelectBox @selectionChanged="(value) => { newOfferData.fuelType = value }" :source="['benzyna', 'diesel', 'instalacja gazowa']" id="fuel" class="w-48"/>
+                        <AppSelectBox @selectionChanged="(value) => { newOfferData.fuelType = value }" :source="['benzyna', 'diesel', 'instalacja gazowa']" :current="newOfferData.fuelType" id="fuel" class="w-48"/>
                     </VerticalGroup>
 
                     <VerticalGroup>
                         <InputLabel for="body">Typ nadwozia: </InputLabel>
-                        <AppSelectBox @selectionChanged="(value) => { newOfferData.bodyType = value }" :source="['SUV', 'Coupe', 'Combi']" id="body"  class="w-48"/>
+                        <AppSelectBox @selectionChanged="(value) => { newOfferData.bodyType = value }" :source="['SUV', 'Coupe', 'Combi']" :current="newOfferData.bodyType" id="body"  class="w-48"/>
                     </VerticalGroup>
                 </HorizontalGroup>
 
@@ -123,7 +121,7 @@
                 <HorizontalGroup class="gap-5">
                     <VerticalGroup>
                         <InputLabel for="condition">Stan: </InputLabel>
-                        <AppSelectBox @selectionChanged="(value) => { newOfferData.condition = value }" :source="['Nowy', 'Używany']" id="condition" class="w-48" />
+                        <AppSelectBox @selectionChanged="(value) => { newOfferData.condition = value }" :source="['Nowy', 'Używany']" :current="newOfferData.condition" id="condition" class="w-48" />
                     </VerticalGroup>
 
                     <VerticalGroup class="flex-1">
@@ -133,37 +131,87 @@
                 </HorizontalGroup>
             </VerticalGroup>
 
-            <ConfirmButton class="mt-24 w-48" @click="createOffer()">Wyślij</ConfirmButton>
+            <img :src="imageSrc" alt="">
+
+            <ConfirmButton class="mt-24 w-48" @click="editOffer()">Edytuj</ConfirmButton>
         </div>
     </div>
 </template>
 
 <script setup>
-    const newOfferData = ref({
-        title: '',
-        price: 0,
-        category: '',
-        forNegotiation: false,
-        description: '',
-        image: [],
-        model: '',
-        yearOfProduction: 0,
-        numberOfDoors: 0,
-        numberOfPlaces: 0,
-        color: '',
-        VIN: '',
-        power: 0,
-        displacement: 0,
-        gearbox: '',
-        fuelType: '',
-        bodyType: '',
-        condition: '',
-        mileage: 0,
-        email: '',
-        phoneNumber: ''
+    const { id } = useRoute().params;
+
+    const { data } = await useFetch(`http://localhost:5271/api/advertisment/${id}`, { 
+        responseType: 'json', 
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json',
+        } 
+    });
+
+    const { data: images } = await useFetch(`http://localhost:5271/api/image/uploadGalleryImages/${id}`, { 
+        responseType: 'json', 
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json',
+        } 
     });
 
     const files = ref([]);
+    const formData = new FormData();
+    const imageSrc = ref(null); // Ustawienie na null na początku
+
+    const { data: singleImage } = await useFetch('http://localhost:5271/api/image/uploadGallerySingleImage', { 
+        responseType: 'arrayBuffer', 
+        method: 'post',
+        body: JSON.stringify({
+            ImagePath: images.value[0].imageSource
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+
+    onMounted(async () => {
+        const mimeType = "image/png";
+        const blob = new Blob([singleImage.value], { type: mimeType });
+        const file = new File([blob], images.value[0].imageSource.split('/').pop(), { type: mimeType });
+        files.value.push(file);
+
+        if (typeof window !== 'undefined') {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                imageSrc.value = reader.result; 
+                console.log(singleImage.value); 
+            };
+            reader.readAsDataURL(blob); 
+        }
+    });
+
+    const newOfferData = ref({
+        title: data.value.title,
+        price: data.value.price,
+        category: data.value.category,
+        forNegotiation: data.value.isPriceNegotiable,
+        description: data.value.description,
+        image: [],
+        model: data.value.model,
+        yearOfProduction: data.value.yearOfProduction,
+        numberOfDoors: data.value.numberOfDoors,
+        numberOfPlaces: data.value.numberOfPlaces,
+        color: data.value.color,
+        VIN: data.value.vin,
+        power: data.value.power,
+        displacement: data.value.displacement,
+        gearbox: data.value.gearbox,
+        fuelType: data.value.fuelType,
+        bodyType: data.value.bodyType,
+        condition: data.value.condition,
+        mileage: data.value.mileage,
+        email: data.value.email,
+        phoneNumber: data.value.phoneNumber
+    });
+
     const allowedTypes = ref(['image/jpeg', 'image/png']);
     const fileInput = ref(null);
     const fileError = ref();
@@ -181,40 +229,22 @@
         });
     }
 
-    async function createOffer() {
-        const response = await $fetch('http://localhost:5271/api/advertisment', 
-        { 
-            responseType: 'json', 
-            method: 'post', 
+    async function editOffer() {
+        const response = await $fetch(`/api/editOffer`, {
+            method: 'post',
             body: {
-                "Title": newOfferData.value.title,
-                "Price": newOfferData.value.price,
-                "Description": newOfferData.value.description,
-                "Model": newOfferData.value.model,
-                "Category": newOfferData.value.category,
-                "IsPriceNegotiable": newOfferData.value.forNegotiation,
-                "YearOfProduction": newOfferData.value.yearOfProduction,
-                "NumberOfDoors": newOfferData.value.numberOfDoors,
-                "NumberOfPlaces": newOfferData.value.numberOfPlaces,
-                "Color": newOfferData.value.color,
-                "VIN": newOfferData.value.VIN,
-                "Power": newOfferData.value.power,
-                "Displacement": newOfferData.value.displacement,
-                "Gearbox": newOfferData.value.gearbox,
-                "FuelType": newOfferData.value.fuelType,
-                "BodyType": newOfferData.value.bodyType,
-                "Condition": newOfferData.value.condition,
-                "Mileage": newOfferData.value.mileage,
-                "Email": newOfferData.value.email,
-                "PhoneNumber": newOfferData.value.phoneNumber
-            },
+                id: id,
+                offerData: newOfferData.value
+            }
         });
 
-        if(response) {
-            const formData = new FormData();
-            files.value.forEach(file => formData.append('files', file));
+        console.log(response.value);
 
-            const imagesResponse = await $fetch(`http://localhost:5271/api/image/uploadGalleryImages/${response.advertisementID}`, { responseType: 'json', method: 'post', body: formData });
-        }
+       // if(response) {
+            //const formData = new FormData();
+            //files.value.forEach(file => formData.append('files', file));
+
+            //const imagesResponse = await $fetch(`http://localhost:5271/api/image/uploadGalleryImages/${response.advertisementID}`, { responseType: 'json', method: 'post', body: formData });
+        //}
     }
 </script>
