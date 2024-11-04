@@ -61,7 +61,7 @@ namespace api.Controllers
             return Ok(imageRepository.GetGalleryImages(advertismentID));
         }
 
-        [HttpGet("uploadGallerySingleImage")]
+        [HttpPost("uploadGallerySingleImage")]
         public async Task<IActionResult> GetGallerySingleImage(ImageDto dto)
         {
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), $"Uploads/gallery/{dto.ImagePath}");
