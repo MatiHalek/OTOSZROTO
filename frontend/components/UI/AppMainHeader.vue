@@ -1,5 +1,5 @@
 <template>
-    <h1 class="font-semibold text-5xl text-center">
+    <h1 class="font-semibold text-4xl sm:text-5xl text-center">
         Szukaj spośród
 
         <!-- temporary static value -->
