@@ -1,6 +1,8 @@
 <template>
-    <div class="mt-20">
+    <div class="mt-20 flex flex-col items-center gap-[50px]">
         <AppMainHeader />
+
+        <AppSearchBlock />
     </div>
 </template>
 
