@@ -1,5 +1,5 @@
 <template>
-    <header class="px-[20px] md:px-[50px] lg:px-[140px] h-[70px] flex items-center shadow-md justify-between">
+    <header class="px-[20px] md:px-[50px] lg:px-[140px] h-[70px] flex items-center shadow-md justify-between sticky top-0">
         <div class="flex items-center gap-1">
             <img src="/img/logo.png" alt="Logo strony" width="50" height="50">
             <h1 class="text-2xl font-extrabold text-[#E5A00A]">
@@ -7,8 +7,8 @@
             </h1>
         </div>
 
-        <div class="block sm:hidden">
-            <i class="fa-solid fa-bars fa-lg cursor-pointer" @click="isMobileCollapsed = !isMobileCollapsed"></i>
+        <div class="block sm:hidden z-40" @click="isMobileCollapsed = !isMobileCollapsed">
+            <i class="fa-solid fa-bars fa-lg cursor-pointer"></i>
         </div>
 
         <div class="gap-4 items-center text-base hidden sm:flex" v-if="isLogged == false">
