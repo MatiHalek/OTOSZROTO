@@ -1,6 +1,6 @@
 <template>
-    <div>
-
+    <div class="mt-20">
+        <AppMainHeader />
     </div>
 </template>
 
