@@ -7,4 +7,5 @@
      </main>
 
       <!-- place for Footer -->
+       <Footer />
 </template>
