@@ -1,5 +1,5 @@
 <template>
-    <header class="px-[20px] md:px-[50px] lg:px-[140px] h-[70px] flex items-center shadow-md justify-between sticky top-0">
+    <header class="px-[20px] md:px-[50px] lg:px-[140px] h-[70px] flex items-center shadow-md justify-between sticky top-0 bg-white">
         <div class="flex items-center gap-1">
             <img src="/img/logo.png" alt="Logo strony" width="50" height="50">
             <h1 class="text-2xl font-extrabold text-[#E5A00A]">
