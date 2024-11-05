@@ -1,8 +1,11 @@
 <template>
     <header class="px-[140px] h-[70px] flex items-center shadow-md justify-between">
-        <h1 class="text-2xl font-extrabold text-[#E5A00A]">
-            <span class="text-[#463691]">OTO</span>SZROTO
-        </h1>
+        <div class="flex items-center gap-1">
+            <img src="/img/logo.png" alt="Logo strony" width="50" height="50">
+            <h1 class="text-2xl font-extrabold text-[#E5A00A]">
+                <span class="text-[#463691]">OTO</span>SZROTO
+            </h1>
+        </div>
 
         <div class="flex gap-4 items-center text-base" v-if="isLogged == false">
             <NuxtLink :to="'/logowanie'">Zaloguj się</NuxtLink>
