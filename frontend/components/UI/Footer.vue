@@ -1,5 +1,5 @@
 <template>
-   <footer class="flex flex-wrap px-3 pb-2 bg-gradient-to-b from-[#463691] via-[#463691B0] to-[#463691cc] text-white">
+   <footer class="flex flex-wrap px-3 pb-2 bg-gradient-to-b from-[#463691] via-[#463691B0] to-[#463691cc] text-white mt-[200px]">
     <article class="container mx-auto mb-4">
         <section class="flex flex-wrap">
             <div class="w-full sm:w-1/2 md:w-1/3 pt-5 text-lg">

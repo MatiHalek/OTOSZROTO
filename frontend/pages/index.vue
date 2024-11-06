@@ -3,7 +3,10 @@
         <AppMainHeader />
         <AppSearchBlock />
         <h2 class="text-center text-3xl mt-40 font-semibold">Najnowsze ogłoszenia</h2>
-        <AppOfferBlock />
+
+        <HorizontalGroup class="gap-4">
+            <AppOfferBlock v-for="i in 5" />
+        </HorizontalGroup>
     </div>
 </template>
 
