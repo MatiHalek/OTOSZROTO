@@ -20,8 +20,12 @@
     "axios": "^1.7.7",
     "happy-dom": "^15.7.4",
     "nuxt": "^3.13.2",
+    "pinia": "^2.2.6",
     "vue": "latest",
     "vue-router": "latest"
+  },
+  "overrides": {
+    "vue": "latest"
   },
   "devDependencies": {
     "@nuxt/test-utils": "^3.14.4",

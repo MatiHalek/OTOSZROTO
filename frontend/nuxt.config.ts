@@ -5,9 +5,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxt/test-utils/module',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
   ],
-
   components: [
     {
       path: '~/components',

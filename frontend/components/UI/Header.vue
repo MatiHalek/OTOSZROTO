@@ -58,7 +58,9 @@
 </template>
 
 <script setup>
-    const isLogged = ref(false);
+    const user = useUserStore()
+    const isLogged = ref(user.isLogged);
+
     const isCollapsed = ref(false);
     const isMobileCollapsed = ref(false);
 </script>
