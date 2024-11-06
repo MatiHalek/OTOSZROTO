@@ -6,8 +6,8 @@
                 <h1 class="text-2xl font-extrabold text-[#E5A00A]">
                     <span class="text-[#463691]">OTO</span>SZROTO
                 </h1>                   
-        </div>
-    </a>  
+            </div>
+        </a>  
 
         <div class="block sm:hidden z-40" @click="isMobileCollapsed = !isMobileCollapsed">
             <i class="fa-solid fa-bars fa-lg cursor-pointer"></i>
@@ -20,16 +20,22 @@
         </div>
 
         <div v-else class="relative hidden sm:block">
-            <button class="p-2.5 px-5 bg-[#E5A00A] text-[#FFF] text-base rounded-full px-5" @click="isCollapsed = !isCollapsed">Moje konto</button>
+            <button class="p-2.5 bg-[#E5A00A] text-[#FFF] text-base rounded-full px-5" @click="isCollapsed = !isCollapsed">Moje konto</button>
 
-            <div class="absolute bg-white p-3 border-2 border-t-0 right-0" v-show="isCollapsed">
+            <div class="absolute bg-white p-3 border-2 border-t-0 right-0 top-[70px]" v-show="isCollapsed">
                 <ul class="flex flex-col gap-3">
                     <li>
-                        placeforemail@gmail.com
+                        Zalogowany jako: <span class="font-semibold">{{ user.email }}</span>
                     </li>
 
                     <li>
-                        <button class="bg-red-500 text-[#FFF] p-2 w-full rounded-full px-5 ">Wyloguj się</button>
+                        <button class="bg-[#E5A00A] text-[#FFF] w-full rounded-full">
+                            <NuxtLink :to="'profil'" class="size-full block p-2 px-5">Mój profil</NuxtLink>
+                        </button>
+                    </li>
+
+                    <li>
+                        <button class="bg-red-500 text-[#FFF] p-2 w-full rounded-full px-5" @click="LogOut()">Wyloguj się</button>
                     </li>
                 </ul>
             </div>
@@ -42,14 +48,20 @@
                 <NuxtLink :to="'/rejestracja'" class="p-3 py-2 bg-[#E5A00A] text-[#FFF] rounded-full px-5 hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300">Utwórz konto</NuxtLink>
             </div>
 
-            <div v-else>
+            <div v-else class="bg-white p-5">
                 <ul class="flex flex-col gap-3">
                     <li>
-                        placeforemail@gmail.com
+                        Zalogowany jako: <span class="font-semibold">{{ user.email }}</span>
                     </li>
 
                     <li>
-                        <button class="bg-red-500 text-[#FFF] p-2 w-full rounded-sm">Wyloguj się</button>
+                        <button class="bg-[#E5A00A] text-[#FFF] w-full rounded-full">
+                            <NuxtLink :to="'profil'" class="size-full block p-2 px-5">Mój profil</NuxtLink>
+                        </button>
+                    </li>
+
+                    <li>
+                        <button class="bg-red-500 text-[#FFF] p-2 w-full rounded-full" @click="LogOut()">Wyloguj się</button>
                     </li>
                 </ul>
             </div>
@@ -58,7 +70,18 @@
 </template>
 
 <script setup>
-    const isLogged = ref(false);
+    const user = useUserStore()
+    const isLogged = ref(user.isLogged);
+
     const isCollapsed = ref(false);
     const isMobileCollapsed = ref(false);
+
+    async function LogOut() {
+        const response = await $fetch('http://localhost:5271/api/auth/logout', { method: 'post', credentials: 'include', responseType: 'json' });
+
+        if(response.message == 'success') {
+            user.isLogged = false;
+            isLogged.value = false;
+        }
+    }
 </script>

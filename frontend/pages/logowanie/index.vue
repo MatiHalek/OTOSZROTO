@@ -57,6 +57,9 @@
             });
 
             if (response.message === 'success') {
+                const user = useUserStore()
+                user.logIn();
+                
                 await navigateTo('/');
             }
         } catch (error) {
