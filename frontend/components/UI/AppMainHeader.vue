@@ -43,7 +43,6 @@
         .toString()
         .split("")
         .map(Number);
-        console.log(advertisementCount.value);
     }
     onMounted(() => {
     InitializeCounter();
