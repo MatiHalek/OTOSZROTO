@@ -1,11 +1,13 @@
 <template>
-    <!-- place for Header -->
+   <div class="flex flex-col min-h-screen">
+      <!-- place for Header -->
      <Header />
 
-     <main>
+     <main class="grow">
         <slot />
      </main>
 
       <!-- place for Footer -->
        <Footer />
+   </div> 
 </template>

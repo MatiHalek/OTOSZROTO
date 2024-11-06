@@ -10,7 +10,9 @@
 </template>
 
 <script setup>
-
+    useHead({
+        title: 'OTOSZROTO, czyli jazda zaczyna się tutaj | Strona główna',
+    });
 </script>
 
 <style scoped>

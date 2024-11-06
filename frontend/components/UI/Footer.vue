@@ -31,7 +31,7 @@
             </div>
         </section>
         <div class="text-center my-6">
-            <p class='mb-1 text-center font-bold' v-html="updateMessage"></p>
+            <p class='mb-1 text-center font-bold'><span v-html="updateMessage"></span><span v-if="hasError">(</span><button v-if="hasError" @click="GetLatestRelease" class="hover:text-[#E5A00A] transition-all">Retry</button><span v-if="hasError">)</span></p>
             <p class='text-center text-white'><i class='bi bi-calendar-check-fill mr-2'></i><a class="no-underline hover:text-[#E5A00A] hover:font-bold transition-all" :href="'https://github.com/MatiHalek/OTOSZROTO/releases/tag/v'+majorVersion+'.'+minorVersion+'.'+patchVersion" target="_blank">v{{majorVersion }}.{{ minorVersion }}.{{ patchVersion }}</a> ({{ releaseDate.toLocaleDateString('pl-PL', {day: 'numeric', month: 'numeric', year: 'numeric'})}})</p> 
         </div>
         
@@ -40,7 +40,8 @@
     </footer>
 </template>
 <script setup>
-        const updateMessage = ref('<i class="fa-solid fa-rotate me-2"></i>Checking for updates...');
+        const updateMessage = ref('');
+        const hasError = ref(false);
         const majorVersion = 1;
         const minorVersion = 0;
         const patchVersion = 0;
@@ -48,23 +49,24 @@
         const owner = 'MatiHalek';
         const repo = 'OTOSZROTO';
         async function GetLatestRelease() {
+            hasError.value = false;
+            updateMessage.value = '<i class="fa-solid fa-rotate me-2"></i>Checking for updates...';
             try {
                 const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`);
                 if (!response.ok) {
-                    updateMessage.value = '<i class="fa-solid fa-circle-xmark me-2"></i>Failed to check for updates';
-                    throw new Error('Network response was not ok');                  
+                    throw new Error('Error fetching latest release');                  
                 }
                 const release = await response.json();
                 const version = release.tag_name;
-                console.log(version);
                 const [major, minor, patch] = version.split('.').map(Number);
                 if (major > majorVersion || minor > minorVersion || patch > patchVersion) {
-                    updateMessage.value = `<i class="fa-solid fa-circle-check me-2"></i>New version available: <a href="${release.html_url}" class="text-[#E5A00A] hover:text-[#FFF] transition-all">${version}</a>`;
+                    updateMessage.value = `<i class="fa-solid fa-circle-check me-2"></i>New version available: <a href="${release.html_url}" class="text-[#E5A00A] hover:text-[#FFF] transition-all" target="_blank">${version}</a>`;
                 } else {
                     updateMessage.value = '<i class="fa-solid fa-circle-check me-2"></i>You\'re up to date';
                 }
             } catch (error) {
-                updateMessage.value = '<i class="fa-solid fa-circle-check me-2"></i>You\'re up to date';
+                hasError.value = true;
+                updateMessage.value = '<i class="fa-solid fa-circle-xmark me-2"></i>Failed to check for updates ';  
             }
         }
         GetLatestRelease();
