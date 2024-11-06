@@ -11,4 +11,7 @@
   if(response) {
     user.logIn(response);
   }
+
+  const offers = useOffersStore();
+  offers.getOffers();
 </script>
