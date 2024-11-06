@@ -29,7 +29,7 @@
                     </li>
 
                     <li>
-                        <button class="bg-red-500 text-[#FFF] p-2 w-full rounded-full px-5 ">Wyloguj się</button>
+                        <button class="bg-red-500 text-[#FFF] p-2 w-full rounded-full px-5" @click="LogOut()">Wyloguj się</button>
                     </li>
                 </ul>
             </div>
@@ -49,7 +49,7 @@
                     </li>
 
                     <li>
-                        <button class="bg-red-500 text-[#FFF] p-2 w-full rounded-sm">Wyloguj się</button>
+                        <button class="bg-red-500 text-[#FFF] p-2 w-full rounded-sm" @click="LogOut()">Wyloguj się</button>
                     </li>
                 </ul>
             </div>
@@ -63,4 +63,15 @@
 
     const isCollapsed = ref(false);
     const isMobileCollapsed = ref(false);
+
+    async function LogOut() {
+        const response = await $fetch('http://localhost:5271/api/auth/logout', { method: 'post', credentials: 'include', responseType: 'json' });
+
+        console.log(response.message);
+
+        if(response.message == 'success') {
+            user.isLogged = false;
+            isLogged.value = false;
+        }
+    }
 </script>
