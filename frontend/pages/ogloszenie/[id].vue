@@ -48,7 +48,7 @@
                     <h1 class="text-2xl font-bold">{{ data.data.title }}
                         <span class="text-base font-normal">#{{ data.data.advertisementID }}</span>
                     </h1>
-                    <h2 class="text-lg text-gray-600 font-semibold">{{  }}</h2>
+                    <h2 class="text-lg text-gray-600 font-semibold">{{ data.data.category }}</h2>
                     <div class="flex justify-between flex-wrap mt-2">
                         <p class="mr-3 flex items-center"><i class="fa-solid fa-car me-2"></i> Stan: {{ data.data.condition }}</p>
                         <p class="flex items-center"><i class="fa-solid fa-calendar-days me-2"></i> Rok produkcji: {{ data.data.yearOfProduction }}</p>
@@ -216,7 +216,7 @@
     // }
 
     useHead({
-        title: data.value.title + ' | OTOSZROTO'
+        title: data.value.data.title + ' | OTOSZROTO'
     });
 
 
