@@ -4,7 +4,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     '@nuxtjs/tailwindcss',
-    '@nuxt/test-utils/module'
+    '@nuxt/test-utils/module',
+    '@pinia/nuxt'
   ],
 
   components: [
