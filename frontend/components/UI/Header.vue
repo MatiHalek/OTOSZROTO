@@ -25,7 +25,13 @@
             <div class="absolute bg-white p-3 border-2 border-t-0 right-0 top-[70px]" v-show="isCollapsed">
                 <ul class="flex flex-col gap-3">
                     <li>
-                        placeforemail@gmail.com
+                        Zalogowany jako: <span class="font-semibold">{{ user.email }}</span>
+                    </li>
+
+                    <li>
+                        <button class="bg-[#E5A00A] text-[#FFF] w-full rounded-full">
+                            <NuxtLink :to="'profil'" class="size-full block p-2 px-5">Mój profil</NuxtLink>
+                        </button>
                     </li>
 
                     <li>
@@ -42,14 +48,20 @@
                 <NuxtLink :to="'/rejestracja'" class="p-3 py-2 bg-[#E5A00A] text-[#FFF] rounded-full px-5 hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300">Utwórz konto</NuxtLink>
             </div>
 
-            <div v-else>
+            <div v-else class="bg-white p-5">
                 <ul class="flex flex-col gap-3">
                     <li>
-                        placeforemail@gmail.com
+                        Zalogowany jako: <span class="font-semibold">{{ user.email }}</span>
                     </li>
 
                     <li>
-                        <button class="bg-red-500 text-[#FFF] p-2 w-full rounded-sm" @click="LogOut()">Wyloguj się</button>
+                        <button class="bg-[#E5A00A] text-[#FFF] w-full rounded-full">
+                            <NuxtLink :to="'profil'" class="size-full block p-2 px-5">Mój profil</NuxtLink>
+                        </button>
+                    </li>
+
+                    <li>
+                        <button class="bg-red-500 text-[#FFF] p-2 w-full rounded-full" @click="LogOut()">Wyloguj się</button>
                     </li>
                 </ul>
             </div>
