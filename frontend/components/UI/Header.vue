@@ -67,8 +67,6 @@
     async function LogOut() {
         const response = await $fetch('http://localhost:5271/api/auth/logout', { method: 'post', credentials: 'include', responseType: 'json' });
 
-        console.log(response.message);
-
         if(response.message == 'success') {
             user.isLogged = false;
             isLogged.value = false;
