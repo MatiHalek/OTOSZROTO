@@ -41,7 +41,7 @@
             </div>
         </div>
 
-        <div class="absolute left-0 top-[70px] bg-white w-full border-t-2 pt-5 px-4" v-show="isMobileCollapsed">
+        <div class="block sm:hidden absolute left-0 top-[70px] bg-white w-full border-t-2 pt-5 px-4" v-show="isMobileCollapsed">
             <div v-if="isLogged == false">
                 <NuxtLink :to="'/logowanie'" class="p-3 py-2 bg-white rounded-full hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300 hover:px-5">Zaloguj się</NuxtLink>
                 |
