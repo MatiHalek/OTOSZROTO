@@ -6,8 +6,8 @@
                 <h1 class="text-2xl font-extrabold text-[#E5A00A]">
                     <span class="text-[#463691]">OTO</span>SZROTO
                 </h1>                   
-        </div>
-    </a>  
+            </div>
+        </a>  
 
         <div class="block sm:hidden z-40" @click="isMobileCollapsed = !isMobileCollapsed">
             <i class="fa-solid fa-bars fa-lg cursor-pointer"></i>
@@ -20,9 +20,9 @@
         </div>
 
         <div v-else class="relative hidden sm:block">
-            <button class="p-2.5 px-5 bg-[#E5A00A] text-[#FFF] text-base rounded-full px-5" @click="isCollapsed = !isCollapsed">Moje konto</button>
+            <button class="p-2.5 bg-[#E5A00A] text-[#FFF] text-base rounded-full px-5" @click="isCollapsed = !isCollapsed">Moje konto</button>
 
-            <div class="absolute bg-white p-3 border-2 border-t-0 right-0" v-show="isCollapsed">
+            <div class="absolute bg-white p-3 border-2 border-t-0 right-0 top-[70px]" v-show="isCollapsed">
                 <ul class="flex flex-col gap-3">
                     <li>
                         placeforemail@gmail.com
