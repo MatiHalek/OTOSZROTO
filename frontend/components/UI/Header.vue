@@ -1,5 +1,5 @@
 <template>
-    <header class="px-[20px] md:px-[50px] lg:px-[140px] h-[70px] flex items-center shadow-md justify-between sticky top-0 bg-[#FFFC] backdrop-blur-md">
+    <header class="z-10 px-[20px] md:px-[50px] lg:px-[140px] h-[70px] flex items-center shadow-md justify-between sticky top-0 bg-[#FFFC] backdrop-blur-md">
         <a href="/" title="Strona główna OTOSZROTO">
             <div class="flex items-center gap-1">           
                 <img src="/img/logo.png" alt="Logo strony" width="50" height="50">

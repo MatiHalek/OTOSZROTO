@@ -10,7 +10,7 @@
 
             <div class="mt-24 flex flex-col sm:flex-row gap-5 sm:gap-0 justify-between items-center">
                 <p class="text-[#463691] font-semibold text-base">Wyszukiwanie zaawansowane</p>
-                <button class="self-end bg-[#E5A00A] text-white p-2 border rounded-sm w-full sm:w-40">Szukaj</button>
+                <button class="self-end bg-[#E5A00A] text-white p-2 border w-full sm:w-40 rounded-full hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300">Szukaj</button>
             </div>
         </VerticalGroup>
     </div>
