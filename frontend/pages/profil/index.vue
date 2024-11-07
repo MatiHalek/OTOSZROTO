@@ -21,13 +21,16 @@
         <h2 class="mb-5 pt-5 text-xl">Moje ogłoszenia</h2>
 
         <div class="h-[500px]">
-
+            <HorizontalGroup class="gap-5">
+                <AppOfferBlock v-for="offer in filteredOffers" :offer="offer" :key="offer.advertisementID"/>
+            </HorizontalGroup>
         </div>
     </div>
 </template>
 
 <script setup>
     const user = useUserStore();
+    const offers = useOffersStore();
 
     const data = ref({
         name: user.name,
@@ -47,6 +50,9 @@
             } 
         });
     }
+
+    const filteredOffers = offers.offers.filter(offer => offer.userID === user.userId);
+
 </script>
 
 <style scoped>
