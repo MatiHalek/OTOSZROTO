@@ -21,9 +21,9 @@
 
         <div v-else class="relative hidden sm:block">
             <NuxtLink :to="'/dodaj-ogloszenie'" class="p-2.5 border-2 border-[#E5A00A] text-[#E5A00A] text-base rounded-full mr-4">Dodaj ogłoszenie</NuxtLink>
-            <button class="p-2.5 bg-[#E5A00A] text-[#FFF] text-base rounded-full px-5" @click="isCollapsed = !isCollapsed">Moje konto</button>
+            <button class="p-2.5 bg-[#E5A00A] text-[#FFF] text-base rounded-full px-5" @click.stop="isCollapsed = !isCollapsed">Moje konto</button>
 
-            <div class="absolute bg-white p-3 border-2 border-t-0 right-0 top-[70px]" v-show="isCollapsed">
+            <div class="absolute bg-white p-3 border-2 border-t-0 right-0 top-[70px]" v-show="isCollapsed" v-click-outside="hideDropdown">
                 <ul class="flex flex-col gap-3">
                     <li>
                         Zalogowany jako: <span class="font-semibold">{{ user.email }}</span>
@@ -76,6 +76,10 @@
 
     const isCollapsed = ref(false);
     const isMobileCollapsed = ref(false);
+
+    function hideDropdown() {
+        isCollapsed.value = false;
+    }
 
     async function LogOut() {
         const response = await $fetch('http://localhost:5271/api/auth/logout', { method: 'post', credentials: 'include', responseType: 'json' });
