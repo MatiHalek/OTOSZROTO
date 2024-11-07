@@ -62,7 +62,7 @@ namespace api.Repositories
             User user = context.Users.Where(u => u.Email == email).FirstOrDefault()!;
             if (user == null)
             {
-                throw new Exception($"Failed to fetch user with email = {email}");
+                return null;
             }
             return user;
         }
