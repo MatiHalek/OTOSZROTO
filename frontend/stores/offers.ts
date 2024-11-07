@@ -21,6 +21,7 @@ interface Offer {
     title: string;
     vin: string | null;
     yearOfProduction: number;
+    userID: number
 }
 
 export const useOffersStore = defineStore('offersStore', {
