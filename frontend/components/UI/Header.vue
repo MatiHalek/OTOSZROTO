@@ -31,7 +31,7 @@
 
                     <li>
                         <button class="bg-[#E5A00A] text-[#FFF] w-full rounded-full">
-                            <NuxtLink :to="'profil'" class="size-full block p-2 px-5">Mój profil</NuxtLink>
+                            <NuxtLink :to="'/profil'" class="size-full block p-2 px-5">Mój profil</NuxtLink>
                         </button>
                     </li>
 
@@ -57,7 +57,7 @@
 
                     <li>
                         <button class="bg-[#E5A00A] text-[#FFF] w-full rounded-full">
-                            <NuxtLink :to="'profil'" class="size-full block p-2 px-5">Mój profil</NuxtLink>
+                            <NuxtLink :to="'/profil'" class="size-full block p-2 px-5">Mój profil</NuxtLink>
                         </button>
                     </li>
 
@@ -81,8 +81,10 @@
         const response = await $fetch('http://localhost:5271/api/auth/logout', { method: 'post', credentials: 'include', responseType: 'json' });
 
         if(response.message == 'success') {
-            user.isLogged = false;
             isLogged.value = false;
+
+            user.logOut();
+            await navigateTo('/');
         }
     }
 </script>

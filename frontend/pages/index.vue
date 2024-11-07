@@ -5,7 +5,7 @@
         <h2 class="text-center text-3xl mt-40 font-semibold">Najnowsze ogłoszenia</h2>
 
         <HorizontalGroup class="gap-4">
-            <AppOfferBlock v-for="offer in newestOffers" :offer="offer" />
+            <AppOfferBlock v-for="offer in newestOffers" :offer="offer" :key="offer.advertisementID" />
         </HorizontalGroup>
     </div>
 </template>

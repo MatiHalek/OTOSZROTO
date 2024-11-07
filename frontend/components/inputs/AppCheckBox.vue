@@ -5,7 +5,9 @@
             <slot />
         </label>
     </HorizontalGroup>
-    <h2>{{ model }}</h2>
+
+    <!-- for tests only -->
+    <!-- <h2>{{ model }}</h2> -->
 </template>
 
 <script setup>

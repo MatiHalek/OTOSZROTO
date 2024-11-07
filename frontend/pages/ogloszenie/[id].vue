@@ -11,8 +11,8 @@
             <div class="relative w-full h-full flex items-center justify-center overflow-hidden">
             <div class="flex transition-transform duration-500 h-full"
                 :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
-                <div v-for="(image, index) in Timages" :key="index" class="min-w-full h-full flex justify-center">
-                    <img :src="image" alt="Obrazek galerii" class="rounded-xl h-full w-full max-w-[1200px] object-cover" />
+                <div v-for="(image, index) in imageSrcArray" :key="index" class="min-w-full h-full flex justify-center">
+                    <img :src="'http://localhost:5271/api/Uploads/gallery/'+ image" alt="Obrazek galerii" class="rounded-xl h-full w-full max-w-[1200px] object-cover" />
                 </div>
             </div>
             </div>
@@ -39,9 +39,9 @@
                         </span>
                     </a>
 
-                    <hr class="w-full">
+                    <hr class="w-full" v-if="currentOfferUserID == user.userId">
 
-                    <AppManageAdvertisment />
+                    <AppManageAdvertisment v-if="currentOfferUserID == user.userId" />
                 </section>
 
                 <section class="rounded-lg bg-white p-3 break-all shadow-lg">
@@ -57,7 +57,7 @@
                         <h1 class="text-center text-2xl drop-shadow-lg font-bold text-white mix-blend-darken bg-gradient-to-br from-[#463691CC] from-40% to-[#E5A00ACC] mb-3 mt-8 mx-auto px-6 py-2 rounded-full">
                             <i class="fa-solid fa-sack-dollar me-2"></i>{{ data.data.price }} PLN           
                         </h1>
-                        <p class="text-md font-bold text-transparent bg-gradient-to-br from-[#463691CC] from-40% to-[#E5A00ACC] bg-clip-text"><i class="fa-solid fa-circle-exclamation me-2"></i>Do negocjacji</p>
+                        <p v-if="data.data.isPriceNegotiable" class="text-md font-bold text-transparent bg-gradient-to-br from-[#463691CC] from-40% to-[#E5A00ACC] bg-clip-text"><i class="fa-solid fa-circle-exclamation me-2"></i>Do negocjacji</p>
                     </div>          
                 </section>
                 <section class="rrounded-lg bg-white p-3 break-all shadow-lg">
@@ -162,6 +162,11 @@
 
     const { id } = useRoute().params;
 
+    const user = useUserStore();
+    const offers = useOffersStore();
+
+    const currentOfferUserID = offers.offers.find(offer => offer.advertisementID == id).userID;
+
     const { data } = await useFetch('/api/getOffers', { 
         responseType: 'json', 
         method: 'post',
@@ -173,6 +178,7 @@
         }
     });
 
+    const imageSrcArray = ref([]);
     const { data: images } = await useFetch(`http://localhost:5271/api/image/uploadGalleryImages/${id}`, { 
         responseType: 'json', 
         method: 'get',
@@ -181,13 +187,11 @@
         } 
     });
 
-    // temporary
-    const Timages = ref([
-        {
+    images.value.forEach(image => {
+        imageSrcArray.value.push(image.imageSource);
+    });
 
-        }
-    ])
-    const imageSrcArray = ref([]);
+    //console.log(images.value);
 
     // for (const image of images.value) {
     //     const { data: singleImage } = await useFetch('http://localhost:5271/api/image/uploadGallerySingleImage', {

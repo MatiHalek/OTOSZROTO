@@ -139,12 +139,15 @@
 <script setup>
     const { id } = useRoute().params;
 
-    const { data } = await useFetch(`http://localhost:5271/api/advertisment/${id}`, { 
+    const { data } = await useFetch('/api/getOffers', { 
         responseType: 'json', 
-        method: 'get',
+        method: 'post',
         headers: {
             'Content-Type': 'application/json',
-        } 
+        },
+        body: {
+            'id': id
+        }
     });
 
     // const { data: images } = await useFetch(`http://localhost:5271/api/image/uploadGalleryImages/${id}`, { 
@@ -189,27 +192,27 @@
     const user = useUserStore();
 
     const newOfferData = ref({
-        title: data.value.title,
-        price: data.value.price,
-        category: data.value.category,
-        forNegotiation: data.value.isPriceNegotiable,
-        description: data.value.description,
+        title: data.value.data.title,
+        price: data.value.data.price,
+        category: data.value.data.category,
+        forNegotiation: data.value.data.isPriceNegotiable,
+        description: data.value.data.description,
         image: [],
-        model: data.value.model,
-        yearOfProduction: data.value.yearOfProduction,
-        numberOfDoors: data.value.numberOfDoors,
-        numberOfPlaces: data.value.numberOfPlaces,
-        color: data.value.color,
-        VIN: data.value.vin,
-        power: data.value.power,
-        displacement: data.value.displacement,
-        gearbox: data.value.gearbox,
-        fuelType: data.value.fuelType,
-        bodyType: data.value.bodyType,
-        condition: data.value.condition,
-        mileage: data.value.mileage,
-        email: data.value.email,
-        phoneNumber: data.value.phoneNumber,
+        model: data.value.data.model,
+        yearOfProduction: data.value.data.yearOfProduction,
+        numberOfDoors: data.value.data.numberOfDoors,
+        numberOfPlaces: data.value.data.numberOfPlaces,
+        color: data.value.data.color,
+        VIN: data.value.data.vin,
+        power: data.value.data.power,
+        displacement: data.value.data.displacement,
+        gearbox: data.value.data.gearbox,
+        fuelType: data.value.data.fuelType,
+        bodyType: data.value.data.bodyType,
+        condition: data.value.data.condition,
+        mileage: data.value.data.mileage,
+        email: data.value.data.email,
+        phoneNumber: data.value.data.phoneNumber,
         userID: user.userId
     });
 
