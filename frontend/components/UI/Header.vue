@@ -31,7 +31,7 @@
 
                     <li>
                         <button class="bg-[#E5A00A] text-[#FFF] w-full rounded-full">
-                            <NuxtLink :to="'profil'" class="size-full block p-2 px-5">Mój profil</NuxtLink>
+                            <NuxtLink :to="'/profil'" class="size-full block p-2 px-5">Mój profil</NuxtLink>
                         </button>
                     </li>
 
@@ -57,7 +57,7 @@
 
                     <li>
                         <button class="bg-[#E5A00A] text-[#FFF] w-full rounded-full">
-                            <NuxtLink :to="'profil'" class="size-full block p-2 px-5">Mój profil</NuxtLink>
+                            <NuxtLink :to="'/profil'" class="size-full block p-2 px-5">Mój profil</NuxtLink>
                         </button>
                     </li>
 

@@ -2,8 +2,6 @@
     <div class="container mx-auto">
         <PageHeader>Dodaj ogłoszenie</PageHeader>
 
-        {{ newOfferData.forNegotiation }}
-
         <div class="pt-5 pb-96">
             <VerticalGroup class="gap-10">
                 <HorizontalGroup class="gap-3">
@@ -139,6 +137,8 @@
 </template>
 
 <script setup>
+    const user = useUserStore();
+
     const newOfferData = ref({
         title: '',
         price: 0,
@@ -159,8 +159,8 @@
         bodyType: '',
         condition: '',
         mileage: 0,
-        email: '',
-        phoneNumber: ''
+        email: user.email,
+        phoneNumber: user.phone
     });
 
     const files = ref([]);
@@ -180,8 +180,6 @@
             }
         });
     }
-
-    const user = useUserStore();
 
     async function createOffer() {
         const response = await $fetch('http://localhost:5271/api/advertisment', 
