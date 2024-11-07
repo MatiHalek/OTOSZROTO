@@ -51,6 +51,14 @@
         title: 'Załóż konto | OTOSZROTO'
     });
 
+    const user = useUserStore();
+
+    onMounted(async () => {
+        if(user.isLogged) {
+            await navigateTo('/profil');
+        }
+    })
+
     const newUserData = ref({
         Email: '',
         PhoneNumber: '',

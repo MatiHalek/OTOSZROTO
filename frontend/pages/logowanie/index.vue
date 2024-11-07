@@ -29,12 +29,20 @@
 
 <script setup>
     definePageMeta({
-        layout: 'clear'
+        layout: 'clear',
     });
 
     useHead({
         title: 'Logowanie | OTOSZROTO'
     });
+
+    const user = useUserStore();
+
+    onMounted(async () => {
+        if(user.isLogged) {
+            await navigateTo('/profil');
+        }
+    })
 
     const isModalVisible = ref(false);
 
