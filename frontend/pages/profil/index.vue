@@ -52,7 +52,6 @@
     }
 
     const filteredOffers = offers.offers.filter(offer => offer.userID === user.userId);
-
 </script>
 
 <style scoped>
