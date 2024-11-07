@@ -1,4 +1,8 @@
 <template>
+    <Teleport to="#teleports">
+        <DeleteOfferModal :isVisible="isModalVisible" @close="isModalVisible = false" :id="id" />
+    </Teleport>
+
     <div class="flex gap-3 w-full p-4 mt-5">
         <button class="bg-[#E5A00A] p-2 w-1/2 text-white" @click="editOffer()">Edytuj</button>
         <button class="bg-[#E32727] p-2 w-1/2 text-white" @click="deleteOffer()">Usuń</button>
@@ -8,17 +12,10 @@
 <script setup>
     const { id } = useRoute().params;
 
+    const isModalVisible = ref(false);
+    
     async function deleteOffer() {
-        if(id) {
-            const response = await $fetch(`/api/test`, {
-                method: 'post',
-                body: {
-                    id: id
-                }
-            });
-
-            console.log(response.value);
-        }
+        isModalVisible.value = true;
     }
 
     async function editOffer() {
