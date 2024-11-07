@@ -12,10 +12,14 @@ namespace api.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IUserRepository userRepository;
+        private readonly IUserTokenRepository userTokenRepository;
         private readonly IJwtService jwtService;
-        public AuthController(IUserRepository userRepository, IJwtService jwtService)
+        private readonly IEmailService emailService;
+        public AuthController(IUserRepository userRepository, IUserTokenRepository userTokenRepository, IJwtService jwtService, IEmailService emailService)
         {
+            this.userTokenRepository = userTokenRepository;
             this.userRepository = userRepository;
+            this.emailService = emailService;
             this.jwtService = jwtService;
         }
         [HttpPost("register")]
@@ -87,6 +91,35 @@ namespace api.Controllers
             {
                 message = "success"
             });
+        }
+
+        [HttpPost("reset/{email}")]
+        public IActionResult Reset(string email)
+        {
+            User user = userRepository.GetByEmail(email);
+            if(user == null) return NotFound();
+            string token = Utils.GenerateRandomString(25);
+
+            emailService.SendEmailAsync(email, "Password restart"
+                , $"<a href='http://localhost:3000/restart?token={token}'>Zrestatruj hasło klikając w ten link!</a>");
+            
+            UserToken userToken = new UserToken()
+            {
+                Token = token,
+                UserID = user.UserID,
+            };
+
+            userTokenRepository.Create(userToken);
+
+            return Ok("success");
+        }
+
+        [HttpPut("reset/{token}-{password}")]
+        public IActionResult Reset(string token, string password)
+        {
+            userTokenRepository.Update(token,password);
+
+            return Ok("success");
         }
     }
 }

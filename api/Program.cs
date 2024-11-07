@@ -19,7 +19,21 @@ namespace api
 
             builder.Services.AddControllers();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IUserTokenRepository, UserTokenRepository>();
+            builder.Services.AddScoped<IAdvertismentRepository, AdvertismentRepository>();
+            builder.Services.AddScoped<IImageRepository, ImageRepository>();
             builder.Services.AddScoped<IJwtService, JwtService>();
+
+            // Register IEmailService with a transient lifetime
+            builder.Services.AddTransient<IEmailService>(provider =>
+                new EmailService(
+                    smtpServer: builder.Configuration["Email:SmtpServer"]!,
+                    smtpPort: int.Parse(builder.Configuration["Email:SmtpPort"]!),
+                    smtpUser: builder.Configuration["Email:SmtpUser"]!,
+                    smtpPass: builder.Configuration["Email:SmtpPass"]!,
+                    fromEmail: builder.Configuration["Email:FromEmail"]!
+                ));
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
 

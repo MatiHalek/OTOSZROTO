@@ -12,5 +12,6 @@ namespace api.Models
         [JsonIgnore]
         public string? Password { get; set; }
         public string? Access { get; set; }
+        public ICollection<UserToken> Tokens { get; set; } = new List<UserToken>();
     }
 }
