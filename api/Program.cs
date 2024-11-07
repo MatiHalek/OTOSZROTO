@@ -66,6 +66,13 @@ namespace api
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "Uploads/gallery")),
+                RequestPath = "/api/Uploads/gallery"
+            });
+
             app.Run();
         }
     }

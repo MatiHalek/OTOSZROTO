@@ -11,8 +11,8 @@
             <div class="relative w-full h-full flex items-center justify-center overflow-hidden">
             <div class="flex transition-transform duration-500 h-full"
                 :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
-                <div v-for="(image, index) in Timages" :key="index" class="min-w-full h-full flex justify-center">
-                    <img :src="image" alt="Obrazek galerii" class="rounded-xl h-full w-full max-w-[1200px] object-cover" />
+                <div v-for="(image, index) in imageSrcArray" :key="index" class="min-w-full h-full flex justify-center">
+                    <img :src="'http://localhost:5271/api/Uploads/gallery/'+ image" alt="Obrazek galerii" class="rounded-xl h-full w-full max-w-[1200px] object-cover" />
                 </div>
             </div>
             </div>
@@ -178,6 +178,7 @@
         }
     });
 
+    const imageSrcArray = ref([]);
     const { data: images } = await useFetch(`http://localhost:5271/api/image/uploadGalleryImages/${id}`, { 
         responseType: 'json', 
         method: 'get',
@@ -186,13 +187,11 @@
         } 
     });
 
-    // temporary
-    const Timages = ref([
-        {
+    images.value.forEach(image => {
+        imageSrcArray.value.push(image.imageSource);
+    });
 
-        }
-    ])
-    const imageSrcArray = ref([]);
+    //console.log(images.value);
 
     // for (const image of images.value) {
     //     const { data: singleImage } = await useFetch('http://localhost:5271/api/image/uploadGallerySingleImage', {
