@@ -1,10 +1,10 @@
 <template>
-    <div class="container mx-auto">
+    <div class="container mx-auto p-10 sm:p-0">
         <PageHeader>Dodaj ogłoszenie</PageHeader>
 
         <div class="pt-5 pb-96">
             <VerticalGroup class="gap-10">
-                <HorizontalGroup class="gap-3">
+                <HorizontalGroup class="gap-3 flex-col sm:flex-row">
                     <VerticalGroup class="flex-1">
                         <InputLabel for="title">Tytuł ogłoszenia: </InputLabel>
                         <AppDetailsInput v-model="newOfferData.title" id="title" />
