@@ -1,13 +1,13 @@
 <template>
     <header class="z-10 px-[20px] md:px-[50px] lg:px-[140px] h-[70px] flex items-center shadow-md justify-between sticky top-0 bg-[#FFFC] backdrop-blur-md">
-        <a href="/" title="Strona główna OTOSZROTO">
+        <NuxtLink to="/" title="Strona główna OTOSZROTO">
             <div class="flex items-center gap-1">           
                 <img src="/img/logo.png" alt="Logo strony" width="50" height="50">
                 <h1 class="text-2xl font-extrabold text-[#E5A00A]">
                     <span class="text-[#463691]">OTO</span>SZROTO
                 </h1>                   
             </div>
-        </a>  
+        </NuxtLink>  
 
         <div class="block sm:hidden z-40" @click="isMobileCollapsed = !isMobileCollapsed">
             <i class="fa-solid fa-bars fa-lg cursor-pointer"></i>
