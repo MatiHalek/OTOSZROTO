@@ -81,8 +81,10 @@
         const response = await $fetch('http://localhost:5271/api/auth/logout', { method: 'post', credentials: 'include', responseType: 'json' });
 
         if(response.message == 'success') {
-            user.isLogged = false;
             isLogged.value = false;
+
+            user.logOut();
+            await navigateTo('/');
         }
     }
 </script>

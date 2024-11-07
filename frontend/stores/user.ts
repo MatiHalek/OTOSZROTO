@@ -18,6 +18,16 @@ export const useUserStore = defineStore('userStore', {
           this.surname = data.surname;
           this.phone = data.phoneNumber;
         }
+      },
+
+      async logOut() {
+        this.isLogged = false;
+        this.userId = '';
+        this.email = '';
+        this.name = '';
+        this.surname = '';
+        this.phone = '';
+        
       }
     }
   })
