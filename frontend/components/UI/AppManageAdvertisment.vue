@@ -14,7 +14,7 @@
 
     const isModalVisible = ref(false);
     
-    async function deleteOffer() {
+    function deleteOffer() {
         isModalVisible.value = true;
     }
 
