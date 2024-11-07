@@ -4,7 +4,7 @@
             <Transition>
                 <div class="bg-[#fff] h-96 w-[540px] rounded-sm relative py-14 px-8" v-if="isVisible">
                     <div>
-                        <h2 class="text-center font-bold text-3xl">Czy napewno chcesz usunąć oferte?</h2>
+                        <h2 class="text-center font-bold text-3xl">Czy na pewno chcesz usunąć ofertę?</h2>
                         <h3 class="text-center py-3 text-base">Oferta nie będzie mogła zostać przywrócona!</h3>
 
                         <div class="flex flex-col mt-20 gap-3">
