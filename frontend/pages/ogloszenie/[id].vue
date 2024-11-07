@@ -1,9 +1,10 @@
 <template>
+
     <section class="bg-[#F3F3F3] pb-36 md:pb-0">
         <div class="relative w-full h-[450px] overflow-hidden">
             <div class="absolute inset-0 w-full h-full overflow-hidden">
             <img
-                :src="images[currentIndex]"
+                :src="'http://localhost:5271/api/Uploads/gallery/' + imageSrcArray[currentIndex]"
                 alt="Rozmyte tło"
                 class="w-full h-full object-cover blur-md scale-110"
             />
