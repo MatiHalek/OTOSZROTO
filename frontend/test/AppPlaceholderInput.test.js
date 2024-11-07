@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import UserProfile from '../pages/profil/index.vue'; // Ścieżka do komponentu
+import UserProfile from '../pages/profil/index.vue';
 
 describe('UserProfile.vue - Imię i Nazwisko input tests', () => {
 
