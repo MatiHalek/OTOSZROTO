@@ -43,6 +43,7 @@ namespace api.Controllers
                 Mileage = dto.Mileage,
                 Email = dto.Email,
                 PhoneNumber = dto.PhoneNumber,
+                UserID = dto.UserID,
             };
             return Created("success", advertismentRepository.Create(advertisement));
         }
@@ -72,6 +73,7 @@ namespace api.Controllers
                 Mileage = dto.Mileage,
                 Email = dto.Email,
                 PhoneNumber = dto.PhoneNumber,
+                UserID = dto.UserID,
             };
             return Ok(advertismentRepository.Update(advertisement, advertismentID));
         }

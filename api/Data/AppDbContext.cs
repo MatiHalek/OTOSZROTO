@@ -23,9 +23,14 @@ namespace api.Data
                         .HasForeignKey(ut => ut.UserID);
 
             modelBuilder.Entity<AdvertismentImage>()
-            .HasOne(ai => ai.Advertisement)
-            .WithMany(a => a.AdvertismentImages)
-            .HasForeignKey(ai => ai.AdvertismentID);
+                        .HasOne(ai => ai.Advertisement)
+                        .WithMany(a => a.AdvertismentImages)
+                        .HasForeignKey(ai => ai.AdvertismentID);
+
+            modelBuilder.Entity<Advertisement>()
+                        .HasOne(a => a.User)
+                        .WithMany(u => u.Advertisements)
+                        .HasForeignKey(a => a.UserID);
         }
     }
 }

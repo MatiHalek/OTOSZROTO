@@ -13,5 +13,6 @@ namespace api.Models
         public string? Password { get; set; }
         public string? Access { get; set; }
         public ICollection<UserToken> Tokens { get; set; } = new List<UserToken>();
+        public ICollection<Advertisement> Advertisements { get; set; } = new List<Advertisement>();
     }
 }
