@@ -4,6 +4,7 @@ using api.Helpers;
 using api.Interfaces;
 using api.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using System.Text.Json.Serialization;
 
 namespace api
@@ -30,7 +31,6 @@ namespace api
 
             builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowNuxtApp",
@@ -49,7 +49,6 @@ namespace api
             if (app.Environment.IsDevelopment())
             {   
             }
-
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
