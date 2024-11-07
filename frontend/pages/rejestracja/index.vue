@@ -1,6 +1,7 @@
 <template>
     <AppForm>
         <PageTitle>Załóż konto</PageTitle>
+
         <VerticalGroup class="gap-y-6 relative overflow-auto grow px-10">     
             <VerticalGroup>
                 <InputLabel for="registrationInputEmail">Adres e-mail<span class="text-red-600 text-xl">*</span></InputLabel>
@@ -20,11 +21,14 @@
             <VerticalGroup>
                 <VerticalGroup>
                     <InputLabel for="registrationInputPassword2">Powtórz hasło<span class="text-red-600 text-xl">*</span></InputLabel>
-                    <AppInput @error-value="(value) => { errors.input4 = value }" :validate="true" type="password" id="registrationInputPassword2" />
+                    <AppInput @error-value="(value) => { errors.input4 = value }" v-model="Password2" :validate="true" type="password" id="registrationInputPassword2" />
+                        <p class="relative left-0 -bottom-2 text-[#E32727] text-right">
+                            {{ errorMessage }}
+                        </p>
                 </VerticalGroup>
 
-                <AppCheckBox>
-                    <span class="cursor-pointer select-none">Oświadczam, że znam i akceptuję postanowienia serwisu OTOSZROTO.<span class="text-red-600 text-xl">*</span></span>
+                <AppCheckBox v-model="checkBoxSelected" @change="checkCheckbox()">
+                    <span class="cursor-pointer select-none" :class="{ 'text-red-600': error }">Oświadczam, że znam i akceptuję postanowienia serwisu OTOSZROTO.<span class="text-red-600 text-xl">*</span></span>
                 </AppCheckBox>
             </VerticalGroup>
 
@@ -53,15 +57,37 @@
         Password: ''
     });
 
+    const Password2 = ref('');
+    const errorMessage = ref('');
+
     const errors = ref({
         input1: true,
         input2: true,
         input3: true,
         input4: true,
     });
+    const checkBoxSelected = ref(false);
+    const error = ref(false);
+    const errorPassword = ref(false);
+
+    function checkCheckbox() {
+        if(checkBoxSelected.value == true) error.value = false;
+    }
 
     async function registerUser() {
-        if(!errors.value.input1 && !errors.value.input2 && !errors.value.input3 && !errors.value.input4) {
+        if(checkBoxSelected.value == false) {
+            error.value = true;
+        }
+
+        if(newUserData.value.Password != Password2.value) {
+            errorPassword.value = true;
+            errorMessage.value = 'Hasła muszą być identyczne!';
+        } else {
+            errorPassword.value = false;
+            errorMessage.value = '';
+        }
+
+        if(!errors.value.input1 && !errors.value.input2 && !errors.value.input3 && !errors.value.input4 && checkBoxSelected.value == true && error.value == false && errorPassword.value == false) {
             const response = await $fetch('http://localhost:5271/api/auth/register', {
                 method: 'POST',
                 body: {
