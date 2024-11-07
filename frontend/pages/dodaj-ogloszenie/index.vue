@@ -181,6 +181,8 @@
         });
     }
 
+    const user = useUserStore();
+
     async function createOffer() {
         const response = await $fetch('http://localhost:5271/api/advertisment', 
         { 
@@ -206,7 +208,8 @@
                 "Condition": newOfferData.value.condition,
                 "Mileage": newOfferData.value.mileage,
                 "Email": newOfferData.value.email,
-                "PhoneNumber": newOfferData.value.phoneNumber
+                "PhoneNumber": newOfferData.value.phoneNumber,
+                "UserID": user.userId
             },
         });
 

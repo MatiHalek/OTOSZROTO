@@ -25,7 +25,8 @@ export default defineEventHandler(async (event) => {
                 "Condition": body.offerData.condition,
                 "Mileage": body.offerData.mileage,
                 "Email": body.offerData.email,
-                "PhoneNumber": body.offerData.phoneNumber
+                "PhoneNumber": body.offerData.phoneNumber,
+                "UserID": body.offerData.userID
             },
         });
 

@@ -33,15 +33,13 @@
                 </VerticalGroup>
 
                 <VerticalGroup class="gap-2">
-                    <InputLabel>Zdjęcia (max 10): {{ files.length }} / 10 </InputLabel>
+                    <InputLabel>Zdjęcia (max 10): </InputLabel>
 
-                    <label :class="{ 'hidden': files.length >= 10 }" for="file-input" class="bg-[#FFF] border-2 border-[#DDD] w-60 h-24 flex justify-center items-center cursor-pointer">
+                    <label for="file-input" class="bg-[#FFF] border-2 border-[#DDD] w-60 h-24 flex justify-center items-center cursor-pointer">
                         <button>Wybierz</button>
                     </label>
 
                     <input class="hidden" type="file" id="file-input" @change="handleFileUpload" ref="fileInput" accept="image/*">
-                    
-                    <AppSelectedImages v-for="(image, index) in files" :image="image" @deleteImage="files.splice(index, 1);"/>
                 </VerticalGroup>
 
                 <VerticalGroup>
@@ -149,44 +147,46 @@
         } 
     });
 
-    const { data: images } = await useFetch(`http://localhost:5271/api/image/uploadGalleryImages/${id}`, { 
-        responseType: 'json', 
-        method: 'get',
-        headers: {
-            'Content-Type': 'application/json',
-        } 
-    });
+    // const { data: images } = await useFetch(`http://localhost:5271/api/image/uploadGalleryImages/${id}`, { 
+    //     responseType: 'json', 
+    //     method: 'get',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     } 
+    // });
 
-    const files = ref([]);
-    const formData = new FormData();
-    const imageSrc = ref(null); // Ustawienie na null na początku
+    // const files = ref([]);
+    // const formData = new FormData();
+    // const imageSrc = ref(null); // Ustawienie na null na początku
 
-    const { data: singleImage } = await useFetch('http://localhost:5271/api/image/uploadGallerySingleImage', { 
-        responseType: 'arrayBuffer', 
-        method: 'post',
-        body: JSON.stringify({
-            ImagePath: images.value[0].imageSource
-        }),
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    });
+    // const { data: singleImage } = await useFetch('http://localhost:5271/api/image/uploadGallerySingleImage', { 
+    //     responseType: 'arrayBuffer', 
+    //     method: 'post',
+    //     body: JSON.stringify({
+    //         ImagePath: images.value[0].imageSource
+    //     }),
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     }
+    // });
 
-    onMounted(async () => {
-        const mimeType = "image/png";
-        const blob = new Blob([singleImage.value], { type: mimeType });
-        const file = new File([blob], images.value[0].imageSource.split('/').pop(), { type: mimeType });
-        files.value.push(file);
+    // onMounted(async () => {
+    //     const mimeType = "image/png";
+    //     const blob = new Blob([singleImage.value], { type: mimeType });
+    //     const file = new File([blob], images.value[0].imageSource.split('/').pop(), { type: mimeType });
+    //     files.value.push(file);
 
-        if (typeof window !== 'undefined') {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                imageSrc.value = reader.result; 
-                console.log(singleImage.value); 
-            };
-            reader.readAsDataURL(blob); 
-        }
-    });
+    //     if (typeof window !== 'undefined') {
+    //         const reader = new FileReader();
+    //         reader.onloadend = () => {
+    //             imageSrc.value = reader.result; 
+    //             console.log(singleImage.value); 
+    //         };
+    //         reader.readAsDataURL(blob); 
+    //     }
+    // });
+
+    const user = useUserStore();
 
     const newOfferData = ref({
         title: data.value.title,
@@ -209,7 +209,8 @@
         condition: data.value.condition,
         mileage: data.value.mileage,
         email: data.value.email,
-        phoneNumber: data.value.phoneNumber
+        phoneNumber: data.value.phoneNumber,
+        userID: user.userId
     });
 
     const allowedTypes = ref(['image/jpeg', 'image/png']);
