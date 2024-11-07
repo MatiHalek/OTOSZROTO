@@ -30,6 +30,10 @@
                 }
             });
 
+            if(response) {
+                await navigateTo('/');
+            }
+
             console.log(response);
         }
     }
