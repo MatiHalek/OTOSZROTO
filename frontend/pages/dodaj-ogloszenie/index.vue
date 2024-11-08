@@ -3,7 +3,7 @@
         <PageHeader>Dodaj ogłoszenie</PageHeader>
 
         <div class="pt-5 pb-96">
-            <form>
+            <form ref="addForm" @submit.prevent="createOffer()">
                 <VerticalGroup class="gap-10">
                     <HorizontalGroup class="gap-3 flex-col sm:flex-row">
                         <VerticalGroup class="flex-1">
@@ -132,7 +132,7 @@
                     </HorizontalGroup>
                 </VerticalGroup>
 
-                <ConfirmButton type="submit" class="mt-24 w-48" @click.prevent="createOffer()">Wyślij</ConfirmButton>
+                <ConfirmButton type="submit" class="mt-24 w-48">Wyślij</ConfirmButton>
             </form>
         </div>
     </div>
@@ -169,6 +169,7 @@
     const allowedTypes = ref(['image/jpeg', 'image/png']);
     const fileInput = ref(null);
     const fileError = ref();
+    const addForm = ref(null);
 
     function handleFileUpload(event) {
         const selectedFiles = Array.from(event.target.files);
@@ -184,6 +185,7 @@
     }
 
     async function createOffer() {
+        if(addForm.value.reportValidity() === false) return;
         const response = await $fetch('http://localhost:5271/api/advertisment', 
         { 
             responseType: 'json', 

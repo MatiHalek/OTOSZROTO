@@ -3,7 +3,7 @@
         <PageHeader>Edytuj ogłoszenie {{ $route.params.id }}</PageHeader>
 
         <div class="pt-5 pb-96">
-            <form>
+            <form ref="editForm">
                 <VerticalGroup class="gap-10">
                     <HorizontalGroup class="gap-3 flex-col sm:flex-row">
                         <VerticalGroup class="flex-1">
@@ -219,6 +219,7 @@
     const allowedTypes = ref(['image/jpeg', 'image/png']);
     const fileInput = ref(null);
     const fileError = ref();
+    const editForm = ref(null);
 
     function handleFileUpload(event) {
         const selectedFiles = Array.from(event.target.files);
@@ -234,6 +235,7 @@
     }
 
     async function editOffer() {
+        if(editForm.value.reportValidity() === false) return;
         const response = await $fetch(`/api/editOffer`, {
             method: 'post',
             body: {
