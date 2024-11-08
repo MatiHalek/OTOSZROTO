@@ -31,6 +31,9 @@
             });
 
             if(response) {
+                const offers = useOffersStore();
+                offers.getOffers();
+
                 await navigateTo('/');
             }
 

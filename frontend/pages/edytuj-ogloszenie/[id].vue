@@ -242,6 +242,11 @@
             }
         });
 
+        if(response) {
+            const offers = useOffersStore();
+            offers.getOffers();
+        }
+
         console.log(response.value);
 
        // if(response) {

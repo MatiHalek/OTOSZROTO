@@ -212,6 +212,9 @@
         });
 
         if(response) {
+            const offers = useOffersStore();
+            offers.getOffers();
+
             const formData = new FormData();
             files.value.forEach(file => formData.append('files', file));
 
