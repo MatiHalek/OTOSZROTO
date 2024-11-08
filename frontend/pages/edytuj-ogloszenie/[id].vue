@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto">
-        <PageHeader>Edytuj ogłoszenie {{ $route.params.id }}</PageHeader>
+        <PageHeader>Edytuj ogłoszenie #{{ $route.params.id.padStart(6, "0") }}</PageHeader>
 
         <div class="pt-5 pb-96">
             <form ref="editForm">
@@ -137,6 +137,9 @@
 </template>
 
 <script setup>
+    useHead({
+        title: 'Edytuj ogłoszenie | OTOSZROTO'
+    });
     const { id } = useRoute().params;
 
     const { data } = await useFetch('/api/getOffers', { 

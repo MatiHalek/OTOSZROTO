@@ -4,8 +4,8 @@
     </Teleport>
 
     <div class="flex gap-3 w-full p-4 mt-5">
-        <button class="bg-[#E5A00A] p-2 w-1/2 text-white" @click="editOffer()">Edytuj</button>
-        <button class="bg-[#E32727] p-2 w-1/2 text-white" @click="deleteOffer()">Usuń</button>
+        <button class="bg-[#E5A00A] p-2 w-1/2 text-white rounded-full hover:bg-transparent hover:text-[#463691] transition-all duration-300" @click="editOffer()">Edytuj</button>
+        <button class="bg-[#E32727] p-2 w-1/2 text-white rounded-full hover:bg-transparent hover:text-[#463691] transition-all duration-300" @click="deleteOffer()">Usuń</button>
     </div>
 </template>
 

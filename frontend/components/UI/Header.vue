@@ -1,5 +1,5 @@
 <template>
-    <header class="z-10 px-[20px] md:px-[50px] lg:px-[140px] h-[70px] flex items-center shadow-md justify-between sticky top-0 bg-[#FFFC] backdrop-blur-md">
+    <header class="z-20 px-[20px] md:px-[50px] lg:px-[140px] h-[70px] flex items-center shadow-md justify-between sticky top-0 bg-[#FFFC] backdrop-blur-md">
         <NuxtLink to="/" title="Strona główna OTOSZROTO">
             <div class="flex items-center gap-1">           
                 <img src="/img/logo.png" alt="Logo strony" width="50" height="50">
@@ -20,10 +20,11 @@
         </div>
 
         <div v-else class="relative hidden sm:block">
-            <NuxtLink :to="'/dodaj-ogloszenie'" class="p-2.5 border-2 border-[#E5A00A] text-[#E5A00A] text-base rounded-full mr-4">Dodaj ogłoszenie</NuxtLink>
-            <button class="p-2.5 bg-[#E5A00A] text-[#FFF] text-base rounded-full px-5" @click.stop="isCollapsed = !isCollapsed">Moje konto</button>
+            <NuxtLink :to="'/dodaj-ogloszenie'" class="p-3 py-2 bg-white rounded-full hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300 hover:px-5">Dodaj ogłoszenie</NuxtLink>
+            |
+            <button class="p-3 py-2 bg-[#E5A00A] text-[#FFF] rounded-full px-5 hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300" @click.stop="isCollapsed = !isCollapsed">Moje konto</button>
 
-            <div class="absolute bg-white p-3 border-2 border-t-0 right-0 top-[70px]" v-show="isCollapsed" v-click-outside="hideDropdown">
+            <div class="absolute bg-white p-3 border-2 border-t-0 right-0 top-[70px] shadow-md" v-show="isCollapsed" v-click-outside="hideDropdown">
                 <ul class="flex flex-col gap-3">
                     <li>
                         Zalogowany jako: <span class="font-semibold">{{ user.email }}</span>
@@ -31,12 +32,12 @@
 
                     <li>
                         <button class="bg-[#E5A00A] text-[#FFF] w-full rounded-full">
-                            <NuxtLink :to="'/profil'" class="size-full block p-2 px-5">Mój profil</NuxtLink>
+                            <NuxtLink :to="'/profil'" class="size-full block p-2 px-5 hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300">Mój profil</NuxtLink>
                         </button>
                     </li>
 
                     <li>
-                        <button class="bg-red-500 text-[#FFF] p-2 w-full rounded-full px-5" @click="LogOut()">Wyloguj się</button>
+                        <button class="bg-red-500 text-[#FFF] p-2 w-full rounded-full px-5 hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300" @click="LogOut()">Wyloguj się</button>
                     </li>
                 </ul>
             </div>
@@ -49,20 +50,26 @@
                 <NuxtLink :to="'/rejestracja'" class="p-3 py-2 bg-[#E5A00A] text-[#FFF] rounded-full px-5 hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300">Utwórz konto</NuxtLink>
             </div>
 
-            <div v-else class="bg-white p-5">
+            <div v-else class="bg-white p-5 shadow-md">
                 <ul class="flex flex-col gap-3">
                     <li>
                         Zalogowany jako: <span class="font-semibold">{{ user.email }}</span>
                     </li>
 
                     <li>
-                        <button class="bg-[#E5A00A] text-[#FFF] w-full rounded-full">
-                            <NuxtLink :to="'/profil'" class="size-full block p-2 px-5">Mój profil</NuxtLink>
+                        <button class="bg-[#1E90FF] text-[#FFF] w-full rounded-full">
+                            <NuxtLink :to="'/dodaj-ogloszenie'" class="size-full block p-2 px-5 hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300">Dodaj ogłoszenie</NuxtLink>
                         </button>
                     </li>
 
                     <li>
-                        <button class="bg-red-500 text-[#FFF] p-2 w-full rounded-full" @click="LogOut()">Wyloguj się</button>
+                        <button class="bg-[#E5A00A] text-[#FFF] w-full rounded-full">
+                            <NuxtLink :to="'/profil'" class="size-full block p-2 px-5 hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300">Mój profil</NuxtLink>
+                        </button>
+                    </li>
+
+                    <li>
+                        <button class="bg-red-500 text-[#FFF] p-2 w-full rounded-full hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300" @click="LogOut()">Wyloguj się</button>
                     </li>
                 </ul>
             </div>

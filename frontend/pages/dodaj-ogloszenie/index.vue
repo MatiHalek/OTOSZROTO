@@ -139,6 +139,9 @@
 </template>
 
 <script setup>
+    useHead({
+        title: 'Dodaj ogłoszenie | OTOSZROTO'
+    });
     const user = useUserStore();
 
     const newOfferData = ref({
