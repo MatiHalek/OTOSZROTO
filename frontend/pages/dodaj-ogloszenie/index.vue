@@ -36,7 +36,7 @@
                     <InputLabel>Zdjęcia (max 10): {{ files.length }} / 10 </InputLabel>
 
                     <label :class="{ 'hidden': files.length >= 10 }" for="file-input" class="bg-[#FFF] border-2 border-[#DDD] w-60 h-24 flex justify-center items-center cursor-pointer">
-                        <button>Wybierz</button>
+                        <h1>Wybierz</h1>
                     </label>
 
                     <input class="hidden" type="file" id="file-input" @change="handleFileUpload" ref="fileInput" accept="image/*">
