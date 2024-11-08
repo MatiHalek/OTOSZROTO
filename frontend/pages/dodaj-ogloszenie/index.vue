@@ -219,6 +219,8 @@
             files.value.forEach(file => formData.append('files', file));
 
             const imagesResponse = await $fetch(`http://localhost:5271/api/image/uploadGalleryImages/${response.advertisementID}`, { responseType: 'json', method: 'post', body: formData });
+
+            await navigateTo('/ogloszenie/' + response.advertisementID);
         }
     }
 </script>
