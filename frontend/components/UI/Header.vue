@@ -20,7 +20,7 @@
         </div>
 
         <div v-else class="relative hidden sm:block">
-            <NuxtLink :to="'/dodaj-ogloszenie'" class="bg-transparent me-4 p-3 py-2 bg-white rounded-full hover:shadow-special hover:text-[#463691] transition-all duration-300 hover:px-5">Dodaj ogłoszenie</NuxtLink>
+            <NuxtLink :to="'/dodaj-ogloszenie'" class="bg-transparent me-4 p-3 py-2 rounded-full hover:shadow-special hover:text-[#463691] transition-all duration-300 hover:px-5">Dodaj ogłoszenie</NuxtLink>
             |
             <button class="ms-4 p-3 py-2 bg-[#E5A00A] text-[#FFF] rounded-full px-5 hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300" @click.stop="isCollapsed = !isCollapsed">Moje konto</button>
 
@@ -31,8 +31,8 @@
                     </li>
 
                     <li>
-                        <button class="bg-[#E5A00A] text-[#FFF] w-full rounded-full">
-                            <NuxtLink :to="'/profil'" class="size-full block p-2 px-5 hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300">Mój profil</NuxtLink>
+                        <button class="bg-[#E5A00A] text-[#FFF] w-full rounded-full hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300">
+                            <NuxtLink :to="'/profil'" class="size-full block p-2 px-5">Mój profil</NuxtLink>
                         </button>
                     </li>
 
