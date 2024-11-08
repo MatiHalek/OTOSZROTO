@@ -130,7 +130,7 @@
                     </HorizontalGroup>
                 </VerticalGroup>
 
-                <ConfirmButton class="mt-24 w-48" @click="editOffer()">Edytuj</ConfirmButton>
+                <ConfirmButton type="submit" class="mt-24 w-48" @click.prevent="editOffer()">Edytuj</ConfirmButton>
             </form>
         </div>
     </div>
@@ -245,6 +245,8 @@
         if(response) {
             const offers = useOffersStore();
             offers.getOffers();
+
+            await navigateTo('/ogloszenie/' + response.value.advertisementID);
         }
 
         console.log(response.value);

@@ -132,7 +132,7 @@
                     </HorizontalGroup>
                 </VerticalGroup>
 
-                <ConfirmButton class="mt-24 w-48" @click="createOffer()">Wyślij</ConfirmButton>
+                <ConfirmButton type="submit" class="mt-24 w-48" @click.prevent="createOffer()">Wyślij</ConfirmButton>
             </form>
         </div>
     </div>
