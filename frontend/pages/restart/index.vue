@@ -1,8 +1,10 @@
 <template>
-    <div>
+    <div class="container mx-auto">
+        <h2 class="text-2xl text-center py-4">Zmień hasło</h2>
+
         <AppInput v-model="password" :type="'password'"/>
 
-        <button @click="changePassword()">Zmień hasło</button>
+        <ConfirmButton @click="changePassword()">Zmień hasło</ConfirmButton>
     </div>
 </template>
 
@@ -17,6 +19,10 @@
             method: 'put'
         });
 
-        console.log(response);
+        if(response == 'success') {
+            await navigateTo('/logowanie');
+        }
+
+        //console.log(response);
     }
 </script>
