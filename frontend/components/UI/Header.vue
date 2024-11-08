@@ -24,7 +24,7 @@
             |
             <button class="ms-4 p-3 py-2 bg-[#E5A00A] text-[#FFF] rounded-full px-5 hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300" @click.stop="isCollapsed = !isCollapsed">Moje konto</button>
 
-            <div class="absolute bg-white p-3 border-2 border-t-0 right-0 top-[70px] shadow-md" v-show="isCollapsed" v-click-outside="hideDropdown">
+            <div class="absolute bg-white p-3 shadow-lg rounded-lg right-0 top-[70px] shadow-md" v-show="isCollapsed" v-click-outside="hideDropdown">
                 <ul class="flex flex-col gap-3">
                     <li>
                         Zalogowany jako: <span class="font-semibold">{{ user.email }}</span>
@@ -43,7 +43,7 @@
             </div>
         </div>
 
-        <div class="block sm:hidden absolute left-0 top-[70px] bg-[#FFF8] backdrop-blur-md w-full border-t-2 pt-5 pb-5 px-4" v-show="isMobileCollapsed">
+        <div class="block sm:hidden absolute left-0 top-[70px] bg-[#FFF8] backdrop-blur-md w-full rounded-lg shadow-lg pt-5 pb-5 px-4" v-show="isMobileCollapsed">
             <div v-if="isLogged == false">
                 <NuxtLink :to="'/logowanie'" class="p-3 py-2 bg-white rounded-full hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300 hover:px-5">Zaloguj się</NuxtLink>
                 |
