@@ -47,7 +47,7 @@
 
                 <section class="rounded-lg bg-white p-3 break-all shadow-lg">
                     <h1 class="text-2xl font-bold">{{ data.data.title }}
-                        <span class="text-base font-normal">#{{ data.data.advertisementID.padStart(6, "0") }}</span>
+                        <span class="text-base font-normal">#{{ data.data.advertisementID.toString().padStart(6, "0") }}</span>
                     </h1>
                     <h2 class="text-lg text-gray-600 font-semibold">{{ data.data.category }}</h2>
                     <div class="flex justify-between flex-wrap mt-2">

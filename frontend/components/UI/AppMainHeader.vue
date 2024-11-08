@@ -1,5 +1,5 @@
 <template>
-    <h1 class="font-semibold text-3xl text-center">
+    <h1 class="mt-20 font-semibold text-3xl text-center">
         Szukaj spośród
         <span class="font-extrabold text-[#E5A00A]">
             <div id="counter" class="inline-flex translate-y-0.5">
