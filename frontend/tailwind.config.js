@@ -5,7 +5,7 @@ export default {
     extend: {
       backgroundImage: {
         'registration-background': "url('/img/background.jpg')",
-        'main-background': "url('/img/background.jpg'), linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7))",
+        'main-background': "linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('/img/background.jpg')",
       },
       dropShadow: {
         'lg': ['0 10px 8px rgb(0 0 0 / 0.08)',

@@ -27,7 +27,7 @@
             </button>
         </div>
         <article class="relative container mx-auto px-4 lg:px-8" id="advertisementInfo">
-            <section class="grid grid-cols-1 md:grid-cols-[minmax(0,_2.5fr)_minmax(250px,_1fr)] grid-flow-dense gap-4 -mt-16">
+            <section class="grid grid-cols-1 md:grid-cols-[minmax(0,_2.5fr)_minmax(250px,_1fr)] grid-flow-dense gap-4 -mt-16 z-20 md:z-0">
                 <section class="flex flex-col items-center justify-center space-y-4 rounded-lg bg-[#D0D0D090] backdrop-blur-md md:backdrop-blur-none md:bg-white p-3 break-all shadow-lg md:col-start-2 md:row-start-1 row-span-5 h-fit min-h-[8rem] fixed md:sticky md:top-24 break-normal bottom-0 w-full start-0">
                     <a :href="'mailto:' + data.data.email" class="flex relative min-h-[50px] items-center justify-center overflow-hidden text-[#FFF] p-2.5 rounded-lg shadow-xl transition-all duration-300 before:absolute before:inset-0 before:border-[0px] before:border-white before:transition-all before:duration-300 before:ease-linear hover:bg-white hover:text-[#463691] hover:shadow-special hover:before:border-[25px] font-bold bg-[#1e90ff] mt-0 shadow-xl w-11/12 cursor-pointer">
                         <span class="relative z-10">
