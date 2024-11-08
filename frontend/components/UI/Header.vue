@@ -43,9 +43,9 @@
             </div>
         </div>
 
-        <div class="block sm:hidden absolute left-0 top-[70px] bg-[#FFF8] backdrop-blur-md w-full rounded-lg shadow-lg pt-5 pb-5 px-4" v-show="isMobileCollapsed">
+        <div class="block sm:hidden absolute left-0 top-[70px] bg-[#FFFE] backdrop-blur-md w-full rounded-lg shadow-lg pt-5 pb-5 px-4" v-show="isMobileCollapsed">
             <div v-if="isLogged == false">
-                <NuxtLink :to="'/logowanie'" class="p-3 py-2 bg-white rounded-full hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300 hover:px-5">Zaloguj się</NuxtLink>
+                <NuxtLink :to="'/logowanie'" class="p-3 py-2 bg-transparent rounded-full hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300 hover:px-5">Zaloguj się</NuxtLink>
                 |
                 <NuxtLink :to="'/rejestracja'" class="p-3 py-2 bg-[#E5A00A] text-[#FFF] rounded-full px-5 hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300">Utwórz konto</NuxtLink>
             </div>

@@ -11,7 +11,7 @@
             class="w-full p-2 focus:border-[#E5A00A] outline-none rounded-md border-solid border-2 border-[#DDD] text-base"
             :class="{ 'border-[#E32727]': error }">
 
-        <p class="relative left-0 -bottom-2 text-[#E32727] text-right">
+        <p class="relative left-0 -bottom-2 text-[#E32727] font-semibold text-right drop-shadow-[0_0_5px_rgba(255,255,255,1)]">
             {{ errorMessage }}
         </p>
 

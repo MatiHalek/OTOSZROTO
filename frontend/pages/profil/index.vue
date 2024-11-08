@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto">
+    <div class="container mx-auto pb-24">
         <h1 class="text-center text-3xl font-bold p-4">Profil</h1>
 
         <hr>
@@ -20,7 +20,7 @@
         <hr class="mt-10">
         <h2 class="mb-5 pt-5 text-xl">Moje ogłoszenia</h2>
 
-        <div class="h-[500px]">
+        <div>
             <HorizontalGroup class="gap-5 flex-wrap justify-center">
                 <AppOfferBlock v-for="offer in filteredOffers" :offer="offer" :key="offer.advertisementID"/>
             </HorizontalGroup>
@@ -31,6 +31,10 @@
 <script setup>
     const user = useUserStore();
     const offers = useOffersStore();
+
+    onMounted(async () => {
+        if(user.isLogged == false) await navigateTo('/logowanie');
+    });
 
     const data = ref({
         name: user.name,

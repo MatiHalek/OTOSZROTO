@@ -2,7 +2,9 @@
     <ResetPasswordModal :isVisible="isModalVisible" @close="isModalVisible = false" />
 
     <AppForm>
-        <PageTitle>Logowanie</PageTitle>
+        <VerticalGroup>
+            <PageTitle>Logowanie</PageTitle>
+        </VerticalGroup>
         <p class="text-red-600 z-20 text-center -mt-5 pb-10 font-medium">{{ errorMessage }}</p>
 
         <VerticalGroup class="gap-y-6 relative overflow-auto grow">         
@@ -23,7 +25,10 @@
                 <NuxtLink :to="'/rejestracja'" class="text-[#463691]">Zarejestruj się</NuxtLink>
             </p>
         </VerticalGroup>
-        <p class="relative border-t-4 text-center py-2 mt-3 rounded">&copy;2024 Grupa OTOSZROTO</p>
+        <p class="relative border-t-4 text-center py-2 mt-3 rounded">&copy;2024 Grupa OTOSZROTO
+
+            <AppGoToHome />
+        </p>
     </AppForm>
 </template>
 

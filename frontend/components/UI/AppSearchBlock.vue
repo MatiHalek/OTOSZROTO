@@ -20,6 +20,8 @@
     const searchValue = ref('');
 
     async function GoToSearch() {
-        await navigateTo('/szukaj/' + searchValue.value);
+        if(searchValue.value) {
+            await navigateTo('/szukaj/' + searchValue.value);
+        }
     }
 </script>

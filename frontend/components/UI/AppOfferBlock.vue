@@ -1,5 +1,5 @@
 <template>
-    <NuxtLink :to="'/ogloszenie/' + offer.advertisementID" class="hover:translate-y-[-8px] transition-all duration-500">
+    <NuxtLink :to="'/ogloszenie/' + offer.advertisementID" class="hover:translate-y-[-8px] transition-all duration-500 bg-white">
         <div class="w-80 aspect-square rounded-lg shadow-lg">
             <img v-if="image[0]" :src="'http://localhost:5271/api/Uploads/gallery/' + image[0].imageSource" alt="Zdjęcie oferty" class="object-cover rounded-t-lg w-full h-2/4">
             <img v-else alt="Zdjęcie oferty" class="object-cover rounded-t-lg w-full h-2/4">

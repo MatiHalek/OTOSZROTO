@@ -1,6 +1,10 @@
 <template>
+    <AppGoToHome />
+
     <AppForm>
-        <PageTitle>Załóż konto</PageTitle>
+        <VerticalGroup>
+            <PageTitle>Załóż konto</PageTitle>
+        </VerticalGroup>
 
         <VerticalGroup class="gap-y-6 relative overflow-auto grow px-10">     
             <VerticalGroup>
@@ -39,7 +43,10 @@
                 <NuxtLink :to="'/logowanie'" class="text-[#463691]">Zaloguj się</NuxtLink>
             </p>          
         </VerticalGroup>
-        <p class="relative border-t-4 text-center py-2 mt-3 rounded">&copy;2024 Grupa OTOSZROTO</p>
+        <p class="relative border-t-4 text-center py-2 mt-3 rounded">&copy;2024 Grupa OTOSZROTO
+
+            <AppGoToHome />
+        </p>
     </AppForm>
 </template>
 
