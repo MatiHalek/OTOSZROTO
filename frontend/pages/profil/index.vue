@@ -29,6 +29,10 @@
 </template>
 
 <script setup>
+    useHead({
+        title: 'Profil | OTOSZROTO'
+    });
+
     const user = useUserStore();
     const offers = useOffersStore();
 

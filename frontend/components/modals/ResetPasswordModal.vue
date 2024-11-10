@@ -2,7 +2,7 @@
     <Transition name="fade">
         <div class="fixed left-0 top-0 z-50 w-full h-full bg-[#00000095] flex justify-center items-center" v-show="isVisible">
             <Transition>
-                <div class="bg-[#fff] h-96 w-[500px] rounded-sm relative py-14 px-8" v-if="isVisible">
+                <div class="bg-[#fff] h-96 w-[500px] rounded-lg relative py-14 px-8" v-if="isVisible">
                     <div>
                         <h2 class="text-center font-bold text-3xl">Nie pamiętasz hasła?</h2>
                         <h3 class="text-center py-3 text-base">Na podany e-mail prześlemy link do zmiany hasła!</h3>

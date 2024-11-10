@@ -2,6 +2,15 @@
     <ResetPasswordModal :isVisible="isModalVisible" @close="isModalVisible = false" />
 
     <AppForm>
+        <NuxtLink to="/" title="Strona główna OTOSZROTO" class="relative mx-auto mt-4">
+            <div class="flex items-center gap-1 border-y-4 border-y-transparent hover:border-b-[#E5A00A] transition-all">           
+                <img src="/img/logo.png" alt="Logo strony" width="50" height="50">
+                <h1 class="text-2xl font-extrabold text-[#E5A00A]">
+                    <span class="text-[#463691]">OTO</span>SZROTO
+                </h1>                   
+            </div>
+        </NuxtLink>
+
         <VerticalGroup>
             <PageTitle>Logowanie</PageTitle>
         </VerticalGroup>
@@ -25,10 +34,7 @@
                 <NuxtLink :to="'/rejestracja'" class="text-[#463691]">Zarejestruj się</NuxtLink>
             </p>
         </VerticalGroup>
-        <p class="relative border-t-4 text-center py-2 mt-3 rounded">&copy;2024 Grupa OTOSZROTO
-
-            <AppGoToHome />
-        </p>
+        <p class="relative border-t-4 text-center py-2 mt-3 rounded">&copy; 2024 Grupa OTOSZROTO</p>
     </AppForm>
 </template>
 

@@ -16,5 +16,12 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css',
       '@fortawesome/fontawesome-free/css/all.css',
   ],
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: 'pl'
+      }
+    }
+  },
   ssr: false
 })

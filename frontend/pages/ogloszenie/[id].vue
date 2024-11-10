@@ -17,24 +17,24 @@
                 </div>
             </div>
             </div>
-            <button @click="prevImage"
+            <button @click="prevImage" v-if="imageSrcArray.length > 1"
                     class="w-10 h-10 shadow-lg absolute top-1/2 left-4 transform -translate-y-1/2 bg-[#1e90ff] bg-opacity-75 text-white px-2 py-1 rounded-full hover:bg-opacity-100">
                 <i class="fa-solid fa-caret-left"></i>
             </button>
-            <button @click="nextImage"
+            <button @click="nextImage" v-if="imageSrcArray.length > 1"
                     class="w-10 h-10 shadow-lg absolute top-1/2 right-4 transform -translate-y-1/2 bg-[#1e90ff] bg-opacity-75 text-white px-2 py-1 rounded-full hover:bg-opacity-100">
                 <i class="fa-solid fa-caret-right"></i>
             </button>
         </div>
         <article class="relative container mx-auto px-4 lg:px-8" id="advertisementInfo">
-            <section class="grid grid-cols-1 md:grid-cols-[minmax(0,_2.5fr)_minmax(250px,_1fr)] grid-flow-dense gap-4 -mt-16 z-20 md:z-0">
-                <section class="flex flex-col items-center justify-center space-y-4 rounded-lg bg-[#D0D0D090] backdrop-blur-md md:backdrop-blur-none md:bg-white p-3 break-all shadow-lg md:col-start-2 md:row-start-1 row-span-5 h-fit min-h-[8rem] fixed md:sticky md:top-24 break-normal bottom-0 w-full start-0">
-                    <a :href="'mailto:' + data.data.email" class="flex relative min-h-[50px] items-center justify-center overflow-hidden text-[#FFF] p-2.5 rounded-lg shadow-xl transition-all duration-300 before:absolute before:inset-0 before:border-[0px] before:border-white before:transition-all before:duration-300 before:ease-linear hover:bg-white hover:text-[#463691] hover:shadow-special hover:before:border-[25px] font-bold bg-[#1e90ff] mt-0 shadow-xl w-11/12 cursor-pointer">
+            <section class="grid grid-cols-1 md:grid-cols-[minmax(0,_2.5fr)_minmax(250px,_1fr)] grid-flow-dense gap-4 -mt-16">
+                <section class="z-10 flex flex-col items-center justify-center space-y-4 rounded-lg bg-[#D0D0D0CC] backdrop-blur-md md:backdrop-blur-none md:bg-white p-3 break-all shadow-lg md:col-start-2 md:row-start-1 row-span-5 h-fit min-h-[8rem] fixed md:sticky md:top-24 break-normal bottom-0 w-full start-0">
+                    <a :href="'mailto:' + data.data.email" class="flex relative min-h-[50px] items-center justify-center overflow-hidden text-[#FFF] py-2.5 px-5 rounded-full shadow-xl transition-all duration-300 before:absolute before:inset-0 before:border-[0px] before:border-white before:transition-all before:duration-300 before:ease-linear hover:bg-white hover:text-[#463691] before:rounded-full hover:shadow-special hover:before:border-[25px] font-bold bg-[#1e90ff] mt-0 shadow-xl w-11/12 cursor-pointer">
                         <span class="relative z-10">
                             <i class="fa-solid fa-envelope me-2"></i>{{ data.data.email }}
                         </span>
                     </a>
-                    <a :href="'tel:' + data.data.phoneNumber" class="flex relative min-h-[50px] items-center justify-center overflow-hidden text-[#FFF] p-2.5 rounded-lg shadow-xl transition-all duration-300 before:absolute before:inset-0 before:border-[0px] before:border-white before:transition-all before:duration-300 before:ease-linear hover:bg-white hover:text-[#463691] hover:shadow-special hover:before:border-[25px] font-bold bg-[#43AD19] mt-0 shadow-xl w-11/12 cursor-pointer">
+                    <a :href="'tel:' + data.data.phoneNumber" class="flex relative min-h-[50px] items-center justify-center overflow-hidden text-[#FFF] py-2.5 px-5 rounded-full shadow-xl transition-all duration-300 before:absolute before:inset-0 before:border-[0px] before:border-white before:transition-all before:duration-300 before:ease-linear hover:bg-white hover:text-[#463691] before:rounded-full hover:shadow-special hover:before:border-[25px] font-bold bg-[#43AD19] mt-0 shadow-xl w-11/12 cursor-pointer">
                         <span class="relative z-10">
                             <i class="fa-solid fa-phone me-2"></i>{{ data.data.phoneNumber }}
                         </span>
@@ -61,7 +61,7 @@
                         <p v-if="data.data.isPriceNegotiable" class="text-md font-bold text-transparent bg-gradient-to-br from-[#463691CC] from-40% to-[#E5A00ACC] bg-clip-text"><i class="fa-solid fa-circle-exclamation me-2"></i>Do negocjacji</p>
                     </div>          
                 </section>
-                <section class="rrounded-lg bg-white p-3 break-all shadow-lg">
+                <section class="rounded-lg bg-white p-3 break-all shadow-lg">
                     <h4 class="text-center font-semibold text-2xl mb-4">Dane podstawowe</h4>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="flex jobInfo">

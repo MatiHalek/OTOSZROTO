@@ -13,7 +13,7 @@
 
                         <VerticalGroup>
                             <InputLabel for="category">Kategoria ogłoszenia: </InputLabel>
-                            <AppSelectBox @selectionChanged="(value) => { newOfferData.category = value }" :source="['Samochody osobowe', 'Motocykle']" :current="newOfferData.category" class="w-64" />
+                            <AppSelectBox @selectionChanged="(value) => { newOfferData.category = value }" :source="['Samochody osobowe', 'Motocykle']" :current="newOfferData.category" />
                         </VerticalGroup>
                     </HorizontalGroup>
 
@@ -98,17 +98,17 @@
 
                         <VerticalGroup>
                             <InputLabel for="gearbox">Skrzynia biegów: </InputLabel>
-                            <AppSelectBox @selectionChanged="(value) => { newOfferData.gearbox = value }" :source="['manualna', 'automatyczna', 'PDK']" :current="newOfferData.gearbox" id="gearbox" class="w-48" />
+                            <AppSelectBox @selectionChanged="(value) => { newOfferData.gearbox = value }" :source="['manualna', 'automatyczna', 'PDK']" :current="newOfferData.gearbox"/>
                         </VerticalGroup>
 
                         <VerticalGroup>
                             <InputLabel for="fuel">Rodzaj paliwa: </InputLabel>
-                            <AppSelectBox @selectionChanged="(value) => { newOfferData.fuelType = value }" :source="['benzyna', 'diesel', 'instalacja gazowa']" :current="newOfferData.fuelType" id="fuel" class="w-48"/>
+                            <AppSelectBox @selectionChanged="(value) => { newOfferData.fuelType = value }" :source="['benzyna', 'diesel', 'instalacja gazowa']" :current="newOfferData.fuelType"/>
                         </VerticalGroup>
 
                         <VerticalGroup>
                             <InputLabel for="body">Typ nadwozia: </InputLabel>
-                            <AppSelectBox @selectionChanged="(value) => { newOfferData.bodyType = value }" :source="['SUV', 'Coupe', 'Combi']" :current="newOfferData.bodyType" id="body"  class="w-48"/>
+                            <AppSelectBox @selectionChanged="(value) => { newOfferData.bodyType = value }" :source="['SUV', 'Coupe', 'Combi']" :current="newOfferData.bodyType"/>
                         </VerticalGroup>
                     </HorizontalGroup>
 
@@ -120,7 +120,7 @@
                     <HorizontalGroup class="gap-5">
                         <VerticalGroup>
                             <InputLabel for="condition">Stan: </InputLabel>
-                            <AppSelectBox @selectionChanged="(value) => { newOfferData.condition = value }" :source="['Nowy', 'Używany']" :current="newOfferData.condition" id="condition" class="w-48" />
+                            <AppSelectBox @selectionChanged="(value) => { newOfferData.condition = value }" :source="['Nowy', 'Używany']" :current="newOfferData.condition"/>
                         </VerticalGroup>
 
                         <VerticalGroup class="flex-1">
@@ -254,8 +254,6 @@
             await navigateTo('/ogloszenie/' + response.value.advertisementID);
         }
 
-        console.log(response.value);
-
        // if(response) {
             //const formData = new FormData();
             //files.value.forEach(file => formData.append('files', file));
@@ -263,4 +261,16 @@
             //const imagesResponse = await $fetch(`http://localhost:5271/api/image/uploadGalleryImages/${response.advertisementID}`, { responseType: 'json', method: 'post', body: formData });
         //}
     }
+    const handleBeforeUnload = (event) => {
+        event.preventDefault();
+        event.returnValue = '';
+    };
+    onMounted(() => {       
+        if(typeof window !== 'undefined')
+            window.addEventListener('beforeunload', handleBeforeUnload);      
+    });
+    onBeforeUnmount(() => {
+        if(typeof window !== 'undefined')
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+    });
 </script>

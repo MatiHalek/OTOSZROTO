@@ -13,7 +13,7 @@
 
                         <VerticalGroup>
                             <InputLabel for="category">Kategoria ogłoszenia: </InputLabel>
-                            <AppSelectBox @selectionChanged="(value) => { newOfferData.category = value }" :source="['Samochody osobowe', 'Motocykle']" class="w-64" />
+                            <AppSelectBox @selectionChanged="(value) => { newOfferData.category = value }" :source="['Samochody osobowe', 'Motocykle']"  />
                         </VerticalGroup>
                     </HorizontalGroup>
 
@@ -100,17 +100,17 @@
 
                         <VerticalGroup>
                             <InputLabel for="gearbox">Skrzynia biegów: </InputLabel>
-                            <AppSelectBox @selectionChanged="(value) => { newOfferData.gearbox = value }" :source="['manualna', 'automatyczna', 'PDK']" id="gearbox" class="w-48" />
+                            <AppSelectBox @selectionChanged="(value) => { newOfferData.gearbox = value }" :source="['manualna', 'automatyczna', 'PDK']"/>
                         </VerticalGroup>
 
                         <VerticalGroup>
                             <InputLabel for="fuel">Rodzaj paliwa: </InputLabel>
-                            <AppSelectBox @selectionChanged="(value) => { newOfferData.fuelType = value }" :source="['benzyna', 'diesel', 'instalacja gazowa']" id="fuel" class="w-48"/>
+                            <AppSelectBox @selectionChanged="(value) => { newOfferData.fuelType = value }" :source="['benzyna', 'diesel', 'instalacja gazowa']"/>
                         </VerticalGroup>
 
                         <VerticalGroup>
                             <InputLabel for="body">Typ nadwozia: </InputLabel>
-                            <AppSelectBox @selectionChanged="(value) => { newOfferData.bodyType = value }" :source="['SUV', 'Coupe', 'Combi']" id="body"  class="w-48"/>
+                            <AppSelectBox @selectionChanged="(value) => { newOfferData.bodyType = value }" :source="['SUV', 'Coupe', 'Combi']"/>
                         </VerticalGroup>
                     </HorizontalGroup>
 
@@ -122,7 +122,7 @@
                     <HorizontalGroup class="gap-5">
                         <VerticalGroup>
                             <InputLabel for="condition">Stan: </InputLabel>
-                            <AppSelectBox @selectionChanged="(value) => { newOfferData.condition = value }" :source="['Nowy', 'Używany']" id="condition" class="w-48" />
+                            <AppSelectBox @selectionChanged="(value) => { newOfferData.condition = value }" :source="['Nowy', 'Używany']" />
                         </VerticalGroup>
 
                         <VerticalGroup class="flex-1">
@@ -230,4 +230,16 @@
             await navigateTo('/ogloszenie/' + response.advertisementID);
         }
     }
+    const handleBeforeUnload = (event) => {
+        event.preventDefault();
+        event.returnValue = '';
+    };
+    onMounted(() => {       
+        if(typeof window !== 'undefined')
+            window.addEventListener('beforeunload', handleBeforeUnload);      
+    });
+    onBeforeUnmount(() => {
+        if(typeof window !== 'undefined')
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+    });
 </script>
