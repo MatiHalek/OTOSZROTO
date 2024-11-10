@@ -25,7 +25,7 @@
                     <span class="text-transparent bg-gradient-to-br from-[#463691CC] bg-clip-text from-40% to-[#E5A00ACC]">Kontakt</span>                       
                 </h3>
                 <p class="text-white mb-2"><i class="fa-solid fa-briefcase me-2"></i>Grupa OTOSZROTO S.A.</p>
-                <p class="text-white mb-2"><i class="fa-solid fa-location-dot me-2"></i>Zielona 5, 34-600 Limanowa</p>
+                <p class="text-white mb-2"><i class="fa-solid fa-location-dot me-2"></i>Antyptasia 666, 11-000 Nod3D</p>
                 <p class="text-white mb-2"><i class="fa-solid fa-phone me-2"></i><a href="tel:123456789" class="no-underline hover:text-[#E5A00A] hover:font-bold transition-all">123 456 789</a></p>
                 <p class="text-white mb-2"><i class="fa-solid fa-envelope me-2"></i><a href="mailto:otoszroto@gmail.com" class="no-underline hover:text-[#E5A00A] hover:font-bold transition-all">otoszroto@gmail.com</a></p>
             </div>
