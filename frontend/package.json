@@ -11,16 +11,16 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.6.0",
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "@nuxtjs/proxy": "^2.1.0",
-    "@nuxtjs/tailwindcss": "^6.12.2",
-    "@pinia/nuxt": "^0.7.0",
-    "@vitejs/plugin-vue": "^5.1.4",
-    "@vue/test-utils": "^2.4.0-alpha.2",
-    "axios": "^1.7.7",
-    "happy-dom": "^15.7.4",
-    "nuxt": "^3.13.2",
-    "pinia": "^2.2.6",
+    "@nuxtjs/tailwindcss": "^6.13.1",
+    "@pinia/nuxt": "^0.10.1",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/test-utils": "^2.4.6",
+    "axios": "^1.7.9",
+    "happy-dom": "^17.1.0",
+    "nuxt": "^3.15.4",
+    "pinia": "^3.0.1",
     "vue": "latest",
     "vue-router": "latest"
   },
@@ -28,7 +28,7 @@
     "vue": "latest"
   },
   "devDependencies": {
-    "@nuxt/test-utils": "^3.14.4",
-    "vitest": "^2.1.4"
+    "@nuxt/test-utils": "^3.15.4",
+    "vitest": "^3.0.5"
   }
 }

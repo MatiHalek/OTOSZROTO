@@ -3,7 +3,7 @@
       <!-- place for Header -->
      <Header />
 
-     <main class="grow">
+     <main class="grow dark:bg-[#0F172A] dark:text-white">
         <slot />
      </main>
 

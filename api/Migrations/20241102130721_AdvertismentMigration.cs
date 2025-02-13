@@ -34,7 +34,8 @@ namespace api.Migrations
                     Condition = table.Column<string>(type: "text", nullable: true),
                     Mileage = table.Column<int>(type: "integer", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: true)
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    DateAdded = table.Column<string>(type: "date", nullable: true)
                 },
                 constraints: table =>
                 {

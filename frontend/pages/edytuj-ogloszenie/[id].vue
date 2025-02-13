@@ -1,8 +1,8 @@
 <template>
-    <div class="container mx-auto">
+    <div class="container mx-auto p-3">
         <PageHeader>Edytuj ogłoszenie #{{ $route.params.id.padStart(6, "0") }}</PageHeader>
 
-        <div class="pt-5 pb-96">
+        <div class="pt-5 pb-12">
             <form ref="editForm">
                 <VerticalGroup class="gap-10">
                     <HorizontalGroup class="gap-3 flex-col sm:flex-row">
@@ -19,8 +19,8 @@
 
                     <HorizontalGroup class="items-center gap-5">
                         <VerticalGroup>
-                            <InputLabel for="price">Cena: (PLN)</InputLabel>
-                            <AppDetailsInput v-model="newOfferData.price" id="price" />
+                            <InputLabel for="price">Cena (PLN):</InputLabel>
+                            <AppDetailsInput type="number" step="0.01" min="1" max="10000000" v-model="newOfferData.price" id="price" />
                         </VerticalGroup>
 
                         <AppCheckBox class="mt-2" v-model="newOfferData.forNegotiation">
@@ -33,16 +33,16 @@
                         <AppTextArea id="description" v-model="newOfferData.description" />
                     </VerticalGroup>
 
-                    <VerticalGroup class="gap-2">
+                    <!---<VerticalGroup class="gap-2">
                         <InputLabel>Zdjęcia (max 10): </InputLabel>
 
-                        <label for="file-input" class="bg-[#FFF] border-2 border-[#DDD] w-60 h-24 flex justify-center items-center cursor-pointer">
+                        <label for="file-input" class="bg-[#FFF] dark:bg-transparent rounded-lg border-2 border-[#DDD] w-60 h-24 flex justify-center items-center cursor-pointer">
                             <button>Wybierz</button>
                         </label>
 
                         <input class="hidden" type="file" id="file-input" @change="handleFileUpload" ref="fileInput" accept="image/*">
-                    </VerticalGroup>
-
+                    </VerticalGroup>-->
+                    <small>Edytowanie zdjęć nie jest dostępne w tej wersji serwisu.</small>
                     <VerticalGroup>
                         <hr class="pb-5">
                         <h2 class="text-2xl m-0 font-medium">Szczegóły</h2>
@@ -56,17 +56,17 @@
                     <HorizontalGroup class="gap-5 flex-col md:flex-row">
                         <VerticalGroup>
                             <InputLabel for="year">Rok produkcji: </InputLabel>
-                            <AppDetailsInput v-model="newOfferData.yearOfProduction" id="year" />
+                            <AppDetailsInput type="number" min="1900" max="2025" v-model="newOfferData.yearOfProduction" id="year" />
                         </VerticalGroup>
 
                         <VerticalGroup>
                             <InputLabel for="doors">Liczba drzwi: </InputLabel>
-                            <AppDetailsInput v-model="newOfferData.numberOfDoors" id="doors" />
+                            <AppDetailsInput type="number" min="1" max="10" v-model="newOfferData.numberOfDoors" id="doors" />
                         </VerticalGroup>
 
                         <VerticalGroup>
                             <InputLabel for="space">Liczba miejsc: </InputLabel>
-                            <AppDetailsInput v-model="newOfferData.numberOfPlaces" id="space" />
+                            <AppDetailsInput type="number" min="1" max="100" v-model="newOfferData.numberOfPlaces" id="space" />
                         </VerticalGroup>
 
                         <VerticalGroup>
@@ -87,13 +87,13 @@
 
                     <HorizontalGroup class="gap-5 flex-col lg:flex-row">
                         <VerticalGroup>
-                            <InputLabel for="power">Moc: </InputLabel>
-                            <AppDetailsInput v-model="newOfferData.power" id="power" />
+                            <InputLabel for="power">Moc (konie mechaniczne): </InputLabel>
+                            <AppDetailsInput type="number" min="1" max="1000000" v-model="newOfferData.power" id="power" />
                         </VerticalGroup>
 
                         <VerticalGroup>
-                            <InputLabel for="displacement">Pojemność skokowa: </InputLabel>
-                            <AppDetailsInput v-model="newOfferData.displacement" id="displacement" />
+                            <InputLabel for="displacement">Pojemność skokowa (cm<sup>3</sup>): </InputLabel>
+                            <AppDetailsInput type="number" min="1" max="1000000" v-model="newOfferData.displacement" id="displacement" />
                         </VerticalGroup>
 
                         <VerticalGroup>
@@ -125,12 +125,14 @@
 
                         <VerticalGroup class="flex-1">
                             <InputLabel for="mileage">Przebieg: </InputLabel>
-                            <AppDetailsInput v-model="newOfferData.mileage" id="mileage" />
+                            <AppDetailsInput type="number" min="0" max="10000000" v-model="newOfferData.mileage" id="mileage" />
                         </VerticalGroup>
                     </HorizontalGroup>
                 </VerticalGroup>
-
-                <ConfirmButton type="submit" class="mt-24 w-48" @click.prevent="editOffer()">Edytuj</ConfirmButton>
+                <div class="text-center">
+                    <ConfirmButton type="submit" class="mt-24 w-48 font-semibold" @click.prevent="editOffer()"><i class="fa-solid fa-circle-check me-2"></i>Zatwierdź zmiany</ConfirmButton>
+                </div>
+                
             </form>
         </div>
     </div>

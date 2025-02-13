@@ -44,6 +44,7 @@ namespace api.Controllers
                 Email = dto.Email,
                 PhoneNumber = dto.PhoneNumber,
                 UserID = dto.UserID,
+                DateAdded = DateOnly.FromDateTime(DateTime.Now)
             };
             return Created("success", advertismentRepository.Create(advertisement));
         }

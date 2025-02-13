@@ -1,5 +1,5 @@
 <template>
-    <div class="flex gap-2 bg-[#DDD] p-2 justify-between">
+    <div class="flex gap-2 bg-[#DDD] dark:bg-[#444] p-2 justify-between">
         <h2>{{ image.name }}</h2>
 
         <div class="flex gap-8">

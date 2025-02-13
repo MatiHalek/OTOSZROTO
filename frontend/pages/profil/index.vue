@@ -11,10 +11,12 @@
                 <AppPlaceholderInput placeholder="Nazwisko" v-model="data.surname"/>
             </HorizontalGroup>
 
-            <h3 class="border-b-2 border-[#DDD] outline-none bg-[#EEEEEE] w-full p-2">{{ user.email }}</h3>
-            <h3 class="border-b-2 border-[#DDD] outline-none bg-[#EEEEEE] w-full p-2">{{ user.phone }}</h3>
+            <h3 class="border-b-2 border-[#DDD] outline-none bg-[#EEE] dark:bg-[#444] w-full p-2">{{ user.email }}</h3>
+            <h3 class="border-b-2 border-[#DDD] outline-none bg-[#EEE] dark:bg-[#444] w-full p-2">{{ user.phone }}</h3>
 
-            <ConfirmButton class="self-end w-[200px]" @click="SaveChanges()">Zapisz</ConfirmButton>
+            <small>Edytowanie adresu e-mail i numeru telefonu nie jest możliwe, gdyż identyfikują one Twoje konto w serwisie.</small>
+
+            <ConfirmButton class="self-end w-[200px] font-semibold" @click="SaveChanges()"><i class="fa-solid fa-circle-check me-2"></i>Zapisz</ConfirmButton>
         </VerticalGroup>
 
         <hr class="mt-10">

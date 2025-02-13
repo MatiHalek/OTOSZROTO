@@ -2,35 +2,44 @@
     <Transition name="fade">
         <div class="fixed left-0 top-0 z-50 w-full h-full bg-[#00000095] flex justify-center items-center" v-show="isVisible">
             <Transition>
-                <div class="bg-[#fff] h-96 w-[500px] rounded-lg relative py-14 px-8" v-if="isVisible">
+                <div class="bg-[#fff] dark:bg-black dark:text-white h-96 w-[500px] rounded-lg relative py-14 px-8 flex flex-col justify-between">
                     <div>
                         <h2 class="text-center font-bold text-3xl">Nie pamiętasz hasła?</h2>
                         <h3 class="text-center py-3 text-base">Na podany e-mail prześlemy link do zmiany hasła!</h3>
 
-                        <input v-model="email" class="outline-none border-2 w-full mt-8 p-2" type="text" placeholder="E-mail">
+                        <input v-model="email" class="outline-none border-2 dark:bg-transparent w-full mt-8 p-2" type="text" placeholder="E-mail">
                         <div class="flex flex-col mt-10 gap-3">
-                            <button class="w-full bg-[#E5A00A] p-2 text-[#FFF] rounded-full hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300" @click="sendEmail()">Wyślij link</button>
-                            <button @click="$emit('close')" class="w-full bg-[#DDD] p-2 rounded-full hover:shadow-special hover:bg-transparent hover:text-[#463691] transition-all duration-300">Anuluj</button>
+                            <button class="w-full bg-[#E5A00A] p-2 text-[#FFF] rounded-full hover:shadow-special hover:bg-white hover:text-[#463691] transition-all duration-300" @click="sendEmail">Wyślij link</button>
+                            <button @click="$emit('close')" class="w-full bg-[#DDD] dark:bg-[#333] p-2 rounded-full hover:shadow-special hover:bg-white hover:text-[#463691] transition-all duration-300">Anuluj</button>
                         </div>
+                    </div>
+                    <div v-if="messageVisible" class="absolute bottom-[.5rem] translate-y-[100%] left-0 w-full bg-green-600 text-white text-center py-2 font-semibold rounded-b-lg">
+                        Link wysłany<br>
+                        <small class="font-normal">Nie dotarł? Sprawdź poprawność e-mail i/lub wyślij ponownie.</small>
                     </div>
                 </div>
             </Transition>
+            
         </div>
     </Transition>
 </template>
 
 <script setup>
-    const props = defineProps(['isVisible']);
+import { ref } from 'vue';
 
-    const email = ref();
+const props = defineProps(['isVisible']);
+const email = ref('');
+const messageVisible = ref(false);
 
-    async function sendEmail() {
-        const response = await $fetch(`http://localhost:5271/api/auth/reset/${email.value}`, {
+async function sendEmail() {
+    messageVisible.value = false;
+    if (email.value.trim() !== '') {
+        await $fetch(`http://localhost:5271/api/auth/reset/${email.value}`, {
             method: 'post'
         });
-
-        console.log(response);
+        messageVisible.value = true;
     }
+}
 </script>
 
 <style scoped>
@@ -56,3 +65,4 @@
         opacity: 0;
     }
 </style>
+

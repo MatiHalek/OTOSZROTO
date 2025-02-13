@@ -1,8 +1,8 @@
 <template>
-    <div class="container mx-auto p-10 sm:p-0">
-        <PageHeader>Dodaj ogłoszenie</PageHeader>
+    <div class="container mx-auto p-3">
+        <PageHeader>Dodaj nowe ogłoszenie</PageHeader>
 
-        <div class="pt-5 pb-96">
+        <div class="pt-5 pb-12">
             <form ref="addForm" @submit.prevent="createOffer()">
                 <VerticalGroup class="gap-10">
                     <HorizontalGroup class="gap-3 flex-col sm:flex-row">
@@ -19,8 +19,8 @@
 
                     <HorizontalGroup class="items-center gap-5">
                         <VerticalGroup>
-                            <InputLabel for="price">Cena: (PLN)</InputLabel>
-                            <AppDetailsInput v-model="newOfferData.price" id="price" />
+                            <InputLabel for="price">Cena (PLN):</InputLabel>
+                            <AppDetailsInput type="number" min="1" max="10000000" step="0.01" v-model="newOfferData.price" id="price" />
                         </VerticalGroup>
 
                         <AppCheckBox class="mt-2" v-model="newOfferData.forNegotiation">
@@ -36,8 +36,8 @@
                     <VerticalGroup class="gap-2">
                         <InputLabel>Zdjęcia (max 10): {{ files.length }} / 10 </InputLabel>
 
-                        <label :class="{ 'hidden': files.length >= 10 }" for="file-input" class="bg-[#FFF] border-2 border-[#DDD] w-60 h-24 flex justify-center items-center cursor-pointer">
-                            <h1>Wybierz</h1>
+                        <label :class="{ 'hidden': files.length >= 10 }" for="file-input" class="bg-[#FFF] hover:bg-green-600 duration-300 border-2 border-[#DDD] rounded-lg dark:bg-transparent w-60 h-24 flex justify-center items-center cursor-pointer">
+                            <h1 class="">Wybierz</h1>
                         </label>
 
                         <input class="hidden" type="file" id="file-input" @change="handleFileUpload" ref="fileInput" accept="image/*">
@@ -58,17 +58,17 @@
                     <HorizontalGroup class="gap-5 flex-col md:flex-row">
                         <VerticalGroup>
                             <InputLabel for="year">Rok produkcji: </InputLabel>
-                            <AppDetailsInput v-model="newOfferData.yearOfProduction" id="year" />
+                            <AppDetailsInput type="number" min="1900" max="2025" v-model="newOfferData.yearOfProduction" id="year" />
                         </VerticalGroup>
 
                         <VerticalGroup>
                             <InputLabel for="doors">Liczba drzwi: </InputLabel>
-                            <AppDetailsInput v-model="newOfferData.numberOfDoors" id="doors" />
+                            <AppDetailsInput type="number" min="1" max="10" v-model="newOfferData.numberOfDoors" id="doors" />
                         </VerticalGroup>
 
                         <VerticalGroup>
                             <InputLabel for="space">Liczba miejsc: </InputLabel>
-                            <AppDetailsInput v-model="newOfferData.numberOfPlaces" id="space" />
+                            <AppDetailsInput type="number" min="1" max="100" v-model="newOfferData.numberOfPlaces" id="space" />
                         </VerticalGroup>
 
                         <VerticalGroup>
@@ -89,13 +89,13 @@
 
                     <HorizontalGroup class="gap-5 flex-col lg:flex-row">
                         <VerticalGroup>
-                            <InputLabel for="power">Moc: </InputLabel>
-                            <AppDetailsInput v-model="newOfferData.power" id="power" />
+                            <InputLabel for="power">Moc (konie mechaniczne): </InputLabel>
+                            <AppDetailsInput type="number" min="1" max="1000000" v-model="newOfferData.power" id="power" />
                         </VerticalGroup>
 
                         <VerticalGroup>
-                            <InputLabel for="displacement">Pojemność skokowa: </InputLabel>
-                            <AppDetailsInput v-model="newOfferData.displacement" id="displacement" />
+                            <InputLabel for="displacement">Pojemność skokowa (cm<sup>3</sup>): </InputLabel>
+                            <AppDetailsInput type="number" min="1" max="1000000" v-model="newOfferData.displacement" id="displacement" />
                         </VerticalGroup>
 
                         <VerticalGroup>
@@ -127,12 +127,14 @@
 
                         <VerticalGroup class="flex-1">
                             <InputLabel for="mileage">Przebieg: </InputLabel>
-                            <AppDetailsInput v-model="newOfferData.mileage" id="mileage" />
+                            <AppDetailsInput type="number" min="0" max="10000000" v-model="newOfferData.mileage" id="mileage" />
                         </VerticalGroup>
                     </HorizontalGroup>
                 </VerticalGroup>
-
-                <ConfirmButton type="submit" class="mt-24 w-48">Wyślij</ConfirmButton>
+                <div class="text-center">
+                    <ConfirmButton type="submit" class="mt-24 w-48 font-semibold"><i class="fa-solid fa-circle-plus me-2"></i>Dodaj</ConfirmButton>
+                </div>
+                
             </form>
         </div>
     </div>
@@ -146,19 +148,19 @@
 
     const newOfferData = ref({
         title: '',
-        price: 0,
+        price: 100000,
         category: '',
         forNegotiation: false,
         description: '',
         image: [],
         model: '',
-        yearOfProduction: 0,
-        numberOfDoors: 0,
-        numberOfPlaces: 0,
+        yearOfProduction: 2015,
+        numberOfDoors: 3,
+        numberOfPlaces: 5,
         color: '',
         VIN: '',
-        power: 0,
-        displacement: 0,
+        power: 400,
+        displacement: 2950,
         gearbox: '',
         fuelType: '',
         bodyType: '',

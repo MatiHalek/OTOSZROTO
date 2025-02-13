@@ -25,18 +25,18 @@
                     <span class="text-transparent bg-gradient-to-br from-[#463691CC] bg-clip-text from-40% to-[#E5A00ACC]">Kontakt</span>                       
                 </h3>
                 <p class="text-white mb-2"><i class="fa-solid fa-briefcase me-2"></i>Grupa OTOSZROTO S.A.</p>
-                <p class="text-white mb-2"><i class="fa-solid fa-location-dot me-2"></i>Antyptasia 666, 11-000 Nod3D</p>
+                <p class="text-white mb-2"><i class="fa-solid fa-location-dot me-2"></i>Zielona 5, 34-600 Limanowa</p>
                 <p class="text-white mb-2"><i class="fa-solid fa-phone me-2"></i><a href="tel:123456789" class="no-underline hover:text-[#E5A00A] hover:font-bold transition-all">123 456 789</a></p>
                 <p class="text-white mb-2"><i class="fa-solid fa-envelope me-2"></i><a href="mailto:otoszroto@gmail.com" class="no-underline hover:text-[#E5A00A] hover:font-bold transition-all">otoszroto@gmail.com</a></p>
             </div>
         </section>
         <div class="text-center my-6">
-            <p class='mb-1 text-center font-bold'><span v-html="updateMessage"></span><span v-if="hasError">(</span><button v-if="hasError" @click="GetLatestRelease" class="hover:text-[#E5A00A] transition-all">Retry</button><span v-if="hasError">)</span><span v-if="isUpToDate">(</span><button v-if="isUpToDate" @click="GetLatestRelease" class="hover:text-[#E5A00A] transition-all">Check again</button><span v-if="isUpToDate">)</span></p>
-            <p class='text-center text-white'><i class='bi bi-calendar-check-fill mr-2'></i><a class="no-underline hover:text-[#E5A00A] hover:font-bold transition-all" :href="'https://github.com/MatiHalek/OTOSZROTO/releases/tag/v'+majorVersion+'.'+minorVersion+'.'+patchVersion" target="_blank">v{{majorVersion }}.{{ minorVersion }}.{{ patchVersion }}</a> ({{ releaseDate.toLocaleDateString('pl-PL', {day: 'numeric', month: 'numeric', year: 'numeric'})}})</p> 
+            <p class='mb-1 text-center font-bold'><span v-html="updateMessage"></span><span v-if="hasError">(</span><button v-if="hasError" @click="GetLatestRelease" class="hover:text-[#E5A00A] transition-all">Ponów próbę</button><span v-if="hasError">)</span><span v-if="isUpToDate">(</span><button v-if="isUpToDate" @click="GetLatestRelease" class="hover:text-[#E5A00A] transition-all">Sprawdź ponownie</button><span v-if="isUpToDate">)</span></p>
+            <p class='text-center text-white'><i class='bi bi-calendar-check-fill mr-2'></i><a class="no-underline hover:text-[#E5A00A] hover:font-bold transition-all" :href="'https://github.com/MatiHalek/OTOSZROTO/releases/tag/v'+majorVersion+'.'+minorVersion+'.'+patchVersion" target="_blank">v{{majorVersion }}.{{ minorVersion }}.{{ patchVersion }}</a> ({{ new Intl.DateTimeFormat('pl-PL', { day: 'numeric', month: 'short', year: 'numeric' }).format(releaseDate)}})</p> 
         </div>
         
     </article>
-    <p class='w-full mb-4 text-sm'>&copy; 2024 Grupa OTOSZROTO. Wszelkie prawa zastrzeżone. Wszystkie znaki handlowe są własnością ich prawnych właścicieli w serwisie OTOSZROTO i innych firmach.</p>
+    <p class='w-full mb-4 text-sm'>&copy; 2025 MH Corporation. Wszelkie prawa zastrzeżone. Wszystkie znaki handlowe są własnością ich prawnych właścicieli w serwisie OTOSZROTO i innych firmach.</p>
     </footer>
 </template>
 <script setup>
@@ -44,15 +44,15 @@
         const hasError = ref(false);
         const isUpToDate = ref(false);
         const majorVersion = 1;
-        const minorVersion = 0;
-        const patchVersion = 1;
-        const releaseDate = new Date(2024, 10, 10);
+        const minorVersion = 1;
+        const patchVersion = 0;
+        const releaseDate = new Date(2025, 1, 13);
         const owner = 'MatiHalek';
         const repo = 'OTOSZROTO';
         async function GetLatestRelease() {
             isUpToDate.value = false;
             hasError.value = false;
-            updateMessage.value = '<i class="fa-solid fa-rotate me-2"></i>Checking for updates...';
+            updateMessage.value = '<i class="fa-solid fa-rotate me-2"></i>Sprawdzanie aktualizacji...';
             try {
                 const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`);
                 if (!response.ok) {
@@ -61,16 +61,16 @@
                 const release = await response.json();
                 const version = release.tag_name;
                 const date = new Date(release.published_at);
-                const [major, minor, patch] = version.split('.').map(Number);
-                if (major > majorVersion || minor > minorVersion || patch > patchVersion) {
-                    updateMessage.value = `<i class="fa-solid fa-circle-check me-2"></i>New version available: <a href="${release.html_url}" class="text-[#E5A00A] hover:text-[#FFF] transition-all" target="_blank">${version}</a> (${date.toLocaleDateString('pl-PL', {day: 'numeric', month: 'numeric', year: 'numeric'})})`;
+                const [major, minor, patch] = version.replace("v", "").split('.').map(Number);
+                if (major > majorVersion || (major == majorVersion && minor > minorVersion) || (major == majorVersion && minor == minorVersion && patch > patchVersion)) {
+                    updateMessage.value = `<i class="fa-solid fa-circle-exclamation me-2"></i>Dostępna nowa wersja: <a href="${release.html_url}" class="text-[#E5A00A] hover:text-[#FFF] transition-all" target="_blank">${version}</a> (${new Intl.DateTimeFormat('pl-PL', { day: 'numeric', month: 'short', year: 'numeric' }).format(date)})`;
                 } else {
                     isUpToDate.value = true;
-                    updateMessage.value = '<i class="fa-solid fa-circle-check me-2"></i>You\'re up to date ';
+                    updateMessage.value = '<i class="fa-solid fa-circle-check me-2"></i>Wszystko jest aktualne ';
                 }
             } catch (error) {
                 hasError.value = true;
-                updateMessage.value = '<i class="fa-solid fa-circle-xmark me-2"></i>Failed to check for updates ';  
+                updateMessage.value = '<i class="fa-solid fa-circle-xmark me-2"></i>Błąd podczas sprawdzania aktualizacji ';  
             }
         }
         GetLatestRelease();

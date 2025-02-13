@@ -14,16 +14,16 @@
         <VerticalGroup>
             <PageTitle>Logowanie</PageTitle>
         </VerticalGroup>
-        <p class="text-red-600 z-20 text-center -mt-5 pb-10 font-medium">{{ errorMessage }}</p>
+        <p class="text-red-600 z-20 text-center mt-5 pb-10 font-medium">{{ errorMessage }}</p>
 
         <VerticalGroup class="gap-y-6 relative overflow-auto grow">         
             <VerticalGroup>
-                <InputLabel for="loginInputEmail">Adres e-mail</InputLabel>
+                <InputLabel for="loginInputEmail" style="color: black">Adres e-mail</InputLabel>
                 <AppInput v-model="userData.Email" :validate="false" class="shadow-xl" type="email" id="loginInputEmail" />
             </VerticalGroup>
 
             <VerticalGroup>
-                <InputLabel for="loginInputPassword">Hasło</InputLabel>
+                <InputLabel for="loginInputPassword" style="color: black">Hasło</InputLabel>
                 <AppInput v-model="userData.Password" :validate="false" class="shadow-xl" type="password" id="loginInputPassword" />
             </VerticalGroup>
             <p @click="isModalVisible = true" class="text-right text-[#463691] font-medium cursor-pointer">Nie pamiętam hasła</p>
@@ -34,7 +34,7 @@
                 <NuxtLink :to="'/rejestracja'" class="text-[#463691]">Zarejestruj się</NuxtLink>
             </p>
         </VerticalGroup>
-        <p class="relative border-t-4 text-center py-2 mt-3 rounded">&copy; 2024 Grupa OTOSZROTO</p>
+        <p class="relative border-t-4 text-center py-2 mt-3 rounded font-semibold">&copy; 2025 MH Corp.</p>
     </AppForm>
 </template>
 
